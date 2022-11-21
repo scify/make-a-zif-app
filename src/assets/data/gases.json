@@ -1,0 +1,65 @@
+[
+  {
+    "key": "he",
+    "name": "He",
+    "title": "Helium",
+    "mass": 4.002,
+    "diameter": 2.6
+  },
+  {
+    "key": "h2",
+    "name": "H<sub>2</sub>",
+    "title": "Dihydrogen",
+    "mass": 2.01,
+    "diameter": 2.89
+  },
+  {
+    "key": "o2",
+    "name": "O<sub>2</sub>",
+    "title": "Dioxygen",
+    "mass": 2.01,
+    "diameter": 2.89
+  },
+  {
+    "key": "co2",
+    "name": "CO<sub>2</sub>",
+    "title": "Carbon dioxide",
+    "mass": 2.01,
+    "diameter": 2.89
+  },
+  {
+    "key": "n2",
+    "name": "N<sub>2</sub>",
+    "title": "Dinitrogen",
+    "mass": 2.01,
+    "diameter": 2.89
+  },
+  {
+    "key": "ch4",
+    "name": "CH<sub>4</sub>",
+    "title": "Methane",
+    "mass": 2.01,
+    "diameter": 2.89
+  },
+  {
+    "key": "ethane",
+    "name": "ethane",
+    "title": "Ethane",
+    "mass": 2.01,
+    "diameter": 2.89
+  },
+  {
+    "key": "propene",
+    "name": "propene",
+    "title": "Propene",
+    "mass": 31.999,
+    "diameter": 4.3
+  },
+  {
+    "key": "butane",
+    "name": "butane",
+    "title": "Butane",
+    "mass": 58.12,
+    "diameter": 4.5
+  }
+]

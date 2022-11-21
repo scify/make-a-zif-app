@@ -1,0 +1,75 @@
+/*
+Inherited variables and values from Make-a-ZIF's website:
+--bg: #f2f7fc;
+--bg-white: #fbfffe;
+--bg-table: #eff3fb;
+--text-grey: #50596b;
+--text-grey-2: #8592ab;
+--border-blue: #a6bdd4;
+--border-green: #6ad3bb;
+--border-grey: #dde1e6;
+--blue-cell: #cfe7ff;
+--green-cell: #afe6d9;
+--primary-blue: #1f3b64;
+--secondary-blue: #5469f2;
+--dark-blue: #001234;
+--primary-green: #14b5ac;
+--light-green: #6dd5bc;
+--orange: #ffe0a1;
+--purple: #405aa2;
+*/
+
+/* Make-a-ZIF App's default colour values */
+:root {
+  --def-white: #ffffff;
+  --def-backdrop-light: #f2f7fc; /* bg */
+  --def-backdrop-dark: #151718; /* bg */
+  --def-black: #181818;
+  --def-indigo: #2c3e50;
+  --def-text-light: #404040; /* body color */
+  --def-text-dark: rgba(225, 225, 245, 0.64);
+  --def-text-faded-light: #d3d9e4;
+  --def-text-faded-dark: #37393d;
+  --def-accent: #6dd5bc; /* light-green */
+  --def-accent-darker: #56b19c; /* light-green */
+  --def-accent-soft-light: #eff3fb;
+  --def-accent-soft-light-text: #000;
+  --def-accent-soft-dark: #a9b8d6;
+  --def-accent-soft-dark-text: #000;
+  --def-blue: #0c98e9;
+  --def-blue-dark: #0b8eda;
+  --def-blue-dark-hover: #5469f2;
+  --def-blue-dark-text: #fff;
+  --def-blue-light: #1f3b64; /* primary-blue */
+  --def-blue-light-hover: #5469f2;
+  --def-blue-light-text: #fff;
+  --def-table-header-light: #eff3fb; /* bg-table */
+  --def-table-header-dark: #a9b8d6;
+}
+
+/* Make-a-ZIF App's common variables */
+:root {
+  --maz-transition: all 0.3s ease-out;
+  --maz-section-gap: 160px;
+  --maz-breakpoint: 768px;
+  --maz-breakpoint-mobile: 768px;
+}
+/* Make-a-ZIF App's Light theme */
+:root {
+  --maz-background: var(--def-white);
+  --maz-text: var(--def-text-light); /* body color */
+  --maz-backdrop: var(--def-backdrop-light); /* bg */
+  --maz-heading: var(--def-indigo);
+  --maz-accent: var(--def-accent); /* light-green */
+  --maz-accent-darker: var(--def-accent-darker);
+  --maz-accent-soft: var(--def-accent-soft-light);
+  --maz-accent-soft-text: var(--def-accent-soft-light-text);
+  --maz-blue: var(--def-blue-light); /* primary-blue */
+  --maz-blue-hover: var(--def-blue-light-hover);
+  --maz-blue-text: var(--def-blue-light-text);
+  --maz-table-header: var(--def-table-header-light); /* bg-table */
+  --maz-table-header-text: var(--def-blue-light);
+  --maz-table-divider-hard: var(--def-blue-light);
+  --maz-table-divider-soft: var(--def-text-faded-light);
+}
+

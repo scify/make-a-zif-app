@@ -1,0 +1,58 @@
+[
+  {
+    "key": "zn2plus",
+    "name": "Zn2+",
+    "title": "Zinc (II) ion",
+    "mass": 30,
+    "size": 0.074
+  },
+  {
+    "key": "zn",
+    "name": "Zn",
+    "title": "Zinc",
+    "mass": 30,
+    "size": 0.074
+  },
+  {
+    "key": "co",
+    "name": "Co",
+    "title": "Cobalt",
+    "mass": 27,
+    "size": 72
+  },
+  {
+    "key": "cd",
+    "name": "Cd",
+    "title": "Cadmium",
+    "mass": 48,
+    "size": 92
+  },
+  {
+    "key": "be",
+    "name": "Be",
+    "title": "Beryllium",
+    "mass": 4,
+    "size": 41
+  },
+  {
+    "key": "mg",
+    "name": "Mg",
+    "title": "Magnesium",
+    "mass": 12,
+    "size": 71
+  },
+  {
+    "key": "mn",
+    "name": "Mn",
+    "title": "Manganese",
+    "mass": 25,
+    "size": 80
+  },
+  {
+    "key": "cu",
+    "name": "Cu",
+    "title": "Copper",
+    "mass": 29,
+    "size": 71
+  }
+]

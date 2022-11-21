@@ -1,0 +1,39 @@
+{
+  "name": "make-a-zif-app",
+  "version": "0.7.2",
+  "homepage": "https://make-a-zif.scify.org/zif-model/",
+  "engines": {
+    "npm": "8.19.2",
+    "node" : "18.12.1"
+  },
+  "author": "konem",
+  "contributors": [
+    "antigoni",
+    "atzoumas"
+  ],
+  "maintainers": [
+    "atzoumas",
+    "konem"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "bootstrap": "^5.2.0",
+    "vue": "^3.2.41"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.1.4",
+    "@vitejs/plugin-vue": "^3.1.2",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "eslint": "^8.22.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "prettier": "^2.7.1",
+    "sass": "^1.56.1",
+    "vite": "^3.1.8"
+  }
+}

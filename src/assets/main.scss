@@ -1,0 +1,579 @@
+@import './base.scss';
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem 0.5rem;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/**
+ * Make-a-ZIF App Header
+ */
+div.maz-header {
+  line-height: 1.5;
+  color: var(--maz-text);
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--maz-blue);
+  }
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-top: 0em;
+  }
+  .greetings h2,
+  .greetings h3 {
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    h2 {
+      font-size: 2em;
+    }
+    h3 {
+      font-size: 1.1em;
+      font-weight: normal;
+      margin-top: 0.75em;
+    }
+    .greetings h2,
+    .greetings h3 {
+      text-align: left;
+    }
+  }
+}
+div.maz-header,
+div.maz-main {
+  color: var(--maz-text);
+}
+@media (min-width: var(--maz-breakpoint)) {
+  div.maz-header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--maz-section-gap) / 2);
+  }
+
+  div.maz-header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+/**
+ * Make-a-ZIF App Main Elements
+ */
+div.maz-main {
+  color: var(--maz-text);
+
+  // Make-a-ZIF App Canvas & Image
+  div.maz-image--visualization {
+    text-align: center;
+    background-color: var(--maz-backdrop);
+    margin: 0;
+    padding: 2em 0;
+    height: 100%;
+  }
+  div.maz-image img {
+    background-color: var(--maz-backdrop);
+    min-width: 366px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  // Make-a-ZIF Bootstrap's Tabs & Modular Panels
+  div.maz-tabs {
+    min-width: 386px;
+    div.maz-history {
+      .message {
+        font-style: italic;
+        margin: 3em 2em;
+      }
+      button {
+        padding: 0.5em 1.5em;
+        font-weight: normal;
+        font-size: 0.9em;
+      }
+      .maz-history-scroll {
+        max-height: 550px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+
+      }
+      .maz-scenario {
+        border-bottom: 1px solid rgba(0, 0, 0, 1);
+        padding-bottom: 1em;
+      }
+      .date {
+        font-weight: 700;
+        margin-bottom: 0.25em;
+      }
+      .data {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        padding-bottom: 0.5em;
+        margin-bottom: 1em;
+        .icon {
+          button.dot {
+            left: -15px;
+            vertical-align: middle;
+            text-align: center;
+            overflow: hidden;
+            text-rendering: optimizeLegibility;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 2px solid var(--maz-blue);
+            background: var(--maz-background);
+            line-height: 0;
+            padding: 0 0px;
+            margin: 0;
+            font-size: 20px;
+            font-weight: bolder;
+            transition: all 0.3s ease;
+            .dash {
+              content: "";
+              display: inline-block;
+              font-weight: bolder;
+              width: 12px;
+              height: 3px;
+              top: -2px;
+              background: var(--maz-blue);
+            }
+            &:hover {
+              transform: rotate(-180deg);
+              border-color: red;
+            }
+            &:hover .dash {
+              top: -3px;
+              background: red;
+            }
+          }
+        }
+      }
+    }
+    div.maz-results-table {
+      thead {
+        background: none;
+        th {
+          background: none;
+        }
+      }
+      transition: background-color 2s ease-in-out;
+      &.executed {
+        background-color: hsla(166, 55%, 53%, 0.2);
+      }
+    }
+    div.maz-diffusion {
+      font-weight: 400;
+      font-size: 1.1em;
+      margin: 1em 0;
+      text-transform: uppercase;
+      color: var(--def-white);
+      background-color: hsla(166, 55%, 53%, 0.95);
+      &.executed {
+        display: block !important;
+        box-shadow: 0 -10px 100px hsla(166, 55%, 63%, 1);
+      }
+      strong {
+        padding-left: 0.25em;
+        font-weight: 700;
+      }
+    }
+    div.maz-save {
+      margin-top: 2em;
+      padding-top: 1.25em;
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+      input {
+        width: auto;
+        box-shadow: none;
+        &:active,
+        &:focus {
+          box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+      }
+      button {
+        margin-top: 0.75em;
+        padding: 0.5em 3em;
+        font-weight: 500;
+      }
+    }
+    table thead th {
+      font-weight: 500;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+      padding: 0.75em 1em;
+    }
+    tbody tr,
+    tbody th,
+    tbody td {
+      color: var(--maz-text);
+      font-weight: normal;
+      border: none;
+      box-shadow: none;
+      padding: 0.75em 1em;
+    }
+    ul.nav-tabs {
+      --bs-nav-tabs-border-width: 1px;
+      --bs-nav-tabs-border-radius: 0;
+      --bs-nav-tabs-border-color: var(--def-black);
+      --bs-nav-tabs-link-hover-border-color: rgba(0, 0, 0, 0);
+      --bs-nav-tabs-link-active-color: var(--def-black);
+      --bs-nav-tabs-link-active-bg: var(--maz-background);
+      --bs-nav-tabs-link-active-border-color: var(--def-black) var(--def-black)
+        var(--maz-background);
+      .nav-link {
+        color: var(--maz-blue);
+        font-weight: 500;
+        &:hover,
+        &:focus {
+          --bs-nav-tabs-link-hover-border-color: var(--maz-background)
+            var(--maz-background) #000 transparent;
+        }
+        &.active {
+          box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.1);
+          color: var(--def-black);
+          font-weight: 700;
+          background-color: var(--maz-background);
+          &:hover,
+          &:focus {
+            background-color: var(--maz-background);
+          }
+        }
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+    }
+  }
+
+  // Abbreviations
+  abbr {
+    font-weight: inherit;
+    text-decoration: none !important;
+    opacity: 0.75;
+    color: inherit;
+  }
+  div.maz-table abbr::before {
+    content: "(";
+    font-weight: inherit;
+    color: inherit;
+  }
+  div.maz-table abbr::after {
+    content: ")";
+    font-weight: inherit;
+    color: inherit;
+  }
+
+  // Forms
+  input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--maz-background);
+    margin: 0;
+    margin-right: 0.5em;
+    font: inherit;
+    color: currentColor;
+    width: 1.0em;
+    height: 1.0em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    transform: translateY(0.2em);
+    display: grid;
+    place-content: center;
+    float: left;
+  }
+  input[type="radio"]::before {
+    content: "";
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--maz-accent);
+  }
+  input[type="radio"]:checked::before {
+    transform: scale(1.2);
+  }
+
+  // Modals
+  .modal-content {
+    background-color: var(--maz-background);
+  }
+  .modal-dialog {
+    color: var(--maz-text);
+    .btn.primary {
+      margin-top: 2em;
+      width: 100%;
+    }
+    .modal-header {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .modal-body {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+    }
+    table thead th {
+      box-shadow: 0 1px 0 0 #000; // No equivelant for dark theme :(.
+    }
+    .modal-footer {
+      border-top: none;
+    }
+    .btn-close {
+      margin-right: 0.5em;
+      // This is the default Bootstrap's X SVG icon: %23 is #, figure where the
+      // color is. Is it too obvious? We are using this to make one for the
+      // Dark theme with the %23fff value. @TODO: Make this element a proud
+      // circle, like the one on the mock-ups!
+      background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    }
+    h6 {
+      font-weight: 600;
+      color: var(--maz-heading);
+    }
+
+  }
+
+  // Chemical elements
+  .element {
+    white-space: nowrap; // Chemical elements should not wrap!
+  }
+  //
+  td.label.element {
+    display:block; // Elements as labels on cells should expand to full width!
+  }
+
+  // Decorated headers
+  h4 {
+    margin-top: 1.5em;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--maz-heading);
+    &.one::before,
+    &.two::before {
+      font-weight: 700;
+      color: var(--maz-background);
+      background: var(--maz-accent);
+      border-radius: 50%;
+      padding: 0.25em 0.5em;
+      margin-right: 0.5em;
+    }
+    &.one::before {
+      content: "1";
+    }
+    &.two::before {
+      content: "2";
+    }
+  }
+  h5 {
+    font-size: 1em;
+    font-weight: normal;
+    margin-top: 0.75em;
+  }
+  // Lists
+  ul {
+    margin-left: 0.25em;
+    li {
+      list-style: none;
+    }
+  }
+
+  // Buttons
+  .btn.primary {
+    background-color: var(--maz-blue);
+    color: var(--maz-blue-text);
+    font-weight: 500;
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: var(--maz-blue-hover);
+    }
+  }
+  .btn.secondary {
+    background-color: var(--maz-background);
+    color: var(--maz-blue);
+    border: 3px solid var(--maz-blue);
+    font-weight: 500;
+    &:hover,
+    &:focus,
+    &:active {
+      color: var(--maz-blue-hover);
+      border-color: var(--maz-blue-hover);
+    }
+  }
+  button.blue {
+    color: var(--maz-blue-text);
+    background-color: var(--maz-blue);
+    border-radius: 0.5em;
+    border: 0;
+    margin: 1.5em 3em;
+    padding: 0.75em 4em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--maz-transition);
+    &:hover {
+      background-color: var(--maz-blue-hover);
+    }
+  }
+
+  // Tables
+  div.maz-table table {
+    font-size: 0.9em; /* will be reverted to 1em via @media on desktop */
+  }
+  table {
+    margin-top: 1em;
+    width: 100%;
+    &.limitwidth {
+      max-width: 100%;
+      tbody th {
+        width: 45%;
+      }
+      tbody td {
+        width: 55%;
+      }
+      tbody td.faded {
+        opacity: 0.5;
+      }
+    }
+  }
+  th,
+  td {
+    padding: 0.4em 0.25em; /* reverted to 0.5em 1em via @media on desktop */
+    transition: var(--maz-transition);
+  }
+  .table-multi th.divider {
+    border-left: 1px solid var(--maz-table-header-text);
+    box-shadow: -1px 0 0 0 var(--maz-table-header-text);
+
+    span {
+      display: block;
+      overflow: hidden;
+    }
+  }
+  .table-multi tbody tr td:nth-child(2),
+  .table-multi tbody tr td:nth-child(3),
+  .table-multi tbody tr td:nth-child(6) {
+    border-left: 1px solid var(--maz-table-divider-hard);
+    box-shadow: -1px 0 0 0 var(--maz-table-divider-hard);
+
+  }
+  thead {
+    background: var(--maz-table-header);
+    color: var(--maz-table-header-text);
+  }
+  th {
+    font-weight: bold;
+    text-align: left;
+    border-bottom: 1px solid;
+    border-bottom-color: var(--maz-table-divider-soft);
+    &.metal,
+    &.linker,
+    &.group,
+    &.gas {
+      cursor: pointer;
+      span::after {
+        content: "▶";
+        padding-left: 5px;
+        display: block;
+        float: right;
+        font-size: 0.9em;
+      }
+      &:hover {
+        background-color: var(--maz-accent);
+      }
+    }
+    span {
+      font-weight: inherit;
+    }
+  }
+  tbody th {
+    font-weight: 500;
+    color: var(--maz-heading);
+    white-space: nowrap;
+  }
+  tbody td {
+    border-bottom: 1px solid;
+    border-bottom-color: var(--maz-table-divider-soft);
+  }
+  td {
+    text-align: left;
+  }
+  th.hover,
+  td.hover {
+    background: #dfdff355;
+    color: #000;
+  }
+
+  // Table-like Bootstrap Containers
+  .container.tablelike {
+    .row.headerlike .col {
+      color: var(--maz-table-header-text);
+      background-color: var(--maz-table-header);
+      box-shadow: 0 1px 0 0 var(--def-black);
+      padding: 0.5em 2em;
+      font-weight: 700;
+      margin-bottom: 0.25em;
+    }
+    .row.rawdata .col {
+      line-height: 1em;
+      font-size: 1.4em;
+      font-weight: 700;
+      padding: 0.5em 0;
+      span {
+        color: var(--maz-accent-darker);
+        font-weight: 700;
+        &.small {
+          font-size: 0.75em;
+        }
+      }
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+    ul li {
+      margin-left: 0;
+      padding: 0.5em 2em;
+    }
+    .col1,
+    .col3 {
+      background: #eeeef599;
+    }
+    .col2 {
+      background: #eeeef944;
+    }
+  }
+
+  // Execution
+  div.maz-execution {
+    margin-top: 2em;
+    button {
+      width: 100%;
+      padding: 0.5em 6em;
+    }
+  }
+
+  // Responsive layout
+  @media (min-width: 768px) {
+    button,
+    div.maz-execution button {
+      width: auto;
+    }
+    th,
+    td {
+      padding: 0.5em 1em;
+    }
+    table.limitwidth {
+      max-width: 50%;
+    }
+  }
+  @media (min-width: 480px) {
+    div.maz-table table {
+      font-size: 1em;
+    }
+  }
+}

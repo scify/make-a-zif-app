@@ -1,0 +1,110 @@
+// Dark scheme optimizations
+/* Make-a-ZIF App's Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --maz-background: var(--def-black);
+    --maz-text: var(--def-text-dark);
+    --maz-backdrop: var(--def-black); /* bg */
+    --maz-heading: var(--def-white);
+    --maz-accent: var(--def-accent); /* light-green */
+    --maz-accent-darker: var(--def-accent-darker);
+    --maz-accent-soft: var(--def-accent-soft-dark);
+    --maz-accent-soft-text: var(--def-accent-soft-dark-text);
+    --maz-blue: var(--def-blue-dark);
+    --maz-blue-hover: var(--def-blue-dark-hover);
+    --maz-blue-text: var(--def-blue-dark-text);
+    --maz-table-header: var(--def-table-header-dark);
+    --maz-table-header-text: var(--def-black);
+    --maz-table-divider-hard: var(--def-table-header-dark);
+    --maz-table-divider-soft: var(--def-text-faded-dark);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  div.maz-header,
+  div.maz-main {
+    // Tables
+    th.hover,
+    td.hover {
+      background: #44445533;
+      color: var(--maz-accent);
+    }
+    // Modal dialogues
+    .modal-dialog .btn-close {
+      background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    }
+    // Table-like Bootstrap Containers
+    .container.tablelike {
+      .row.rawdata .col span {
+        color: var(--maz-accent);
+      }
+      .col1,
+      .col3 {
+        background: #eeeef80b;
+      }
+      .col2 {
+        background: #eeeef505;
+      }
+    }
+    // Make-a-ZIF Tabs & Mods
+    div.maz-tabs {
+      div.maz-history .maz-scenario {
+        border-bottom: 1px solid rgba(255, 255, 255, 1);
+      }
+      div.maz-history .maz-scenario .data {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      div.maz-diffusion {
+        font-size: 1.8em;
+        line-height: 1;
+        font-weight: 700;
+        padding: 0;
+        text-transform: uppercase;
+        color: var(--def-white);
+        box-shadow: none;
+      }
+      div.maz-difussion::after {
+        content: "&nbsp;";
+      }
+      div.maz-save {
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        input {
+          background-color: var(--maz-background);
+          color: var(--def-white);
+          &:active,
+          &:focus {
+            box-shadow: inset 1px -2px 10px rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+      table thead th {
+        color: var(--def-white);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+      }
+      ul.nav-tabs {
+        --bs-nav-tabs-border-color: var(--def-white);
+        --bs-nav-tabs-link-hover-border-color: rgba(255, 255, 255, 0);
+        --bs-nav-tabs-link-active-color: var(--def-white);
+        --bs-nav-tabs-link-active-bg: var(--maz-background);
+        --bs-nav-tabs-link-active-border-color: var(--def-white) var(--def-white)
+          var(--maz-background);
+        .nav-link {
+          color: var(--maz-text);
+          &:hover,
+          &:focus {
+            --bs-nav-tabs-link-hover-border-color: var(--maz-background)
+              var(--maz-background) #fff transparent;
+          }
+          &.active {
+            box-shadow: 0px -5px 5px rgba(255, 255, 255, 0.1);
+            color: var(--def-white);
+            background-color: var(--maz-background);
+            &:hover,
+            &:focus {
+              background-color: var(--maz-background);
+            }
+          }
+        }
+      }
+    }
+  }
+}

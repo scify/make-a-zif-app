@@ -1,0 +1,58 @@
+[
+  {
+    "key": "ch3",
+    "name": "–CH<sub>3</sub>",
+    "title": "Methyl group",
+    "mass": 15,
+    "size": 3.78
+  },
+  {
+    "key": "h",
+    "name": "H",
+    "title": "H",
+    "mass": 1,
+    "size": 2.278
+  },
+  {
+    "key": "cl",
+    "name": "Cl",
+    "title": "Cl",
+    "mass": 36,
+    "size": 3.54
+  },
+  {
+    "key": "br",
+    "name": "Br",
+    "title": "Br",
+    "mass": 80,
+    "size": 3.85
+  },
+  {
+    "key": "l",
+    "name": "l",
+    "title": "l",
+    "mass": 127,
+    "size": 4.25
+  },
+  {
+    "key": "f",
+    "name": "F",
+    "title": "F",
+    "mass": 19,
+    "size": 2.7
+  },
+  {
+    "key": "nh2",
+    "name": "NH<sub>2</sub>",
+    "title": "Amide",
+    "mass": 16,
+    "size": 3.927
+  },
+  {
+    "key": "cho",
+    "name": "CHO",
+    "title": "CHO",
+    "mass": 31,
+    "size": 4.093
+  }
+]
