@@ -163,9 +163,11 @@ div.maz-main {
           background: none;
         }
       }
-      transition: background-color 2s ease-in-out;
+      border: 1px solid var(--maz-background);
+      transition: all 1s ease-in-out;
       &.executed {
-        background-color: hsla(166, 55%, 53%, 0.2);
+        border: 1px solid hsla(166, 55%, 53%, 1);
+        background-color: hsla(166, 55%, 53%, 0.1);
       }
     }
     div.maz-diffusion {
@@ -247,24 +249,6 @@ div.maz-main {
     }
     @media (prefers-color-scheme: dark) {
     }
-  }
-
-  // Abbreviations
-  abbr {
-    font-weight: inherit;
-    text-decoration: none !important;
-    opacity: 0.75;
-    color: inherit;
-  }
-  div.maz-table abbr::before {
-    content: "(";
-    font-weight: inherit;
-    color: inherit;
-  }
-  div.maz-table abbr::after {
-    content: ")";
-    font-weight: inherit;
-    color: inherit;
   }
 
   // Forms
@@ -359,7 +343,8 @@ div.maz-main {
       color: var(--maz-background);
       background: var(--maz-accent);
       border-radius: 50%;
-      padding: 0.25em 0.5em;
+      line-height: 1;
+      padding: 0.33em 0.66em;
       margin-right: 0.5em;
     }
     &.one::before {
@@ -421,9 +406,38 @@ div.maz-main {
   }
 
   // Tables
-  div.maz-table table {
-    font-size: 0.9em; /* will be reverted to 1em via @media on desktop */
+  // Responsive mobile-first: these apply to all screen-sizes
+  table.table-multi {
+    font-size: 0.9em; // will be reverted to 1em via @media on desktop
+    abbr {
+      display: none; // will be reverted to inline-block on desktop
+    }
+    thead th,
+    tbody td {
+      font-size: 0.9em;
+      text-align: center; // will be reverted to left via @media on desktop
+    }
   }
+  th,
+  td {
+    padding: 0.5em 0.2em; /* reverted to 0.5em 1em via @media on desktop */
+    transition: var(--maz-transition);
+  }
+  div.col-modal {
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  div.col-title--arrow::after {
+    content: "";
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    display: block;
+    float: right;
+    font-size: 0.7em;
+  }
+  // End of responsive elements
   table {
     margin-top: 1em;
     width: 100%;
@@ -440,19 +454,9 @@ div.maz-main {
       }
     }
   }
-  th,
-  td {
-    padding: 0.4em 0.25em; /* reverted to 0.5em 1em via @media on desktop */
-    transition: var(--maz-transition);
-  }
   .table-multi th.divider {
     border-left: 1px solid var(--maz-table-header-text);
     box-shadow: -1px 0 0 0 var(--maz-table-header-text);
-
-    span {
-      display: block;
-      overflow: hidden;
-    }
   }
   .table-multi tbody tr td:nth-child(2),
   .table-multi tbody tr td:nth-child(3),
@@ -470,24 +474,19 @@ div.maz-main {
     text-align: left;
     border-bottom: 1px solid;
     border-bottom-color: var(--maz-table-divider-soft);
+    div {
+      font-weight: inherit;
+    }
     &.metal,
     &.linker,
     &.group,
     &.gas {
       cursor: pointer;
-      span::after {
-        content: "▶";
-        padding-left: 5px;
-        display: block;
-        float: right;
-        font-size: 0.9em;
-      }
-      &:hover {
+      &:hover,
+      &:focus,
+      &:active {
         background-color: var(--maz-accent);
       }
-    }
-    span {
-      font-weight: inherit;
     }
   }
   tbody th {
@@ -496,6 +495,7 @@ div.maz-main {
     white-space: nowrap;
   }
   tbody td {
+    color: var(--maz-text-bright);
     border-bottom: 1px solid;
     border-bottom-color: var(--maz-table-divider-soft);
   }
@@ -510,11 +510,12 @@ div.maz-main {
 
   // Table-like Bootstrap Containers
   .container.tablelike {
+    font-size: 1em;
     .row.headerlike .col {
       color: var(--maz-table-header-text);
       background-color: var(--maz-table-header);
       box-shadow: 0 1px 0 0 var(--def-black);
-      padding: 0.5em 2em;
+      padding: 0.5em 1em;
       font-weight: 700;
       margin-bottom: 0.25em;
     }
@@ -536,8 +537,9 @@ div.maz-main {
       padding: 0;
     }
     ul li {
+      font-size: 0.9em; // will be reverted on desktop to 1em
       margin-left: 0;
-      padding: 0.5em 2em;
+      padding: 0.5em 1em;
     }
     .col1,
     .col3 {
@@ -547,7 +549,6 @@ div.maz-main {
       background: #eeeef944;
     }
   }
-
   // Execution
   div.maz-execution {
     margin-top: 2em;
@@ -557,23 +558,67 @@ div.maz-main {
     }
   }
 
-  // Responsive layout
+  // Abbreviations
+  abbr {
+    font-weight: inherit;
+    text-decoration: none !important;
+    opacity: 0.75;
+    color: inherit;
+  }
+  div.maz-table abbr::before {
+    content: "(";
+    font-weight: inherit;
+    color: inherit;
+  }
+  div.maz-table abbr::after {
+    content: ")";
+    font-weight: inherit;
+    color: inherit;
+  }
+
+  // Responsive layout (changes applied on screen widths > 768px)
   @media (min-width: 768px) {
     button,
     div.maz-execution button {
       width: auto;
     }
-    th,
-    td {
-      padding: 0.5em 1em;
-    }
     table.limitwidth {
       max-width: 50%;
     }
   }
+  @media (min-width: 640px) {
+    th,
+    td {
+      padding: 0.5em 1em;
+    }
+  }
   @media (min-width: 480px) {
+    .container.tablelike {
+      .row.headerlike .col {
+        padding: 0.5em 2em;
+      }
+      ul li {
+        font-size: 1em;
+        padding: 0.5em 2em;
+      }
+    }
     div.maz-table table {
       font-size: 1em;
+    }
+    div.col-title--arrow::after {
+      content: "▶";
+      padding: 4px 0 0 4px;
+      font-size: 0.9em;
+    }
+    table.table-multi {
+      abbr {
+        display: inline-block;
+      }
+      thead th,
+      tbody td {
+        font-size: 1em; // switches to 0.9 via @media on mobile
+        text-align: left; // switches to 0.9 via @media on mobile
+      }
     }
   }
 }

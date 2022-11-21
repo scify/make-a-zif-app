@@ -30,6 +30,8 @@ Inherited variables and values from Make-a-ZIF's website:
   --def-text-dark: rgba(225, 225, 245, 0.64);
   --def-text-faded-light: #d3d9e4;
   --def-text-faded-dark: #37393d;
+  --def-text-bright-light: #181818;
+  --def-text-bright-dark: #e9eef7;
   --def-accent: #6dd5bc; /* light-green */
   --def-accent-darker: #56b19c; /* light-green */
   --def-accent-soft-light: #eff3fb;
@@ -58,6 +60,7 @@ Inherited variables and values from Make-a-ZIF's website:
 :root {
   --maz-background: var(--def-white);
   --maz-text: var(--def-text-light); /* body color */
+  --maz-text-bright: var(--def-text-bright-light);
   --maz-backdrop: var(--def-backdrop-light); /* bg */
   --maz-heading: var(--def-indigo);
   --maz-accent: var(--def-accent); /* light-green */

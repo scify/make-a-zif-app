@@ -98,7 +98,7 @@ export default {
       inputFuncGroup3
     "
   >
-    <h4 class="one">Select metal, linkers & functional groups</h4>
+    <h4 class="one">Select metal, linkers & groups</h4>
     <h5>
       Edit the table below to change the metal, the organic linkers and/or the
       functional groups of the ZIF.
@@ -110,38 +110,51 @@ export default {
       <colgroup class="group" span="3"></colgroup>
       <thead>
         <tr>
-          <th scope="col" class="hidden">#</th>
           <th
             scope="col"
-            class="metal divider"
-            v-on:mouseover="onMouseHover('metal')"
-            v-on:mouseleave="onMouseLeave('metal')"
+            class="hidden"
+            aria-label="Properties"
+            role="columnheader"
           >
-            <span data-bs-toggle="modal" data-bs-target="#metalModal">
-              Metal
-            </span>
+            #
           </th>
-          <th
-            scope="col"
-            colspan="3"
-            class="linker divider"
-            v-on:mouseover="onMouseHover('linker')"
-            v-on:mouseleave="onMouseLeave('linker')"
-          >
-            <span data-bs-toggle="modal" data-bs-target="#linkersModal">
-              Organic Linkers
-            </span>
+          <th scope="col" class="metal divider" role="button">
+            <div
+              class="col-modal"
+              data-bs-toggle="modal"
+              data-bs-target="#metalModal"
+              v-on:mouseover="onMouseHover('metal')"
+              v-on:mouseleave="onMouseLeave('metal')"
+              aria-label="Selection of Metal"
+            >
+              <div class="col-title--arrow">Metal</div>
+            </div>
           </th>
-          <th
-            scope="col"
-            colspan="3"
-            class="group divider"
-            v-on:mouseover="onMouseHover('group')"
-            v-on:mouseleave="onMouseLeave('group')"
-          >
-            <span data-bs-toggle="modal" data-bs-target="#groupsModal">
-              Functional Groups
-            </span>
+          <th scope="col" colspan="3" class="linker divider">
+            <div
+              class="col-modal"
+              data-bs-toggle="modal"
+              data-bs-target="#linkersModal"
+              v-on:mouseover="onMouseHover('linker')"
+              v-on:mouseleave="onMouseLeave('linker')"
+              aria-label="Selection of Organic Linkers"
+              role="button"
+            >
+              <div class="col-title--arrow">Organic Linkers</div>
+            </div>
+          </th>
+          <th scope="col" colspan="3" class="group divider">
+            <div
+              class="col-modal"
+              data-bs-toggle="modal"
+              data-bs-target="#groupsModal"
+              v-on:mouseover="onMouseHover('group')"
+              v-on:mouseleave="onMouseLeave('group')"
+              aria-label="Selection of Functional Groups"
+              role="button"
+            >
+              <div class="col-title--arrow">Functional Groups</div>
+            </div>
           </th>
         </tr>
       </thead>

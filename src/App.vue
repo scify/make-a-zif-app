@@ -461,12 +461,12 @@ export default {
 </template>
 
 <style lang="scss">
-/* Import Make-a-ZIF App's Main stylesheets (also imports base.scss): */
+/* 1. Import Make-a-ZIF App's Main stylesheets (also imports base.scss): */
 @import "./assets/main.scss";
-/* Import Make-a-ZIF App's Dark Theme support */
+/* 2. Import Make-a-ZIF App's Dark Theme support */
 @import "./assets/dark.scss";
-/* 2. Import Bootstrap's CSS (@TODO: Should we remove it from Production?): */
+/* 3. Import Bootstrap's CSS (@TODO: Should we remove it from Production?): */
 @import "~bootstrap/scss/bootstrap";
-/* 3. Default body & reset (@TODO: Should we remove it from Production?): */
+/* 4. Default body & reset (@TODO: Should we remove it from Production?): */
 @import "./assets/default.scss";
 </style>

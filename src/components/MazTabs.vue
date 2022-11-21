@@ -129,7 +129,7 @@ export default {
           <div
             id="mazDiffusion"
             v-if="scenarioResults.showDiff"
-            class="maz-diffusion text-center p-3"
+            class="maz-diffusion text-center p-3 mb-0"
           >
             Diffusion: <strong>{{ scenarioResults.diffusion }}</strong>
           </div>

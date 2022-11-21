@@ -1,10 +1,10 @@
 {
   "name": "make-a-zif-app",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "homepage": "https://make-a-zif.scify.org/zif-model/",
   "engines": {
     "npm": "8.19.2",
-    "node" : "18.12.1"
+    "node" : "18.x.x"
   },
   "author": "konem",
   "contributors": [

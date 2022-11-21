@@ -51,14 +51,26 @@ export default {
       <colgroup class="gas"></colgroup>
       <thead>
         <tr>
-          <th scope="col" class="hidden limitwidth">#</th>
           <th
             scope="col"
-            class="gas divider"
-            v-on:mouseover="onMouseHover('gas')"
-            v-on:mouseleave="onMouseLeave('gas')"
+            class="hidden limitwidth"
+            aria-label="Properties"
+            role="columnheader"
           >
-            <span data-bs-toggle="modal" data-bs-target="#gasModal">Gas</span>
+            #
+          </th>
+          <th scope="col" class="gas divider">
+            <div
+              class="col-modal"
+              data-bs-toggle="modal"
+              data-bs-target="#gasModal"
+              v-on:mouseover="onMouseHover('gas')"
+              v-on:mouseleave="onMouseLeave('gas')"
+              aria-label="Selection of Gas"
+              role="button"
+            >
+              <div class="col-title--arrow">Gas</div>
+            </div>
           </th>
         </tr>
       </thead>
