@@ -109,29 +109,30 @@ export default {
       <colgroup class="linker" span="3"></colgroup>
       <colgroup class="group" span="3"></colgroup>
       <thead>
-        <tr>
+        <tr class="modal-row">
           <th
             scope="col"
             class="hidden"
             aria-label="Properties"
             role="columnheader"
           >
-            #
+            <div class="col-modal">#</div>
           </th>
-          <th scope="col" class="metal divider" role="button">
-            <div
+          <th scope="col" class="metal divider">
+            <button
               class="col-modal"
               data-bs-toggle="modal"
               data-bs-target="#metalModal"
               v-on:mouseover="onMouseHover('metal')"
               v-on:mouseleave="onMouseLeave('metal')"
               aria-label="Selection of Metal"
+              role="button"
             >
               <div class="col-title--arrow">Metal</div>
-            </div>
+            </button>
           </th>
           <th scope="col" colspan="3" class="linker divider">
-            <div
+            <button
               class="col-modal"
               data-bs-toggle="modal"
               data-bs-target="#linkersModal"
@@ -141,10 +142,10 @@ export default {
               role="button"
             >
               <div class="col-title--arrow">Organic Linkers</div>
-            </div>
+            </button>
           </th>
           <th scope="col" colspan="3" class="group divider">
-            <div
+            <button
               class="col-modal"
               data-bs-toggle="modal"
               data-bs-target="#groupsModal"
@@ -154,7 +155,7 @@ export default {
               role="button"
             >
               <div class="col-title--arrow">Functional Groups</div>
-            </div>
+            </button>
           </th>
         </tr>
       </thead>

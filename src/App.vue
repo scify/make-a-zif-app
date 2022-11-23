@@ -1,8 +1,8 @@
 <script>
 /**
- * Make-a-ZIF App version 0.9.0
+ * Make-a-ZIF App version 0.9.1
  *
- * Created by SciFY on November 20, 2022.
+ * Created by SciFY on November 2022.
  *
  * Note: By default the App supports both Light and dark theme. If you want
  * to disable dark mode, just remove @import "./assets/dark.scss"; from this
@@ -18,6 +18,7 @@ import gasData from "./assets/data/gases.json";
 import metalData from "./assets/data/metals.json";
 import linkerData from "./assets/data/linkers.json";
 import groupData from "./assets/data/groups.json";
+
 // Let the Vue begin!
 export default {
   components: {
@@ -385,10 +386,13 @@ export default {
      */
     loadDefaultScenario() {
       // The default (example) ZIF is created using the following variables:
-      let defaultMetal = this.listOfMetals.find((i) => i.key === "zn2plus");
+      let defaultMetal = this.listOfMetals.find((i) => i.key === "zn");
       let defaultLinker = this.listOfLinkers.find((i) => i.key === "mlm");
       let defaultGroup = this.listOfGroups.find((i) => i.key === "ch3");
       let defaultGas = false;
+      if (!defaultMetal || !defaultLinker || !defaultGroup) {
+        throw new Error("Can't load initial properties from JSON assets/data!");
+      }
       let selectedScenario = {
         metal: defaultMetal,
         linker1: defaultLinker,

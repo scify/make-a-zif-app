@@ -50,17 +50,17 @@ export default {
       <colgroup class="header"></colgroup>
       <colgroup class="gas"></colgroup>
       <thead>
-        <tr>
+        <tr class="modal-row">
           <th
             scope="col"
             class="hidden limitwidth"
             aria-label="Properties"
             role="columnheader"
           >
-            #
+            <div class="col-modal">#</div>
           </th>
           <th scope="col" class="gas divider">
-            <div
+            <button
               class="col-modal"
               data-bs-toggle="modal"
               data-bs-target="#gasModal"
@@ -70,7 +70,7 @@ export default {
               role="button"
             >
               <div class="col-title--arrow">Gas</div>
-            </div>
+            </button>
           </th>
         </tr>
       </thead>

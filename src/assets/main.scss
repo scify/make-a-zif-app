@@ -418,14 +418,36 @@ div.maz-main {
       text-align: center; // will be reverted to left via @media on desktop
     }
   }
+  tr.modal-row th {
+    margin: 0;
+    padding: 0;
+    @media (min-width: 640px) {
+      padding: 0;
+    }
+  }
   th,
   td {
     padding: 0.5em 0.2em; /* reverted to 0.5em 1em via @media on desktop */
     transition: var(--maz-transition);
+    @media (min-width: 640px) {
+      padding: 0.5em 1em;
+    }
   }
+  button.col-modal,
   div.col-modal {
+    padding: 0.5em;
+    text-align: center;
+    display: block;
+    width: 100%;
+    border: none;
     white-space: nowrap;
     overflow: hidden;
+    font: inherit;
+    background: inherit;
+    @media (min-width: 480px) {
+      padding: 0.5em 1em;
+      text-align: left;
+    }
   }
   div.col-title--arrow::after {
     content: "";
@@ -436,6 +458,11 @@ div.maz-main {
     display: block;
     float: right;
     font-size: 0.7em;
+    @media (min-width: 560px) {
+      content: "▶";
+      padding: 4px 0 0 4px;
+      font-size: 0.9em;
+    }
   }
   // End of responsive elements
   table {
@@ -586,12 +613,6 @@ div.maz-main {
       max-width: 50%;
     }
   }
-  @media (min-width: 640px) {
-    th,
-    td {
-      padding: 0.5em 1em;
-    }
-  }
   @media (min-width: 480px) {
     .container.tablelike {
       .row.headerlike .col {
@@ -605,11 +626,6 @@ div.maz-main {
     div.maz-table table {
       font-size: 1em;
     }
-    div.col-title--arrow::after {
-      content: "▶";
-      padding: 4px 0 0 4px;
-      font-size: 0.9em;
-    }
     table.table-multi {
       abbr {
         display: inline-block;
@@ -621,4 +637,5 @@ div.maz-main {
       }
     }
   }
+
 }
