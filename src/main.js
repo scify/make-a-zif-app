@@ -6,5 +6,6 @@ import App from "./App.vue";
 
 // Import all of Bootstrap's JS.
 import * as bootstrap from "bootstrap";
+import * as p5 from "p5";
 
 createApp(App).mount("#app");

@@ -12,6 +12,7 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
       // Adding an alias for Bootstrap:
       "~bootstrap": path.resolve("node_modules/bootstrap"),
+      "~p5": path.resolve("node_modules/p5"),
     },
   },
 });

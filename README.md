@@ -27,11 +27,23 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
+Use this project's version of Node.js:
+
+```sh
+nvm use
+```
+
+Install the project:
+
 ```sh
 npm install
 ```
 
 ### Compile and Hot-Reload for Development
+
+```sh
+nvm use
+```
 
 ```sh
 npm run dev
