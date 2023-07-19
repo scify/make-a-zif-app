@@ -1,11 +1,11 @@
 <script>
 /**
- * Make-a-ZIF App version 0.9.1
+ * Make-a-ZIF App version 0.9.2
  *
- * Created by SciFY on November 2022.
+ * Created by SciFY on November 2022-July 2023.
  *
- * Note: By default the App supports both Light and dark theme. If you want
- * to disable dark mode, just remove @import "./assets/dark.scss"; from this
+ * Note: By default the App supports both light and dark theme. If dark mode
+ * needs to be disabled, just remove @import "./assets/dark.scss"; from this
  * file's <style> imports.
  */
 import MazHeader from "./components/MazHeader.vue";
@@ -13,7 +13,7 @@ import MazImage from "./components/MazImage.vue";
 import MazTabs from "./components/MazTabs.vue";
 import MazTableOne from "./components/MazTableOne.vue";
 import MazTableTwo from "./components/MazTableTwo.vue";
-// Import assets (gas, metals, linkers, functional groups)
+// Import default assets (gas, metals, linkers, functional groups)
 import gasData from "./assets/data/gases.json";
 import metalData from "./assets/data/metals.json";
 import linkerData from "./assets/data/linkers.json";
@@ -22,16 +22,17 @@ import groupData from "./assets/data/groups.json";
 // Let the Vue begin!
 export default {
   components: {
-    MazHeader,
-    MazImage,
-    MazTabs,
-    MazTableOne,
-    MazTableTwo,
+    MazHeader, // A very basic header.
+    MazImage, // A very basic image of a ZIF.
+    MazTabs, // Memo & History Tabs, next to the image.
+    MazTableOne, // Allows selection of Metals, Linkers & Groups.
+    MazTableTwo, // Allows selection of Gas elements.
   },
   props: [],
   data() {
     return {
       // Parsed JSON data
+      modelVersion: "0.9.0", // Local cached version of data.
       listOfGases: gasData,
       listOfMetals: metalData,
       listOfGroups: groupData,
@@ -67,7 +68,7 @@ export default {
     };
   },
   created() {
-    //check if history exists in the local storage.
+    // Checks if history exists in local storage:
     let localStorageHistory = window.localStorage.getItem("mazAppHistory");
     console.log("App was Created...");
     if (localStorageHistory) {
@@ -90,8 +91,27 @@ export default {
     this.selectedFuncGroup3 = this.selectedScenario.funcGroup3;
   },
   computed: {},
-  mounted() {},
+  mounted() {
+    this.updateDataFromAPI();
+  },
   methods: {
+    updateDataFromAPI() {
+      fetch("https://make-a-zif-api.scify.org/model/params")
+        .then((response) => response.json())
+        .then((data) => {
+          // Update the data properties with the fetched data:
+          // this.listOfGases = data.gases;
+          // this.listOfMetals = data.metals;
+          // this.listOfGroups = data.groups;
+          // this.listOfLinkers = data.linkers;
+          this.modelVersion = data.model_version;
+        })
+        .catch((error) => {
+          // Handle any error that occurs during the fetch request:
+          console.error("Error fetching data:", error);
+        });
+    },
+
     currentDate() {
       const current = new Date();
       const month = current.getMonth() + 1;
@@ -101,22 +121,26 @@ export default {
       const date = `${current.getDate()}/${month}/${current.getFullYear()} | ${hours}:${minutes}:${seconds}`;
       return date;
     },
+
     refreshMetal(newMetal) {
       console.log("App received metal: " + newMetal);
       this.selectedScenario.metal = newMetal;
     },
+
     refreshLinkers(newLinkers) {
       console.log("App received linkers:" + newLinkers);
       this.selectedScenario.linker1 = newLinkers.linker1;
       this.selectedScenario.linker2 = newLinkers.linker2;
       this.selectedScenario.linker3 = newLinkers.linker3;
     },
+
     refreshGroups(newGroups) {
       console.log("App received groups:" + newGroups);
       this.selectedScenario.funcGroup1 = newGroups.group1;
       this.selectedScenario.funcGroup2 = newGroups.group2;
       this.selectedScenario.funcGroup3 = newGroups.group3;
     },
+
     refreshGas(newGas) {
       console.log("App Received Gas: " + newGas);
       if (newGas) {
@@ -418,6 +442,7 @@ export default {
       <MazHeader
         header="Make-a-ZIF"
         subHeader="A tool to design ZIFs for gas seperations"
+        :modelVersion="modelVersion"
       />
     </div>
   </div>
@@ -469,8 +494,8 @@ export default {
 @import "./assets/main.scss";
 /* 2. Import Make-a-ZIF App's Dark Theme support */
 @import "./assets/dark.scss";
-/* 3. Import Bootstrap's CSS (@TODO: Should we remove it from Production?): */
+/* 3. Import Bootstrap's CSS (@TODO: Should it be removed from Production?): */
 @import "~bootstrap/scss/bootstrap";
-/* 4. Default body & reset (@TODO: Should we remove it from Production?): */
+/* 4. Default body & reset (@TODO: Should it be removed from Production?): */
 @import "./assets/default.scss";
 </style>

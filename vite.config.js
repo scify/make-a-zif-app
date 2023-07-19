@@ -15,4 +15,10 @@ export default defineConfig({
       "~p5": path.resolve("node_modules/p5"),
     },
   },
+  server: {
+    https: {
+      key: "localhost.key",
+      cert: "localhost.crt",
+    },
+  },
 });

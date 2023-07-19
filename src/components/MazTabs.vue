@@ -1,4 +1,7 @@
 <script>
+/**
+ * Experimental use of p5.js for rendering output on a canvas.
+ */
 import UnitNanometre from "./units/UnitNanometre.vue";
 
 export default {

@@ -24,6 +24,13 @@ div.maz-header {
     font-size: 1.25rem;
     font-weight: 500;
     margin-top: 0em;
+
+    span {
+      display: block;
+      margin-top: 0.8em;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
   }
   .greetings h2,
   .greetings h3 {
@@ -37,6 +44,11 @@ div.maz-header {
       font-size: 1.1em;
       font-weight: normal;
       margin-top: 0.75em;
+      line-height: 1.5;
+      span {
+        display: inline-block;
+        font-size: 1em;
+      }
     }
     .greetings h2,
     .greetings h3 {

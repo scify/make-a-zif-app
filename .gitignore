@@ -17,7 +17,7 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
-# Editor directories and files
+# Editor directories and other local/dev files:
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -26,3 +26,6 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+*.key
+*.crt
+*.csr
