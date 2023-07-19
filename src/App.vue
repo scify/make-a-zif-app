@@ -1,6 +1,6 @@
 <script>
 /**
- * Make-a-ZIF App version 0.9.2
+ * Make-a-ZIF App
  *
  * Created by SciFY on November 2022-July 2023.
  *
@@ -13,7 +13,7 @@ import MazImage from "./components/MazImage.vue";
 import MazTabs from "./components/MazTabs.vue";
 import MazTableOne from "./components/MazTableOne.vue";
 import MazTableTwo from "./components/MazTableTwo.vue";
-// Import default assets (gas, metals, linkers, functional groups)
+// Import default assets (gas, metals, linkers, functional groups):
 import gasData from "./assets/data/gases.json";
 import metalData from "./assets/data/metals.json";
 import linkerData from "./assets/data/linkers.json";
@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       // Parsed JSON data
-      modelVersion: "0.9.0", // Local cached version of data.
+      modelVersion: "1.1.0 local", // Local cached version of initial data.
       listOfGases: gasData,
       listOfMetals: metalData,
       listOfGroups: groupData,
@@ -69,47 +69,223 @@ export default {
   },
   created() {
     // Checks if history exists in local storage:
-    let localStorageHistory = window.localStorage.getItem("mazAppHistory");
     console.log("App was Created...");
-    if (localStorageHistory) {
-      this.scenarioHistory = JSON.parse(localStorageHistory);
-      console.log("App loaded scenarios from browser's history");
-      // @TODO: Load an actual scenario...
-      // this.selectedScenario = this.scenarioHistory[this.scenarioHistory.length - 1];
-      this.selectedScenario = this.loadDefaultScenario(); // remove when fixed!
-    } else {
-      console.log("App loaded default scenario");
-      this.selectedScenario = this.loadDefaultScenario();
-    }
-    this.selectedGas = this.selectedScenario.gas;
-    this.selectedMetal = this.selectedScenario.metal;
-    this.selectedLinker1 = this.selectedScenario.linker1;
-    this.selectedLinker2 = this.selectedScenario.linker2;
-    this.selectedLinker3 = this.selectedScenario.linker3;
-    this.selectedFuncGroup1 = this.selectedScenario.funcGroup1;
-    this.selectedFuncGroup2 = this.selectedScenario.funcGroup2;
-    this.selectedFuncGroup3 = this.selectedScenario.funcGroup3;
+    this.resetToLocalOrDefault();
   },
   computed: {},
   mounted() {
     this.updateDataFromAPI();
   },
   methods: {
+    resetToLocalOrDefault() {
+      let localStorageHistory = window.localStorage.getItem("mazAppHistory");
+      if (localStorageHistory) {
+        this.scenarioHistory = JSON.parse(localStorageHistory);
+        console.log("App loaded scenarios from browser's history");
+        // @TODO: Load an actual scenario...
+        // this.selectedScenario = this.scenarioHistory[this.scenarioHistory.length - 1];
+        this.selectedScenario = this.loadDefaultScenario(); // remove when fixed!
+      } else {
+        console.log("App loaded default scenario");
+        this.selectedScenario = this.loadDefaultScenario();
+      }
+      this.selectedGas = this.selectedScenario.gas;
+      this.selectedMetal = this.selectedScenario.metal;
+      this.selectedLinker1 = this.selectedScenario.linker1;
+      this.selectedLinker2 = this.selectedScenario.linker2;
+      this.selectedLinker3 = this.selectedScenario.linker3;
+      this.selectedFuncGroup1 = this.selectedScenario.funcGroup1;
+      this.selectedFuncGroup2 = this.selectedScenario.funcGroup2;
+      this.selectedFuncGroup3 = this.selectedScenario.funcGroup3;
+    },
     updateDataFromAPI() {
-      fetch("https://make-a-zif-api.scify.org/model/params")
+      fetch(import.meta.env.VITE_MAZ_API_ENDPOINT + "params")
         .then((response) => response.json())
         .then((data) => {
-          // Update the data properties with the fetched data:
-          // this.listOfGases = data.gases;
-          // this.listOfMetals = data.metals;
-          // this.listOfGroups = data.groups;
-          // this.listOfLinkers = data.linkers;
           this.modelVersion = data.model_version;
+          this.listOfGases = data.gases.map((gas) => this.mapApiGases(gas));
+          this.listOfMetals = data.metals.map((metal) =>
+            this.mapApiMetals(metal)
+          );
+          this.listOfGroups = data.f_groups.map((group) =>
+            this.mapApiGroups(group)
+          );
+          this.listOfLinkers = data.linkers.map((linker) =>
+            this.mapApiLinkers(linker)
+          );
+          /*
+          this.downloadJsonData(this.listOfGases, "gases");
+          this.downloadJsonData(this.listOfMetals, "metals");
+          this.downloadJsonData(this.listOfGroups, "groups");
+          this.downloadJsonData(this.listOfLinkers, "linkers");
+          */
+          this.resetToLocalOrDefault();
         })
         .catch((error) => {
           // Handle any error that occurs during the fetch request:
-          console.error("Error fetching data:", error);
+          // @TODO: Handle specific errors in specific ways.
+          console.error("Error fetching remote data:", error);
+        })
+        .finally(() => {
+          console.log("Finally!");
         });
+    },
+
+    downloadJsonData(data, name = "data") {
+      const json = JSON.stringify(data, null, 2);
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = name + ".json";
+      link.click();
+    },
+
+    /**
+     * Maps an Make-a-ZIF API v1.0 metal object to the optimal structure.
+     * @param {Object} group - The API metal object to be mapped.
+     * @returns {Object} The transformed group object.
+     */
+    mapApiGases(gas) {
+      return {
+        key: gas.key,
+        name: gas.name,
+        title: gas.title,
+        acentricFactor: gas.ascentricF,
+        kineticDiameter: {
+          name: "kinetic diameter",
+          unit: {
+            name: "angstrom",
+            symbol: "\u00C5",
+          },
+          value: gas.kdiameter,
+        },
+        mass: {
+          name: "mass",
+          unit: {
+            name: "gram per mol",
+            symbol: "g/mol",
+          },
+          value: gas.mass,
+        },
+        size: {
+          name: "vdW diameter",
+          unit: {
+            name: "angstrom",
+            symbol: "\u00C5",
+          },
+          value: gas.diameter,
+        },
+      };
+    },
+
+    /**
+     * Maps an Make-a-ZIF API v1.0 metal object to the optimal structure.
+     * @param {Object} group - The API metal object to be mapped.
+     * @returns {Object} The transformed group object.
+     */
+    mapApiMetals(metal) {
+      // Compensate for typo on API v1.0:
+      if (metal.ionicRad === undefined) {
+        metal.ionicRad = metal.IonicRad;
+      }
+      return {
+        key: metal.key,
+        name: metal.name,
+        title: metal.title,
+        number: metal.metalNum,
+        mass: {
+          name: "metal mass",
+          unit: {
+            name: "dalton",
+            symbol: "u",
+          },
+          value: metal.metalMass,
+        },
+        size: {
+          name: "ionic radius",
+          unit: {
+            name: "picometer",
+            symbol: "pm",
+          },
+          value: metal.ionicRad,
+        },
+      };
+    },
+
+    /**
+     * Maps an Make-a-ZIF API v1.0 f_group object to the optimal structure.
+     * @param {Object} group - The API f_group object to be mapped.
+     * @returns {Object} The transformed group object.
+     */
+    mapApiGroups(group) {
+      return {
+        key: group.key,
+        name: group.name,
+        title: group.title,
+        mass: {
+          name: "mass",
+          unit: {
+            name: "dalton",
+            symbol: "u",
+          },
+          value: group.f_group_mass,
+        },
+        size: {
+          name: "length",
+          unit: {
+            name: "angstrom",
+            symbol: "\u00C5",
+          },
+          value: group.f_group_length,
+        },
+      };
+    },
+
+    /**
+     * Maps an Make-a-ZIF API v1.0 linker object to the optimal structure.
+     * @param {Object} linker - The API linker object to be mapped.
+     * @returns {Object} The transformed linker object.
+     */
+    mapApiLinkers(linker) {
+      return {
+        key: linker.key,
+        name: linker.name,
+        title: linker.title,
+        // Distance (σ) at which intermolecular potential btwn particles is 0.
+        distance: {
+          name: "\u03c3",
+          unit: {
+            name: "angstrom",
+            symbol: "\u00C5",
+          },
+          value: linker["s_1"],
+        },
+        energy: {
+          name: "e",
+          unit: {
+            name: "kilojoule per mol",
+            symbol: "kJ/mol",
+          },
+          value: linker["e_1"],
+        },
+        mass: {
+          name: "mass",
+          unit: {
+            name: "dalton",
+            symbol: "u",
+          },
+          value: linker["linker_mass"],
+        },
+        size: {
+          name: "length",
+          unit: {
+            name: "angstrom",
+            symbol: "\u00C5",
+          },
+          value: linker["linker_length"],
+        },
+      };
     },
 
     currentDate() {

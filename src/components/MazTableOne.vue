@@ -201,67 +201,67 @@ export default {
         <tr>
           <th scope="row">Mass <UnitDalton :abbr="true" /></th>
           <td class="metal" :class="hoverColumns.metal ? 'hover' : ''">
-            {{ selectedScenario.metal.mass }}
+            {{ selectedScenario.metal.mass.value }}
           </td>
           <td
             class="linker linker1"
             :class="hoverColumns.linker ? 'hover' : ''"
           >
-            {{ selectedScenario.linker1.mass }}
+            {{ selectedScenario.linker1.mass.value }}
           </td>
           <td
             class="linker linker2"
             :class="hoverColumns.linker ? 'hover' : ''"
           >
-            {{ selectedScenario.linker2.mass }}
+            {{ selectedScenario.linker2.mass.value }}
           </td>
           <td
             class="linker linker3"
             :class="hoverColumns.linker ? 'hover' : ''"
           >
-            {{ selectedScenario.linker3.mass }}
+            {{ selectedScenario.linker3.mass.value }}
           </td>
           <td class="group group1" :class="hoverColumns.group ? 'hover' : ''">
-            {{ selectedScenario.funcGroup1.mass }}
+            {{ selectedScenario.funcGroup1.mass.value }}
           </td>
           <td class="group group2" :class="hoverColumns.group ? 'hover' : ''">
-            {{ selectedScenario.funcGroup2.mass }}
+            {{ selectedScenario.funcGroup2.mass.value }}
           </td>
           <td class="group group3" :class="hoverColumns.group ? 'hover' : ''">
-            {{ selectedScenario.funcGroup3.mass }}
+            {{ selectedScenario.funcGroup3.mass.value }}
           </td>
         </tr>
         <tr>
           <th scope="row">Size <UnitAngstrom :abbr="true" /></th>
           <td class="metal" :class="hoverColumns.metal ? 'hover' : ''">
-            {{ selectedScenario.metal.size }}
+            {{ selectedScenario.metal.size.value }}
           </td>
           <td
             class="linker linker1"
             :class="hoverColumns.linker ? 'hover' : ''"
           >
-            {{ selectedScenario.linker1.size }}
+            {{ selectedScenario.linker1.size.value }}
           </td>
           <td
             class="linker linker2"
             :class="hoverColumns.linker ? 'hover' : ''"
           >
-            {{ selectedScenario.linker2.size }}
+            {{ selectedScenario.linker2.size.value }}
           </td>
           <td
             class="linker linker3"
             :class="hoverColumns.linker ? 'hover' : ''"
           >
-            {{ selectedScenario.linker3.size }}
+            {{ selectedScenario.linker3.size.value }}
           </td>
           <td class="group group1" :class="hoverColumns.group ? 'hover' : ''">
-            {{ selectedScenario.funcGroup1.size }}
+            {{ selectedScenario.funcGroup1.size.value }}
           </td>
           <td class="group group2" :class="hoverColumns.group ? 'hover' : ''">
-            {{ selectedScenario.funcGroup2.size }}
+            {{ selectedScenario.funcGroup2.size.value }}
           </td>
           <td class="group group3" :class="hoverColumns.group ? 'hover' : ''">
-            {{ selectedScenario.funcGroup3.size }}
+            {{ selectedScenario.funcGroup3.size.value }}
           </td>
         </tr>
       </tbody>
@@ -321,8 +321,8 @@ export default {
                       >
                       </label>
                     </th>
-                    <td>{{ metal.size }}</td>
-                    <td>{{ metal.mass }}</td>
+                    <td>{{ metal.size.value }}</td>
+                    <td>{{ metal.mass.value }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -374,29 +374,29 @@ export default {
                 <div class="row rawdata px-0 gx-0">
                   <div class="col col1 text-center">
                     <span title="mass">
-                      {{ inputLinker1.mass }} <UnitDalton />
+                      {{ inputLinker1.mass.value }} <UnitDalton />
                     </span>
                     <br />
                     <span class="small" title="size" aria-label="size">
-                      {{ inputLinker1.size }} <UnitAngstrom />
+                      {{ inputLinker1.size.value }} <UnitAngstrom />
                     </span>
                   </div>
                   <div class="col col2 text-center">
                     <span title="mass">
-                      {{ inputLinker2.mass }} <UnitDalton />
+                      {{ inputLinker2.mass.value }} <UnitDalton />
                     </span>
                     <br />
                     <span class="small" title="size" aria-label="size">
-                      {{ inputLinker2.size }} <UnitAngstrom />
+                      {{ inputLinker2.size.value }} <UnitAngstrom />
                     </span>
                   </div>
                   <div class="col col3 text-center">
                     <span title="mass">
-                      {{ inputLinker3.mass }} <UnitDalton />
+                      {{ inputLinker3.mass.value }} <UnitDalton />
                     </span>
                     <br />
                     <span class="small" title="size" aria-label="size">
-                      {{ inputLinker3.size }} <UnitAngstrom />
+                      {{ inputLinker3.size.value }} <UnitAngstrom />
                     </span>
                   </div>
                 </div>
