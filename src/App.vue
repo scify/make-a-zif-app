@@ -185,10 +185,6 @@ export default {
      * @returns {Object} The transformed group object.
      */
     mapApiMetals(metal) {
-      // Compensate for typo on API v1.0:
-      if (metal.ionicRad === undefined) {
-        metal.ionicRad = metal.IonicRad;
-      }
       return {
         key: metal.key,
         name: metal.name,

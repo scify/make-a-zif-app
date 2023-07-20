@@ -634,8 +634,11 @@ div.maz-main {
     table.limitwidth {
       max-width: 50%;
     }
+    div.maz-table table {
+      font-size: 1em;
+    }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 576px) {
     .container.tablelike {
       .row.headerlike .col {
         padding: 0.5em 2em;
@@ -644,9 +647,6 @@ div.maz-main {
         font-size: 1em;
         padding: 0.5em 2em;
       }
-    }
-    div.maz-table table {
-      font-size: 1em;
     }
     table.table-multi {
       abbr {

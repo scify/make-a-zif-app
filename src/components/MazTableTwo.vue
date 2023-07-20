@@ -47,7 +47,7 @@ export default {
   <!-- v-if starts here -->
   <div class="maz-table" v-if="selectedScenario && listOfGases">
     <h4 class="two">Add a gas element</h4>
-    <h5>You can optionally add a gas element to the ZIF.</h5>
+    <h5>@TODO: ENTER TEXT HERE TO DESCRIBE WHY GAS ELEMENT IS IMPORTANT TO BE ON ITS OWN.</h5>
     <table class="table-multi limitwidth">
       <colgroup class="header"></colgroup>
       <colgroup class="gas"></colgroup>
