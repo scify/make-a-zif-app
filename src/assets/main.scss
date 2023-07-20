@@ -296,8 +296,15 @@ div.maz-main {
 
   // Modals
   .modal-content {
-    background-color: var(--maz-background);
+    background-color: var(--maz-modal-bg);
   }
+  .modal-content.warning {
+    box-shadow: var(--maz-warning-shadow);
+  }
+  .warning .modal-label {
+    box-shadow: 0 3px 0 0 #f00;
+  }
+
   .modal-dialog {
     color: var(--maz-text);
     .btn.primary {

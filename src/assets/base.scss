@@ -74,5 +74,8 @@ Inherited variables and values from Make-a-ZIF's website:
   --maz-table-header-text: var(--def-blue-light);
   --maz-table-divider-hard: var(--def-blue-light);
   --maz-table-divider-soft: var(--def-text-faded-light);
+  --maz-modal-bg: var(--def-white);
+  --maz-warning-shadow: 1px 1px 2px 2px rgba(255, 0, 0, 0.8),
+    -1px -1px 2px 2px rgba(255, 0, 0, 0.8);
 }
 

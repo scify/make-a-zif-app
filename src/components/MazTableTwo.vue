@@ -40,6 +40,12 @@ export default {
       this.$emit("update:selectedGas", this.inputGas);
     },
   },
+  watch: {
+    inputGas() {
+      document.querySelector("#mazExecuteButton").classList.remove("disabled");
+      document.querySelector("#gasModalContent").classList.remove("warning");
+    },
+  },
 };
 </script>
 
@@ -47,7 +53,9 @@ export default {
   <!-- v-if starts here -->
   <div class="maz-table" v-if="selectedScenario && listOfGases">
     <h4 class="two">Add a gas element</h4>
-    <h5>@TODO: ENTER TEXT HERE TO DESCRIBE WHY GAS ELEMENT IS IMPORTANT TO BE ON ITS OWN.</h5>
+    <h5>
+      @TODO: ENTER TEXT HERE TO DESCRIBE WHY GAS IS IMPORTANT TO BE ON ITS OWN.
+    </h5>
     <table class="table-multi limitwidth">
       <colgroup class="header"></colgroup>
       <colgroup class="gas"></colgroup>
@@ -63,6 +71,7 @@ export default {
           </th>
           <th scope="col" class="gas divider">
             <button
+              id="gasModalButton"
               class="col-modal"
               data-bs-toggle="modal"
               data-bs-target="#gasModal"
@@ -111,7 +120,7 @@ export default {
             class="gas"
             :class="hoverColumns.gas ? 'hover' : ''"
           >
-            {{ selectedScenario.gas.diameter }}
+            {{ selectedScenario.gas.kineticDiameter.value }}
           </td>
           <td v-else class="gas" :class="hoverColumns.gas ? 'hover' : 'faded'">
             &#8212;
@@ -128,11 +137,13 @@ export default {
       aria-hidden="true"
     >
       <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" id="gasModalContent">
           <div class="modal-header align-items-baseline">
             <div class="modal-title">
-              <h6 id="gasModalLabel" class="fs-4">Select a Gas</h6>
-              <p>Select a gas from the following list</p>
+              <h6 id="gasModalLabel" class="fs-4 modal-label">Select a Gas</h6>
+              <p id="gasModalDescription">
+                Select a gas from the following list
+              </p>
             </div>
             <button
               type="button"

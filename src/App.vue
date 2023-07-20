@@ -331,8 +331,6 @@ export default {
       // Disable execution button until further notice:
       const mazExecuteButton = document.querySelector("#mazExecuteButton");
       mazExecuteButton.classList.add("disabled");
-      // Define the results container so we can alter it later on...
-      const mazResultsTable = document.querySelector("#mazResultsTable");
       // Scrolls to top in case the results are not into view:
       const scrollTarget = document.querySelector("#mazTabs");
       scrollTarget.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -350,52 +348,105 @@ export default {
       divHistory.classList.remove("active", "show");
       divMemo.classList.remove("fade");
       divMemo.classList.add("active", "show");
+      // Toggle gas if no gas selected and abort.
+      if (!scenario.gas) {
+        document.querySelector("#gasModalButton").click();
+        document.querySelector("#gasModalContent").classList.add("warning");
+        return false;
+      }
       // Validating Scenario:
       if (!this.validateScenario(scenario)) {
         return false;
       }
+      // Running scenario via API:
       console.log("App running scenario!");
-      let diameter = 0; // in centimeters (@TODO: I guess in nanometers?)
-      let permeability = 0; //  ease of passage through the material
-      let diffusion = 0; // the most important metric of them all
-      // @TODO: Calculate the values above based on a given formula.
-      // For arguments shake let's calculate total size in ångström:
-      let totalSize =
-        scenario.metal.size +
-        scenario.linker1.size +
-        scenario.linker2.size +
-        scenario.linker3.size +
-        scenario.funcGroup1.size +
-        scenario.funcGroup2.size +
-        scenario.funcGroup3.size;
-      // Note: 1 ångström = 0.1 nanometre
-      diameter = (totalSize * 0.1).toFixed(2);
-      // @see https://www.omnicalculator.com/physics/porosity-and-permeability
-      permeability = Math.floor(Math.random() * (10 - 1) + 1);
-      // @see no idea really
-      diffusion = Math.floor(Math.random() * (6 - 1) + 1);
-      let results = {
-        name: "",
-        date: Date.now(),
-        formattedDate: this.currentDate(),
-        diameter: parseFloat(diameter),
-        permeability: permeability,
-        diffusion: diffusion,
-        scenario: {
-          metal: scenario.metal.key,
-          linker1: scenario.linker1.key,
-          linker2: scenario.linker2.key,
-          linker3: scenario.linker3.key,
-          funcGroup1: scenario.funcGroup1.key,
-          funcGroup2: scenario.funcGroup2.key,
-          funcGroup3: scenario.funcGroup3.key,
-          gas: scenario.gas ? scenario.gas.key : false,
-        },
-        showDiff: true,
-        showSave: true,
+      let scenarioData = {
+        metal: scenario.metal.key,
+        linker1: scenario.linker1.key,
+        linker2: scenario.linker2.key,
+        linker3: scenario.linker3.key,
+        funcGroup1: scenario.funcGroup1.key,
+        funcGroup2: scenario.funcGroup2.key,
+        funcGroup3: scenario.funcGroup3.key,
+        gas: scenario.gas ? scenario.gas.key : false,
       };
-      console.log("App ran scenario with diffusion: " + results.diffusion);
-      this.scenarioResults = results;
+      const apiMapping = {
+        funcGroup1: "f_group1",
+        funcGroup2: "f_group2",
+        funcGroup3: "f_group3",
+      };
+      let apiScenario = {};
+      for (const key in scenarioData) {
+        if (apiMapping[key]) {
+          apiScenario[apiMapping[key]] = scenarioData[key];
+        } else {
+          apiScenario[key] = scenarioData[key];
+        }
+      }
+      const apiParams = Object.keys(apiScenario)
+        .map(
+          (key) =>
+            `${encodeURIComponent(key)}=${encodeURIComponent(apiScenario[key])}`
+        )
+        .join("&");
+
+      fetch(import.meta.env.VITE_MAZ_API_ENDPOINT + "predict?" + apiParams, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          console.log(data.diffusivity);
+          if (data && typeof data.diffusivity === "number") {
+            this.handlePredictionResponseData(data.diffusivity, scenarioData);
+          } else {
+            throw new Error(
+              "Invalid API response data or missing diffusivity key"
+            );
+          }
+        })
+        .catch((error) => {
+          // Handle any error that occurs during the fetch request
+          console.error("Error fetching data:", error);
+        });
+      return true;
+    },
+    /**
+     * Handles prediction response data
+     * Some random text will go here.
+     */
+    handlePredictionResponseData(diffusivity, scenarioData) {
+      const mazResultsTable = document.querySelector("#mazResultsTable");
+      const mazExecuteButton = document.querySelector("#mazExecuteButton");
+      if (typeof diffusivity === "number") {
+        const diffusivityValue = parseFloat(diffusivity);
+        if (!isNaN(diffusivityValue)) {
+          let results = {
+            name: "",
+            date: Date.now(),
+            model: this.modelVersion,
+            formattedDate: this.currentDate(),
+            diffusion: diffusivityValue,
+            scenario: scenarioData,
+            showDiff: true,
+            showSave: true,
+          };
+          console.log("App ran scenario with diffusion: " + diffusivityValue);
+          this.scenarioResults = results;
+        } else {
+          throw new Error("Invalid diffusivity value received from the API");
+        }
+      } else {
+        throw new Error("Invalid API response data or missing diffusivity key");
+      }
       // Highlight the new results for a few seconds:
       mazResultsTable.classList.add("executed");
       setTimeout(function () {
@@ -417,6 +468,10 @@ export default {
       if (!scenario) {
         return false;
       }
+      if (!scenario.gas) {
+        return false;
+      }
+      console.log(scenario);
       return true;
     },
     /**
@@ -599,9 +654,11 @@ export default {
         funcGroup3: defaultGroup,
         gas: defaultGas,
       };
+      /*
       if (!this.validateScenario(selectedScenario)) {
         throw new Error("Default scenario is invalid!");
       }
+      */
       return selectedScenario;
     },
   },
@@ -620,7 +677,7 @@ export default {
   </div>
 
   <div class="maz-main">
-    <div class="maz-generator mt-4 gx-0 container-fluid">
+    <div class="maz-generator mt-4 gx-2 container-fluid">
       <div class="row">
         <MazImage />
         <MazTabs
