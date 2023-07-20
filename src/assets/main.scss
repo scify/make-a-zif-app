@@ -510,7 +510,7 @@ div.maz-main {
   }
   th {
     font-weight: bold;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid;
     border-bottom-color: var(--maz-table-divider-soft);
     div {
@@ -613,6 +613,16 @@ div.maz-main {
     content: ")";
     font-weight: inherit;
     color: inherit;
+  }
+  .unit.inline {
+    display: inline-block;
+    opacity: 0.7;
+    margin-left: 0.12rem;
+    letter-spacing: -1px;
+    font-weight: 300;
+  }
+  .unit.inline.shrinked {
+    font-size: 0.8em;
   }
 
   // Responsive layout (changes applied on screen widths > 768px)

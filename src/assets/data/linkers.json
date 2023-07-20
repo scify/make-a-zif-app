@@ -1,51 +1,261 @@
 [
   {
     "key": "mlm",
-    "name": "mlm",
-    "title": "mlm",
-    "mass": 81,
-    "size": 4.438
+    "name": "mLm",
+    "title": "mLm",
+    "distance": {
+      "name": "\u03c3",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 0.25
+    },
+    "energy": {
+      "name": "e",
+      "unit": {
+        "name": "kilojoule per mol",
+        "sign": "kJ/mol"
+      },
+      "value": 0.0627
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 81
+    },
+    "size": {
+      "name": "length",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 4.438
+    }
   },
   {
     "key": "blm",
-    "name": "blm",
-    "title": "blm",
-    "mass": 117,
-    "size": 5.996
+    "name": "bLm",
+    "title": "bLm",
+    "distance": {
+      "name": "\u03c3",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 0.25
+    },
+    "energy": {
+      "name": "e",
+      "unit": {
+        "name": "kilojoule per mol",
+        "sign": "kJ/mol"
+      },
+      "value": 0.0627
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 117
+    },
+    "size": {
+      "name": "length",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 5.7
+    }
   },
   {
     "key": "dclm",
     "name": "dClm",
     "title": "dClm",
-    "mass": 135,
-    "size": 5.7
+    "distance": {
+      "name": "\u03c3",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 0.34
+    },
+    "energy": {
+      "name": "e",
+      "unit": {
+        "name": "kilojoule per mol",
+        "sign": "kJ/mol"
+      },
+      "value": 1.2552
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 134.906
+    },
+    "size": {
+      "name": "length",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 5.7
+    }
   },
   {
     "key": "dfm",
     "name": "dFm",
     "title": "dFm",
-    "mass": 102,
-    "size": 4.86
+    "distance": {
+      "name": "\u03c3",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 0.285
+    },
+    "energy": {
+      "name": "e",
+      "unit": {
+        "name": "kilojoule per mol",
+        "sign": "kJ/mol"
+      },
+      "value": 0.255
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 101.98
+    },
+    "size": {
+      "name": "length",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 4.86
+    }
   },
   {
     "key": "dbrm",
     "name": "dBrm",
     "title": "dBrm",
-    "mass": 224,
-    "size": 6.01
+    "distance": {
+      "name": "\u03c3",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 0.4
+    },
+    "energy": {
+      "name": "e",
+      "unit": {
+        "name": "kilojoule per mol",
+        "sign": "kJ/mol"
+      },
+      "value": 1.8731
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 223.8
+    },
+    "size": {
+      "name": "length",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 6.01
+    }
   },
   {
     "key": "dlm",
     "name": "dlm",
     "title": "dlm",
-    "mass": 318,
-    "size": 6.41
+    "distance": {
+      "name": "\u03c3",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 0.367
+    },
+    "energy": {
+      "name": "e",
+      "unit": {
+        "name": "kilojoule per mol",
+        "sign": "kJ/mol"
+      },
+      "value": 2.4267
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 317.8
+    },
+    "size": {
+      "name": "length",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 6.41
+    }
   },
   {
     "key": "tetrz",
     "name": "tetrz",
     "title": "tetrz",
-    "mass": 83,
-    "size": 3.66
+    "distance": {
+      "name": "\u03c3",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 0.325
+    },
+    "energy": {
+      "name": "e",
+      "unit": {
+        "name": "kilojoule per mol",
+        "sign": "kJ/mol"
+      },
+      "value": 0.7112
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 83
+    },
+    "size": {
+      "name": "length",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.66
+    }
   }
 ]

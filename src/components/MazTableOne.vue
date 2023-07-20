@@ -161,7 +161,7 @@ export default {
       </thead>
       <tbody>
         <tr>
-          <th scope="row">Name</th>
+          <th scope="row" class="text-start">Name</th>
           <td
             class="metal element"
             :class="hoverColumns.metal ? 'hover' : ''"
@@ -199,7 +199,9 @@ export default {
           ></td>
         </tr>
         <tr>
-          <th scope="row">Mass <UnitDalton :abbr="true" /></th>
+          <th scope="row" class="text-start">
+            Mass <UnitDalton :abbr="true" />
+          </th>
           <td class="metal" :class="hoverColumns.metal ? 'hover' : ''">
             {{ selectedScenario.metal.mass.value }}
           </td>
@@ -232,9 +234,12 @@ export default {
           </td>
         </tr>
         <tr>
-          <th scope="row">Size <UnitAngstrom :abbr="true" /></th>
+          <th scope="row" class="text-start">
+            Length <UnitAngstrom :abbr="true" />
+          </th>
           <td class="metal" :class="hoverColumns.metal ? 'hover' : ''">
-            {{ selectedScenario.metal.size.value }}
+            <!-- {{ selectedScenario.metal.size.value }} -->
+            &#8212;
           </td>
           <td
             class="linker linker1"
@@ -295,8 +300,12 @@ export default {
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Metal</th>
-                    <th scope="col">Size <UnitAngstrom :abbr="true" /></th>
-                    <th scope="col">Mass <UnitDalton :abbr="true" /></th>
+                    <th scope="col" class="fw-bold text-capitalize">
+                      {{ listOfMetals[0].size.name }}
+                    </th>
+                    <th scope="col" class="fw-bold text-capitalize">
+                      {{ listOfMetals[0].mass.name }}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -306,7 +315,7 @@ export default {
                     v-bind:title="metal.title"
                   >
                     <td>{{ index + 1 }}</td>
-                    <th scope="row">
+                    <th scope="row" class="text-start">
                       <input
                         type="radio"
                         name="metal"
@@ -321,8 +330,18 @@ export default {
                       >
                       </label>
                     </th>
-                    <td>{{ metal.size.value }}</td>
-                    <td>{{ metal.mass.value }}</td>
+                    <td class="text-center">
+                      {{ metal.size.value
+                      }}<span class="unit inline">{{
+                        metal.size.unit.sign
+                      }}</span>
+                    </td>
+                    <td class="text-center">
+                      {{ metal.mass.value
+                      }}<span class="unit inline">{{
+                        metal.mass.unit.sign
+                      }}</span>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -373,29 +392,50 @@ export default {
                 </div>
                 <div class="row rawdata px-0 gx-0">
                   <div class="col col1 text-center">
-                    <span title="mass">
+                    <span
+                      v-bind:title="inputLinker1.mass.name"
+                      v-bind:aria-label="inputLinker1.mass.name"
+                    >
                       {{ inputLinker1.mass.value }} <UnitDalton />
                     </span>
                     <br />
-                    <span class="small" title="size" aria-label="size">
+                    <span
+                      class="small"
+                      v-bind:title="inputLinker1.size.name"
+                      v-bind:aria-label="inputLinker1.size.name"
+                    >
                       {{ inputLinker1.size.value }} <UnitAngstrom />
                     </span>
                   </div>
                   <div class="col col2 text-center">
-                    <span title="mass">
+                    <span
+                      v-bind:title="inputLinker1.mass.name"
+                      v-bind:aria-label="inputLinker2.mass.name"
+                    >
                       {{ inputLinker2.mass.value }} <UnitDalton />
                     </span>
                     <br />
-                    <span class="small" title="size" aria-label="size">
+                    <span
+                      class="small"
+                      v-bind:title="inputLinker2.size.name"
+                      v-bind:aria-label="inputLinker2.size.name"
+                    >
                       {{ inputLinker2.size.value }} <UnitAngstrom />
                     </span>
                   </div>
                   <div class="col col3 text-center">
-                    <span title="mass">
+                    <span
+                      v-bind:title="inputLinker1.mass.name"
+                      v-bind:aria-label="inputLinker3.mass.name"
+                    >
                       {{ inputLinker3.mass.value }} <UnitDalton />
                     </span>
                     <br />
-                    <span class="small" title="size" aria-label="size">
+                    <span
+                      class="small"
+                      v-bind:title="inputLinker3.size.name"
+                      v-bind:aria-label="inputLinker3.size.name"
+                    >
                       {{ inputLinker3.size.value }} <UnitAngstrom />
                     </span>
                   </div>
@@ -519,30 +559,42 @@ export default {
                 </div>
                 <div class="row rawdata px-0 gx-0">
                   <div class="col col1 text-center">
-                    <span title="mass">
-                      {{ inputFuncGroup1.mass }} <UnitDalton />
+                    <span v-bind:title="inputFuncGroup1.mass.name">
+                      {{ inputFuncGroup1.mass.value }} <UnitDalton />
                     </span>
                     <br />
-                    <span class="small" title="size" aria-label="size">
-                      {{ inputFuncGroup1.size }} <UnitAngstrom />
+                    <span
+                      class="small"
+                      v-bind:title="inputFuncGroup1.size.name"
+                      v-bind:aria-label="inputFuncGroup1.size.name"
+                    >
+                      {{ inputFuncGroup1.size.value }} <UnitAngstrom />
                     </span>
                   </div>
                   <div class="col col2 text-center">
-                    <span title="mass">
-                      {{ inputFuncGroup2.mass }} <UnitDalton />
+                    <span v-bind:title="inputFuncGroup2.mass.name">
+                      {{ inputFuncGroup2.mass.value }} <UnitDalton />
                     </span>
                     <br />
-                    <span class="small" title="size" aria-label="size">
-                      {{ inputFuncGroup2.size }} <UnitAngstrom />
+                    <span
+                      class="small"
+                      v-bind:title="inputFuncGroup2.size.name"
+                      v-bind:aria-label="inputFuncGroup2.size.name"
+                    >
+                      {{ inputFuncGroup2.size.value }} <UnitAngstrom />
                     </span>
                   </div>
                   <div class="col col3 text-center">
-                    <span title="mass">
-                      {{ inputFuncGroup3.mass }} <UnitDalton />
+                    <span v-bind:title="inputFuncGroup3.mass.name">
+                      {{ inputFuncGroup3.mass.value }} <UnitDalton />
                     </span>
                     <br />
-                    <span class="small" title="size" aria-label="size">
-                      {{ inputFuncGroup3.size }} <UnitAngstrom />
+                    <span
+                      class="small"
+                      v-bind:title="inputFuncGroup3.size.name"
+                      v-bind:aria-label="inputFuncGroup3.size.name"
+                    >
+                      {{ inputFuncGroup3.size.value }} <UnitAngstrom />
                     </span>
                   </div>
                 </div>

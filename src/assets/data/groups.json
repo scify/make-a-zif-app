@@ -1,91 +1,127 @@
 [
   {
     "key": "ch3",
-    "name": "–CH<sub>3</sub>",
+    "name": "\u2013CH<sub>3</sub>",
     "title": "Methyl",
     "mass": {
-      "type": "mass",
-      "unit": "dalton",
+      "name": "mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
       "value": 15
     },
     "size": {
-      "type": "length",
-      "unit": "angstrom",
+      "name": "length",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
       "value": 3.78
     }
   },
   {
     "key": "br",
-    "name": "–Br",
+    "name": "\u2013Br",
     "title": "Bromine",
     "mass": {
-      "type": "mass",
-      "unit": "dalton",
+      "name": "mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
       "value": 79.9
     },
     "size": {
-      "type": "length",
-      "unit": "angstrom",
+      "name": "length",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
       "value": 3.85
     }
   },
   {
     "key": "cl",
-    "name": "–Cl",
-    "title": "Chlorine",
+    "name": "Chlorine",
+    "title": "\u2013Cl",
     "mass": {
-      "type": "mass",
-      "unit": "dalton",
+      "name": "mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
       "value": 35.45
     },
     "size": {
-      "type": "length",
-      "unit": "angstrom",
+      "name": "length",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
       "value": 3.54
     }
   },
   {
     "key": "h",
-    "name": "–H",
-    "title": "Hydrogen",
+    "name": "Hydrogen",
+    "title": "\u2013H",
     "mass": {
-      "type": "mass",
-      "unit": "dalton",
-      "value": 1
+      "name": "mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 2.278
     },
     "size": {
-      "type": "length",
-      "unit": "angstrom",
-      "value": 2.278
+      "name": "length",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 1
     }
   },
   {
     "key": "nh2",
-    "name": "NH<sub>2</sub>",
+    "name": "\u2013NH<sub>2</sub>",
     "title": "Amide",
     "mass": {
-      "type": "mass",
-      "unit": "dalton",
+      "name": "mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
       "value": 16
     },
     "size": {
-      "type": "length",
-      "unit": "angstrom",
+      "name": "length",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
       "value": 3.927
     }
   },
   {
     "key": "cho",
-    "name": "–CHO",
+    "name": "\u2013CHO",
     "title": "Aldehyde",
     "mass": {
-      "type": "mass",
-      "unit": "dalton",
+      "name": "mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
       "value": 31
     },
     "size": {
-      "type": "length",
-      "unit": "angstrom",
+      "name": "length",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
       "value": 4.093
     }
   }

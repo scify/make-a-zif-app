@@ -1,51 +1,156 @@
 [
   {
+    "key": "cd",
+    "name": "Cd",
+    "title": "Cadmium",
+    "number": 48,
+    "mass": {
+      "name": "metal mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 112.411
+    },
+    "size": {
+      "name": "ionic radius",
+      "unit": {
+        "name": "picometer",
+        "sign": "pm"
+      },
+      "value": 92
+    }
+  },
+  {
     "key": "zn",
     "name": "Zn",
     "title": "Zinc",
-    "mass": 30,
-    "size": 74
+    "number": 30,
+    "mass": {
+      "name": "metal mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 65.38
+    },
+    "size": {
+      "name": "ionic radius",
+      "unit": {
+        "name": "picometer",
+        "sign": "pm"
+      },
+      "value": 74
+    }
   },
   {
     "key": "co",
     "name": "Co",
     "title": "Cobalt",
-    "mass": 27,
-    "size": 72
-  },
-  {
-    "key": "cd",
-    "name": "Cd",
-    "title": "Cadmium",
-    "mass": 48,
-    "size": 92
+    "number": 27,
+    "mass": {
+      "name": "metal mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 58.93
+    },
+    "size": {
+      "name": "ionic radius",
+      "unit": {
+        "name": "picometer",
+        "sign": "pm"
+      },
+      "value": 72
+    }
   },
   {
     "key": "be",
     "name": "Be",
     "title": "Beryllium",
-    "mass": 4,
-    "size": 41
+    "number": 4,
+    "mass": {
+      "name": "metal mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 9.012
+    },
+    "size": {
+      "name": "ionic radius",
+      "unit": {
+        "name": "picometer",
+        "sign": "pm"
+      },
+      "value": 41
+    }
   },
   {
     "key": "mg",
     "name": "Mg",
     "title": "Magnesium",
-    "mass": 12,
-    "size": 71
+    "number": 12,
+    "mass": {
+      "name": "metal mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 24.305
+    },
+    "size": {
+      "name": "ionic radius",
+      "unit": {
+        "name": "picometer",
+        "sign": "pm"
+      },
+      "value": 71
+    }
   },
   {
     "key": "mn",
     "name": "Mn",
     "title": "Manganese",
-    "mass": 25,
-    "size": 80
+    "number": 25,
+    "mass": {
+      "name": "metal mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 54.938
+    },
+    "size": {
+      "name": "ionic radius",
+      "unit": {
+        "name": "picometer",
+        "sign": "pm"
+      },
+      "value": 80
+    }
   },
   {
     "key": "cu",
     "name": "Cu",
     "title": "Copper",
-    "mass": 29,
-    "size": 71
+    "number": 29,
+    "mass": {
+      "name": "metal mass",
+      "unit": {
+        "name": "dalton",
+        "sign": "u"
+      },
+      "value": 63.456
+    },
+    "size": {
+      "name": "ionic radius",
+      "unit": {
+        "name": "picometer",
+        "sign": "pm"
+      },
+      "value": 71
+    }
   }
 ]

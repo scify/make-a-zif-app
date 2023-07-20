@@ -1,9 +1,11 @@
 <script>
-import UnitDalton from "./units/UnitDalton.vue";
+import UnitAngstrom from "./units/UnitAngstrom.vue";
+import UnitGMol from "./units/UnitGMol.vue";
 
 export default {
   components: {
-    UnitDalton,
+    UnitAngstrom,
+    UnitGMol,
   },
   props: {
     ["selectedScenario"]: { required: true },
@@ -76,7 +78,7 @@ export default {
       </thead>
       <tbody>
         <tr>
-          <th scope="row">Name</th>
+          <th scope="row" class="text-start">Name</th>
           <td
             v-if="selectedScenario.gas"
             class="gas element"
@@ -84,24 +86,26 @@ export default {
             v-html="selectedScenario.gas.name"
           ></td>
           <td v-else class="gas" :class="hoverColumns.gas ? 'hover' : 'faded'">
-            -
+            &#8212;
           </td>
         </tr>
         <tr>
-          <th scope="row">Mass <UnitDalton :abbr="true" /></th>
+          <th scope="row" class="text-start">Mass <UnitGMol :abbr="true" /></th>
           <td
             v-if="selectedScenario.gas"
             class="gas"
             :class="hoverColumns.gas ? 'hover' : ''"
           >
-            {{ selectedScenario.gas.mass }}
+            {{ selectedScenario.gas.mass.value }}
           </td>
           <td v-else class="gas" :class="hoverColumns.gas ? 'hover' : 'faded'">
-            -
+            &#8212;
           </td>
         </tr>
         <tr>
-          <th scope="row">Kinetic diameter</th>
+          <th scope="row" class="text-start">
+            Kinetic diameter <UnitAngstrom :abbr="true" />
+          </th>
           <td
             v-if="selectedScenario.gas"
             class="gas"
@@ -110,7 +114,7 @@ export default {
             {{ selectedScenario.gas.diameter }}
           </td>
           <td v-else class="gas" :class="hoverColumns.gas ? 'hover' : 'faded'">
-            -
+            &#8212;
           </td>
         </tr>
       </tbody>
@@ -145,13 +149,13 @@ export default {
                     <th scope="col">#</th>
                     <th scope="col">Gas</th>
                     <th scope="col">Kinetic diameter</th>
-                    <th scope="col">Mass <UnitDalton :abbr="true" /></th>
+                    <th scope="col">Mass</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>-</td>
-                    <th scope="row">
+                    <td>&#8212;</td>
+                    <th scope="row" class="text-start">
                       <input
                         v-if="inputGas === false"
                         type="radio"
@@ -171,8 +175,8 @@ export default {
                       />
                       <label class="element" for="gasfalse">None</label>
                     </th>
-                    <td>-</td>
-                    <td>-</td>
+                    <td class="text-center">&#8212;</td>
+                    <td class="text-center">&#8212;</td>
                   </tr>
                   <tr
                     v-for="(gas, index) in listOfGases"
@@ -180,7 +184,7 @@ export default {
                     v-bind:title="gas.title"
                   >
                     <td>{{ index + 1 }}</td>
-                    <th scope="row">
+                    <th scope="row" class="text-start">
                       <input
                         type="radio"
                         name="gas"
@@ -195,8 +199,18 @@ export default {
                       >
                       </label>
                     </th>
-                    <td>{{ gas.diameter }}</td>
-                    <td>{{ gas.mass }}</td>
+                    <td class="text-center">
+                      {{ gas.kineticDiameter.value
+                      }}<span class="unit inline">{{
+                        gas.kineticDiameter.unit.sign
+                      }}</span>
+                    </td>
+                    <td class="text-center">
+                      {{ gas.mass.value
+                      }}<span class="unit inline shrinked">{{
+                        gas.mass.unit.sign
+                      }}</span>
+                    </td>
                   </tr>
                 </tbody>
               </table>

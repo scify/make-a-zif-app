@@ -156,7 +156,7 @@ export default {
           name: "kinetic diameter",
           unit: {
             name: "angstrom",
-            symbol: "\u00C5",
+            sign: "\u00C5",
           },
           value: gas.kdiameter,
         },
@@ -164,7 +164,7 @@ export default {
           name: "mass",
           unit: {
             name: "gram per mol",
-            symbol: "g/mol",
+            sign: "g/mol",
           },
           value: gas.mass,
         },
@@ -172,7 +172,7 @@ export default {
           name: "vdW diameter",
           unit: {
             name: "angstrom",
-            symbol: "\u00C5",
+            sign: "\u00C5",
           },
           value: gas.diameter,
         },
@@ -198,7 +198,7 @@ export default {
           name: "metal mass",
           unit: {
             name: "dalton",
-            symbol: "u",
+            sign: "u",
           },
           value: metal.metalMass,
         },
@@ -206,7 +206,7 @@ export default {
           name: "ionic radius",
           unit: {
             name: "picometer",
-            symbol: "pm",
+            sign: "pm",
           },
           value: metal.ionicRad,
         },
@@ -221,13 +221,13 @@ export default {
     mapApiGroups(group) {
       return {
         key: group.key,
-        name: group.name,
+        name: "\u2013" + group.name,
         title: group.title,
         mass: {
           name: "mass",
           unit: {
             name: "dalton",
-            symbol: "u",
+            sign: "u",
           },
           value: group.f_group_mass,
         },
@@ -235,7 +235,7 @@ export default {
           name: "length",
           unit: {
             name: "angstrom",
-            symbol: "\u00C5",
+            sign: "\u00C5",
           },
           value: group.f_group_length,
         },
@@ -257,7 +257,7 @@ export default {
           name: "\u03c3",
           unit: {
             name: "angstrom",
-            symbol: "\u00C5",
+            sign: "\u00C5",
           },
           value: linker["s_1"],
         },
@@ -265,7 +265,7 @@ export default {
           name: "e",
           unit: {
             name: "kilojoule per mol",
-            symbol: "kJ/mol",
+            sign: "kJ/mol",
           },
           value: linker["e_1"],
         },
@@ -273,7 +273,7 @@ export default {
           name: "mass",
           unit: {
             name: "dalton",
-            symbol: "u",
+            sign: "u",
           },
           value: linker["linker_mass"],
         },
@@ -281,7 +281,7 @@ export default {
           name: "length",
           unit: {
             name: "angstrom",
-            symbol: "\u00C5",
+            sign: "\u00C5",
           },
           value: linker["linker_length"],
         },

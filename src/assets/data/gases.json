@@ -3,63 +3,450 @@
     "key": "he",
     "name": "He",
     "title": "Helium",
-    "mass": 4.002,
-    "diameter": 2.6
+    "acentricFactor": -0.39,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 2.6
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 4.002
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 2.66
+    }
   },
   {
     "key": "h2",
     "name": "H<sub>2</sub>",
-    "title": "Dihydrogen",
-    "mass": 2.01,
-    "diameter": 2.89
+    "title": "Hydrogen",
+    "acentricFactor": -0.217,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 2.89
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 2.01
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 2.76
+    }
   },
   {
     "key": "o2",
     "name": "O<sub>2</sub>",
     "title": "Dioxygen",
-    "mass": 2.01,
-    "diameter": 2.89
+    "acentricFactor": 0.022,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.46
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 31.999
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 2.94
+    }
   },
   {
     "key": "co2",
     "name": "CO<sub>2</sub>",
     "title": "Carbon dioxide",
-    "mass": 2.01,
-    "diameter": 2.89
+    "acentricFactor": 0.225,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.3
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 44.01
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.24
+    }
   },
   {
     "key": "n2",
     "name": "N<sub>2</sub>",
     "title": "Dinitrogen",
-    "mass": 2.01,
-    "diameter": 2.89
+    "acentricFactor": 0.037,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.64
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 28
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.13
+    }
   },
   {
     "key": "ch4",
     "name": "CH<sub>4</sub>",
     "title": "Methane",
-    "mass": 2.01,
-    "diameter": 2.89
+    "acentricFactor": 0.011,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.8
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 16.04
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.25
+    }
+  },
+  {
+    "key": "ethylane",
+    "name": "ethylane",
+    "title": "Ethylane",
+    "acentricFactor": 0.087,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.9
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 28.05
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.59
+    }
   },
   {
     "key": "ethane",
     "name": "ethane",
     "title": "Ethane",
-    "mass": 2.01,
-    "diameter": 2.89
+    "acentricFactor": 0.099,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 4
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 30.07
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.72
+    }
   },
   {
-    "key": "propene",
-    "name": "propene",
-    "title": "Propene",
-    "mass": 31.999,
-    "diameter": 4.3
+    "key": "propane",
+    "name": "propane",
+    "title": "Propane",
+    "acentricFactor": 0.152,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 4.3
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 44.1
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 5.16
+    }
   },
   {
     "key": "butane",
     "name": "butane",
     "title": "Butane",
-    "mass": 58.12,
-    "diameter": 4.5
+    "acentricFactor": 0.2,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 4.5
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 58.12
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 5.42
+    }
+  },
+  {
+    "key": "kr",
+    "name": "Kr",
+    "title": "Kr",
+    "acentricFactor": 0.005,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.69
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 83.8
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 4
+    }
+  },
+  {
+    "key": "xe",
+    "name": "Xe",
+    "title": "Xe",
+    "acentricFactor": 0.008,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 4.2
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 131.29
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 4.1
+    }
+  },
+  {
+    "key": "rn",
+    "name": "Rn",
+    "title": "Rn",
+    "acentricFactor": 0.008,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 4.2
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 222
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 4.2
+    }
+  },
+  {
+    "key": "n2o",
+    "name": "N<sub>2</sub>O",
+    "title": "N2o",
+    "acentricFactor": 0.834,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.3
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 46.0055
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.22
+    }
+  },
+  {
+    "key": "so2",
+    "name": "SO<sub>2</sub>",
+    "title": "SO2",
+    "acentricFactor": 0.251,
+    "kineticDiameter": {
+      "name": "kinetic diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 4.1
+    },
+    "mass": {
+      "name": "mass",
+      "unit": {
+        "name": "gram per mol",
+        "sign": "g/mol"
+      },
+      "value": 64.006
+    },
+    "size": {
+      "name": "vdW diameter",
+      "unit": {
+        "name": "angstrom",
+        "sign": "\u212b"
+      },
+      "value": 3.55
+    }
   }
 ]
