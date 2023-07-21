@@ -53,9 +53,8 @@ export default {
   <!-- v-if starts here -->
   <div class="maz-table" v-if="selectedScenario && listOfGases">
     <h4 class="two">Add a gas element</h4>
-    <h5>
-      @TODO: ENTER TEXT HERE TO DESCRIBE WHY GAS IS IMPORTANT TO BE ON ITS OWN.
-    </h5>
+    <h5>Click on the Gas column to select a fume.</h5>
+    <h6>Keep in mind that the larger the gas is, the larger the modification impact will be on its diffusivity.</h6>
     <table class="table-multi limitwidth">
       <colgroup class="header"></colgroup>
       <colgroup class="gas"></colgroup>
