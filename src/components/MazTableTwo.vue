@@ -54,7 +54,10 @@ export default {
   <div class="maz-table" v-if="selectedScenario && listOfGases">
     <h4 class="two">Add a gas element</h4>
     <h5>Click on the Gas column to select a fume.</h5>
-    <h6>Keep in mind that the larger the gas is, the larger the modification impact will be on its diffusivity.</h6>
+    <h6>
+      Keep in mind that the larger the gas is, the larger the modification
+      impact will be on its diffusivity.
+    </h6>
     <table class="table-multi limitwidth">
       <colgroup class="header"></colgroup>
       <colgroup class="gas"></colgroup>
@@ -79,7 +82,7 @@ export default {
               aria-label="Selection of Gas"
               role="button"
             >
-              <div class="col-title--arrow">Gas</div>
+              <span class="col-title--arrow">Gas</span>
             </button>
           </th>
         </tr>

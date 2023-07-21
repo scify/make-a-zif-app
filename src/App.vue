@@ -18,6 +18,13 @@ import gasData from "./assets/data/gases.json";
 import metalData from "./assets/data/metals.json";
 import linkerData from "./assets/data/linkers.json";
 import groupData from "./assets/data/groups.json";
+// Import mapping for API v1.0.0 metadata:
+import {
+  mapApiLinkers,
+  mapApiGases,
+  mapApiGroups,
+  mapApiMetals,
+} from "./js/mapApiFunctions.js";
 
 // Let the Vue begin!
 export default {
@@ -31,8 +38,9 @@ export default {
   props: [],
   data() {
     return {
+      // Local cached version of initial data.
+      modelVersion: "1.1.0 local",
       // Parsed JSON data
-      modelVersion: "1.1.0 local", // Local cached version of initial data.
       listOfGases: gasData,
       listOfMetals: metalData,
       listOfGroups: groupData,
@@ -53,8 +61,8 @@ export default {
         date: "",
         formattedDate: "5/3/2022 | 12:00:13",
         suggestedName: "Scenario name",
-        diameter: 3,
-        permeability: 4,
+        diameter: "Coming soon",
+        permeability: "Coming soon",
         diffusion: 4,
         scenario: [],
         showDiff: false,
@@ -78,40 +86,30 @@ export default {
   },
   methods: {
     resetToLocalOrDefault() {
-      let localStorageHistory = window.localStorage.getItem("mazAppHistory");
+      const localStorageHistory = window.localStorage.getItem("mazAppHistory");
       if (localStorageHistory) {
         this.scenarioHistory = JSON.parse(localStorageHistory);
         console.log("App loaded scenarios from browser's history");
-        // @TODO: Load an actual scenario...
-        // this.selectedScenario = this.scenarioHistory[this.scenarioHistory.length - 1];
-        this.selectedScenario = this.loadDefaultScenario(); // remove when fixed!
+        const lastScenario =
+          this.scenarioHistory[this.scenarioHistory.length - 1];
+        this.selectedScenario = this.createScenario();
+        this.loadScenario(lastScenario.date, false);
+        // this.selectedScenario = this.loadDefaultScenario(); // remove when fixed!
       } else {
         console.log("App loaded default scenario");
-        this.selectedScenario = this.loadDefaultScenario();
+        this.applyScenario(this.createScenario());
       }
-      this.selectedGas = this.selectedScenario.gas;
-      this.selectedMetal = this.selectedScenario.metal;
-      this.selectedLinker1 = this.selectedScenario.linker1;
-      this.selectedLinker2 = this.selectedScenario.linker2;
-      this.selectedLinker3 = this.selectedScenario.linker3;
-      this.selectedFuncGroup1 = this.selectedScenario.funcGroup1;
-      this.selectedFuncGroup2 = this.selectedScenario.funcGroup2;
-      this.selectedFuncGroup3 = this.selectedScenario.funcGroup3;
     },
     updateDataFromAPI() {
       fetch(import.meta.env.VITE_MAZ_API_ENDPOINT + "params")
         .then((response) => response.json())
         .then((data) => {
           this.modelVersion = data.model_version;
-          this.listOfGases = data.gases.map((gas) => this.mapApiGases(gas));
-          this.listOfMetals = data.metals.map((metal) =>
-            this.mapApiMetals(metal)
-          );
-          this.listOfGroups = data.f_groups.map((group) =>
-            this.mapApiGroups(group)
-          );
+          this.listOfGases = data.gases.map((gas) => mapApiGases(gas));
+          this.listOfMetals = data.metals.map((metal) => mapApiMetals(metal));
+          this.listOfGroups = data.f_groups.map((group) => mapApiGroups(group));
           this.listOfLinkers = data.linkers.map((linker) =>
-            this.mapApiLinkers(linker)
+            mapApiLinkers(linker)
           );
           /*
           this.downloadJsonData(this.listOfGases, "gases");
@@ -131,167 +129,13 @@ export default {
         });
     },
 
-    downloadJsonData(data, name = "data") {
-      const json = JSON.stringify(data, null, 2);
-      const blob = new Blob([json], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = name + ".json";
-      link.click();
-    },
-
-    /**
-     * Maps an Make-a-ZIF API v1.0 metal object to the optimal structure.
-     * @param {Object} group - The API metal object to be mapped.
-     * @returns {Object} The transformed group object.
-     */
-    mapApiGases(gas) {
-      return {
-        key: gas.key,
-        name: gas.name,
-        title: gas.title,
-        acentricFactor: gas.ascentricF,
-        kineticDiameter: {
-          name: "kinetic diameter",
-          unit: {
-            name: "angstrom",
-            sign: "\u00C5",
-          },
-          value: gas.kdiameter,
-        },
-        mass: {
-          name: "mass",
-          unit: {
-            name: "gram per mol",
-            sign: "g/mol",
-          },
-          value: gas.mass,
-        },
-        size: {
-          name: "vdW diameter",
-          unit: {
-            name: "angstrom",
-            sign: "\u00C5",
-          },
-          value: gas.diameter,
-        },
-      };
-    },
-
-    /**
-     * Maps an Make-a-ZIF API v1.0 metal object to the optimal structure.
-     * @param {Object} group - The API metal object to be mapped.
-     * @returns {Object} The transformed group object.
-     */
-    mapApiMetals(metal) {
-      return {
-        key: metal.key,
-        name: metal.name,
-        title: metal.title,
-        number: metal.metalNum,
-        mass: {
-          name: "metal mass",
-          unit: {
-            name: "dalton",
-            sign: "u",
-          },
-          value: metal.metalMass,
-        },
-        size: {
-          name: "ionic radius",
-          unit: {
-            name: "picometer",
-            sign: "pm",
-          },
-          value: metal.ionicRad,
-        },
-      };
-    },
-
-    /**
-     * Maps an Make-a-ZIF API v1.0 f_group object to the optimal structure.
-     * @param {Object} group - The API f_group object to be mapped.
-     * @returns {Object} The transformed group object.
-     */
-    mapApiGroups(group) {
-      return {
-        key: group.key,
-        name: "\u2013" + group.name,
-        title: group.title,
-        mass: {
-          name: "mass",
-          unit: {
-            name: "dalton",
-            sign: "u",
-          },
-          value: group.f_group_mass,
-        },
-        size: {
-          name: "length",
-          unit: {
-            name: "angstrom",
-            sign: "\u00C5",
-          },
-          value: group.f_group_length,
-        },
-      };
-    },
-
-    /**
-     * Maps an Make-a-ZIF API v1.0 linker object to the optimal structure.
-     * @param {Object} linker - The API linker object to be mapped.
-     * @returns {Object} The transformed linker object.
-     */
-    mapApiLinkers(linker) {
-      return {
-        key: linker.key,
-        name: linker.name,
-        title: linker.title,
-        // Distance (σ) at which intermolecular potential btwn particles is 0.
-        distance: {
-          name: "\u03c3",
-          unit: {
-            name: "angstrom",
-            sign: "\u00C5",
-          },
-          value: linker["s_1"],
-        },
-        energy: {
-          name: "e",
-          unit: {
-            name: "kilojoule per mol",
-            sign: "kJ/mol",
-          },
-          value: linker["e_1"],
-        },
-        mass: {
-          name: "mass",
-          unit: {
-            name: "dalton",
-            sign: "u",
-          },
-          value: linker["linker_mass"],
-        },
-        size: {
-          name: "length",
-          unit: {
-            name: "angstrom",
-            sign: "\u00C5",
-          },
-          value: linker["linker_length"],
-        },
-      };
-    },
-
     currentDate() {
       const current = new Date();
       const month = current.getMonth() + 1;
       const hours = String(current.getHours()).padStart(2, "0");
       const minutes = String(current.getMinutes()).padStart(2, "0");
       const seconds = String(current.getSeconds()).padStart(2, "0");
-      const date = `${current.getDate()}/${month}/${current.getFullYear()} | ${hours}:${minutes}:${seconds}`;
-      return date;
+      return `${current.getDate()}/${month}/${current.getFullYear()} | ${hours}:${minutes}:${seconds}`;
     },
 
     refreshMetal(newMetal) {
@@ -323,9 +167,10 @@ export default {
         this.selectedScenario.gas = false;
       }
     },
+
     /**
      * Executes a given scenario and returns reactive results.
-     * @param {obj} scenario - Scenario to execute.
+     * @param {Object} scenario - Scenario to execute.
      */
     runScenario(scenario) {
       // Disable execution button until further notice:
@@ -403,8 +248,6 @@ export default {
           return response.json();
         })
         .then((data) => {
-          console.log(data);
-          console.log(data.diffusivity);
           if (data && typeof data.diffusivity === "number") {
             this.handlePredictionResponseData(data.diffusivity, scenarioData);
           } else {
@@ -419,9 +262,9 @@ export default {
         });
       return true;
     },
+
     /**
-     * Handles prediction response data
-     * Some random text will go here.
+     * Handles prediction response data. Some random text will go here.
      */
     handlePredictionResponseData(diffusivity, scenarioData) {
       const mazResultsTable = document.querySelector("#mazResultsTable");
@@ -432,14 +275,15 @@ export default {
           let results = {
             name: "",
             date: Date.now(),
-            model: this.modelVersion,
             formattedDate: this.currentDate(),
+            model: this.modelVersion.toString(),
+            source: window.location.href.toString(),
             diffusion: diffusivityValue,
             scenario: scenarioData,
             showDiff: true,
             showSave: true,
           };
-          console.log("App ran scenario with diffusion: " + diffusivityValue);
+          console.log("App ran scenario with diffusivity: " + diffusivityValue);
           this.scenarioResults = results;
         } else {
           throw new Error("Invalid diffusivity value received from the API");
@@ -458,35 +302,195 @@ export default {
       }, 2500);
       return true;
     },
+
     /**
-     * Validates a ZIF scenario (@TODO: Not implemented yet!).
-     * @param {obj} scenario - A scenario to validate.
+     * Download (non-unicode) JSON data.
+     * @param {array} dataArray An array of data.
+     * @param {string} fileName The name of the file (=data).
+     * @param {string} fileExtension The extension of the file (=json).
      */
-    validateScenario(scenario) {
-      // @TODO: Validation based on minimum amount of required data.
-      console.log("App validates scenario...");
-      if (!scenario) {
-        return false;
-      }
-      if (!scenario.gas) {
-        return false;
-      }
-      console.log(scenario);
+    downloadJsonData(dataArray, fileName = "data", fileExtension = "json") {
+      const json = encodeURIComponent(JSON.stringify(dataArray, null, 2));
+      const output = "data:application/json;charset=utf-8," + json;
+      const anchor = document.createElement("a");
+      anchor.href = output;
+      anchor.download = fileName + "." + fileExtension;
+      // document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
       return true;
     },
+
+    /**
+     * Creates a Scenario: Create a Scenario by parsing the input of the keys
+     * for metals, linkers & functional groups. The returned object (a Scenario)
+     * includes all the required units and their properties ready to be
+     * processed by other methods of this App. If no parameters are set, then
+     * the Scenario with the default units ('Example Scenario') is returned.
+     * @param {string} metal Metal key.
+     * @param {string} linker1 Linker 1 key.
+     * @param {string} linker2 Linker 2 key.
+     * @param {string} linker3 Linker 3 key.
+     * @param {string} funcGroup1 Functional Group 1 key.
+     * @param {string} funcGroup2 Functional Group 2 key.
+     * @param {string} funcGroup3 Functional Group 3 key.
+     * @param {string|false} gas Gas key.
+     * @return {Object} Scenario (objects of units).
+     */
+    createScenario({
+      metal = "zn",
+      linker1 = "mlm",
+      linker2 = "mlm",
+      linker3 = "mlm",
+      funcGroup1 = "ch3",
+      funcGroup2 = "ch3",
+      funcGroup3 = "ch3",
+      gas = false,
+    } = {}) {
+      let metalObject = this.listOfMetals.find((i) => i.key === metal);
+      let linker1Object = this.listOfLinkers.find((i) => i.key === linker1);
+      let linker2Object = this.listOfLinkers.find((i) => i.key === linker2);
+      let linker3Object = this.listOfLinkers.find((i) => i.key === linker3);
+      let funcGroup1Object = this.listOfGroups.find(
+        (i) => i.key === funcGroup1
+      );
+      let funcGroup2Object = this.listOfGroups.find(
+        (i) => i.key === funcGroup2
+      );
+      let funcGroup3Object = this.listOfGroups.find(
+        (i) => i.key === funcGroup3
+      );
+      // No need to validate gas as example scenario does not have any.
+      if (
+        !metalObject ||
+        !linker1Object ||
+        !linker2Object ||
+        !linker3Object ||
+        !funcGroup1Object ||
+        !funcGroup2Object ||
+        !funcGroup3Object
+      ) {
+        throw new Error("Can't create a scenario!");
+      }
+      return {
+        metal: metalObject,
+        linker1: linker1Object,
+        linker2: linker2Object,
+        linker3: linker3Object,
+        funcGroup1: funcGroup1Object,
+        funcGroup2: funcGroup2Object,
+        funcGroup3: funcGroup3Object,
+        gas:
+          gas !== false ? this.listOfGases.find((i) => i.key === gas) : false,
+      };
+    },
+
+    /**
+     * Applies a Scenario to the UI: Alters the app's inputs to set them to the
+     * ones "selected" by the Scenario (which is created via createScenario() ).
+     * @param {Object} scenario Scenario (objects of units).
+     * @return {boolean} - True/false.
+     */
+    applyScenario(scenario) {
+      this.selectedScenario = scenario;
+      this.selectedMetal = this.selectedScenario.metal;
+      this.selectedLinker1 = this.selectedScenario.linker1;
+      this.selectedLinker2 = this.selectedScenario.linker2;
+      this.selectedLinker3 = this.selectedScenario.linker3;
+      this.selectedFuncGroup1 = this.selectedScenario.funcGroup1;
+      this.selectedFuncGroup2 = this.selectedScenario.funcGroup2;
+      this.selectedFuncGroup3 = this.selectedScenario.funcGroup3;
+      this.selectedGas = this.selectedScenario.gas;
+      return true;
+    },
+
+    /**
+     * Loads a Scenario (its keys) from browser's local storage. Data are loaded
+     * from: window.localStorage.mazAppHistory (mazAppHistory).
+     *
+     * @param {int} scenarioDate - The saved scenario's date (epoch time).
+     * @param {boolean} execution - Execute loaded scenario? (default: true).
+     */
+    loadScenario(scenarioDate, execution = true) {
+      console.log("App loads scenario executed on " + scenarioDate);
+      // Find scenario on history based on its date...
+      const scenarioData = this.scenarioHistory.find(
+        (i) => i.date === scenarioDate
+      );
+      if (scenarioData) {
+        const index = this.scenarioHistory.indexOf(scenarioData);
+        if (index > -1) {
+          this.applyScenario(this.createScenario({ ...scenarioData.scenario }));
+          if (document.querySelector("#mazExecuteButton") && execution) {
+            // Running the restored scenario: This also takes us back to "Memo".
+            this.runScenario(this.selectedScenario);
+            this.scenarioResults.showSave = false;
+          }
+          return true;
+        }
+      }
+      return false;
+    },
+
+    /**
+     * Saves current scenario in browser's local storage (mazAppHistory).
+     * Data are saved at: window.localStorage.mazAppHistory.
+     *
+     * @param {string} scenarioName - The name of the scenario.
+     */
+    saveScenario(scenarioName) {
+      console.log("App saving scenario!");
+      // Validating Scenario:
+      if (!this.validateScenario(this.scenarioResults.scenario)) {
+        console.log("Can't validate scenario");
+        return false;
+      }
+      this.scenarioResults.name = scenarioName;
+      this.scenarioResults.showSave = false;
+      // @TODO: Save scenario confirmation (via a bootstrap component).
+      // Pushing scenario to history:
+      console.log("App pushing scenario to history!");
+      if (!this.scenarioHistory) {
+        this.scenarioHistory = [];
+      }
+      this.scenarioHistory.push(this.scenarioResults);
+      // Storing scenario to browser's storage:
+      window.localStorage.mazAppHistory = JSON.stringify(this.scenarioHistory);
+      return true;
+    },
+
+    /**
+     * Exports a saved scenario from browser's local storage (mazAppHistory).
+     * @param {int} scenarioDate - The saved scenario's date (epoch time).
+     */
+    exportScenario(scenarioDate) {
+      // Find scenario on history based on its date...
+      const scenario = this.scenarioHistory.find(
+        (i) => i.date === scenarioDate
+      );
+      if (scenario) {
+        const index = this.scenarioHistory.indexOf(scenario);
+        if (index > -1) {
+          this.downloadJsonData(scenario, `make-a-zif-${scenarioDate}`);
+          return true;
+        }
+      }
+      return false;
+    },
+
     /**
      * Delete scenario from browser's local storage (mazAppHistory).
      *
      * Updates: window.localStorage.mazAppHistory. Note: As we are not saving a
      * unique id for each scenario and the rendered history is sorted by date,
-     * it's only logical to "acquire" the scenario based on it's epoch until we
+     * it's only logical to "acquire" the scenario based on its epoch until we
      * have a unique hash for each scenario based on its parameters.
      *
      * @param {int} scenarioDate - The saved scenario's date (epoch time).
      */
     deleteScenario(scenarioDate) {
       console.log("App deletes scenario executed on " + scenarioDate);
-      // Find scenario on history based on it's date...
+      // Find scenario on history based on its date...
       const reqScenario = this.scenarioHistory.find(
         (i) => i.date === scenarioDate
       );
@@ -512,154 +516,22 @@ export default {
       return false;
       // this.scenarioHistory.remove(scenario);
     },
+
     /**
-     * Saves current scenario in browser's local storage (mazAppHistory).
-     * Data are saved at: window.localStorage.mazAppHistory.
-     *
-     * @param {string} scenarioName - The name of the scenario.
+     * Validates a ZIF scenario (@TODO: Not implemented yet!).
+     * @param {Object} scenario - A scenario to validate.
      */
-    saveScenario(scenarioName) {
-      console.log("App saving scenario!");
-      // Validating Scenario:
-      if (!this.validateScenario(this.scenarioResults.scenario)) {
-        console.log("Can't validate scenario");
+    validateScenario(scenario) {
+      // @TODO: Validation based on minimum amount of required data.
+      console.log("App validates scenario...");
+      if (!scenario) {
         return false;
       }
-      this.scenarioResults.name = scenarioName;
-      this.scenarioResults.showSave = false;
-      // @TODO: Confirmation div!
-      // Pushing scenario to history:
-      console.log("App pushing scenario to history!");
-      if (!this.scenarioHistory) {
-        this.scenarioHistory = [];
+      if (!scenario.gas) {
+        return false;
       }
-      this.scenarioHistory.push(this.scenarioResults);
-      // Storing scenario to browser's storage:
-      window.localStorage.mazAppHistory = JSON.stringify(this.scenarioHistory);
+      console.log(scenario);
       return true;
-    },
-    /**
-     * Exports a saved scenario to a JSON file.
-     * @param {int} scenarioDate - The saved scenario's date (epoch time).
-     */
-    downloadScenario(scenarioDate) {
-      console.log("App sends JSON data to user!");
-      // Find scenario on history based on it's date...
-      // @TODO: indexScenario should be a function...
-      const reqScenario = this.scenarioHistory.find(
-        (i) => i.date === scenarioDate
-      );
-      if (reqScenario) {
-        const index = this.scenarioHistory.indexOf(reqScenario);
-        if (index > -1) {
-          var header =
-            "data:text/json;charset=utf-8," +
-            encodeURIComponent(JSON.stringify(reqScenario));
-          var anchor = document.createElement("a");
-          anchor.setAttribute("href", header);
-          anchor.setAttribute("download", `make-a-zif-${scenarioDate}.json`);
-          document.body.appendChild(anchor);
-          anchor.click();
-          anchor.remove();
-          return true;
-        }
-      }
-      return false;
-    },
-    /**
-     * Loads scenario from browser's local storage.
-     * Data are loaded from: window.localStorage.mazAppHistory.
-     *
-     * @param {int} scenarioDate - The saved scenario's date (epoch time).
-     */
-    loadScenario(scenarioDate) {
-      console.log("App loads scenario executed on " + scenarioDate);
-      // Find scenario on history based on it's date...
-      // @TODO: indexScenario should be a function...
-      const reqScenario = this.scenarioHistory.find(
-        (i) => i.date === scenarioDate
-      );
-      if (reqScenario) {
-        const index = this.scenarioHistory.indexOf(reqScenario);
-        if (index > -1) {
-          // @TODO: Visualization of removal!
-          // Load variables from reqScenario.scenario:
-          let req = reqScenario.scenario;
-          // Restoring components & scenario...
-          // I wish we had TypeScript...
-          this.selectedMetal = this.listOfMetals.find(
-            (i) => i.key === req.metal
-          );
-          this.selectedLinker1 = this.listOfLinkers.find(
-            (i) => i.key === req.linker1
-          );
-          this.selectedLinker2 = this.listOfLinkers.find(
-            (i) => i.key === req.linker2
-          );
-          this.selectedLinker3 = this.listOfLinkers.find(
-            (i) => i.key === req.linker3
-          );
-          this.selectedFuncGroup1 = this.listOfGroups.find(
-            (i) => i.key === req.funcGroup1
-          );
-          this.selectedFuncGroup2 = this.listOfGroups.find(
-            (i) => i.key === req.funcGroup2
-          );
-          this.selectedFuncGroup3 = this.listOfGroups.find(
-            (i) => i.key === req.funcGroup3
-          );
-          if (req.gas) {
-            this.selectedGas = this.listOfGases.find((i) => i.key === req.gas);
-            this.selectedScenario.gas = this.selectedGas;
-          } else {
-            this.selectedGas = false;
-            this.selectedScenario.gas = false;
-          }
-          this.selectedScenario.metal = this.selectedMetal;
-          this.selectedScenario.linker1 = this.selectedLinker1;
-          this.selectedScenario.linker2 = this.selectedLinker2;
-          this.selectedScenario.linker3 = this.selectedLinker3;
-          this.selectedScenario.funcGroup1 = this.selectedFuncGroup1;
-          this.selectedScenario.funcGroup2 = this.selectedFuncGroup2;
-          this.selectedScenario.funcGroup3 = this.selectedFuncGroup3;
-          // Running the restored scenario!
-          // This will also take us back to "Memo"...
-          this.runScenario(this.selectedScenario);
-          this.scenarioResults.showSave = false;
-          return true;
-        }
-      }
-      return false;
-    },
-    /**
-     * Loads the default (example scenario) as set by the App.
-     * @constructor
-     */
-    loadDefaultScenario() {
-      // The default (example) ZIF is created using the following variables:
-      let defaultMetal = this.listOfMetals.find((i) => i.key === "zn");
-      let defaultLinker = this.listOfLinkers.find((i) => i.key === "mlm");
-      let defaultGroup = this.listOfGroups.find((i) => i.key === "ch3");
-      let defaultGas = false;
-      if (!defaultMetal || !defaultLinker || !defaultGroup) {
-        throw new Error("Can't load initial properties from JSON assets/data!");
-      }
-      let selectedScenario = {
-        metal: defaultMetal,
-        linker1: defaultLinker,
-        linker2: defaultLinker,
-        linker3: defaultLinker,
-        funcGroup1: defaultGroup,
-        funcGroup2: defaultGroup,
-        funcGroup3: defaultGroup,
-        gas: defaultGas,
-      };
-      /*
-      if (!this.validateScenario(selectedScenario)) {
-        throw new Error("Default scenario is invalid!");
-      }
-      */
-      return selectedScenario;
     },
   },
 };
@@ -670,7 +542,7 @@ export default {
     <div class="wrapper">
       <MazHeader
         header="Make-a-ZIF"
-        subHeader="A tool to design ZIFs for gas seperations"
+        subHeader="A tool to design ZIFs for gas separations"
         :modelVersion="modelVersion"
       />
     </div>
@@ -684,7 +556,7 @@ export default {
           :scenario-results="scenarioResults"
           :scenario-history="scenarioHistory"
           @do:delete-scenario="deleteScenario"
-          @do:download-scenario.once="downloadScenario"
+          @do:download-scenario.once="exportScenario"
           @do:load-scenario="loadScenario"
           @do:save-scenario="saveScenario"
         />
