@@ -129,7 +129,7 @@ export default {
               aria-label="Selection of Metal"
               role="button"
             >
-              <div class="col-title--arrow">Metal</div>
+              <span class="col-title--arrow">Metal</span>
             </button>
           </th>
           <th scope="col" colspan="3" class="linker divider">
@@ -142,7 +142,7 @@ export default {
               aria-label="Selection of Organic Linkers"
               role="button"
             >
-              <div class="col-title--arrow">Organic Linkers</div>
+              <span class="col-title--arrow">Organic Linkers</span>
             </button>
           </th>
           <th scope="col" colspan="3" class="group divider">
@@ -155,7 +155,7 @@ export default {
               aria-label="Selection of Functional Groups"
               role="button"
             >
-              <div class="col-title--arrow">Functional Groups</div>
+              <span class="col-title--arrow">Functional Groups</span>
             </button>
           </th>
         </tr>

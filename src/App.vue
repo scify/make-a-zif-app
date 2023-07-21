@@ -94,7 +94,6 @@ export default {
           this.scenarioHistory[this.scenarioHistory.length - 1];
         this.selectedScenario = this.createScenario();
         this.loadScenario(lastScenario.date, false);
-        // this.selectedScenario = this.loadDefaultScenario(); // remove when fixed!
       } else {
         console.log("App loaded default scenario");
         this.applyScenario(this.createScenario());

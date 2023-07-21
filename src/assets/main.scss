@@ -23,8 +23,7 @@ div.maz-header {
   h3 {
     font-size: 1.25rem;
     font-weight: 500;
-    margin-top: 0em;
-
+    margin-top: 0;
     span {
       display: block;
       margin-top: 0.8em;
@@ -142,7 +141,7 @@ div.maz-main {
             border: 2px solid var(--maz-blue);
             background: var(--maz-background);
             line-height: 0;
-            padding: 0 0px;
+            padding: 0 0;
             margin: 0;
             font-size: 20px;
             font-weight: bolder;
@@ -472,7 +471,11 @@ div.maz-main {
       text-align: left;
     }
   }
-  div.col-title--arrow::after {
+  span.col-title--arrow {
+    display: block;
+    font-weight: bold;
+  }
+  span.col-title--arrow::after {
     content: "";
     z-index: 1;
     padding: 0;
