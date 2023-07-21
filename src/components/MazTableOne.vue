@@ -100,9 +100,10 @@ export default {
   >
     <h4 class="one">Select metal, linkers & groups</h4>
     <h5>
-      Edit the table below to change the metal, the organic linkers and/or the
-      functional groups of the ZIF.
+      Click on the columns to replace the units (metal, organic linkers &amp;
+      functional groups) in the ZIF.
     </h5>
+    <h6></h6>
     <table class="table-multi">
       <colgroup class="header"></colgroup>
       <colgroup class="metal"></colgroup>
