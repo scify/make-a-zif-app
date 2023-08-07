@@ -7,7 +7,7 @@
       "name": "\u03c3",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 0.25
     },
@@ -15,7 +15,7 @@
       "name": "e",
       "unit": {
         "name": "kilojoule per mol",
-        "sign": "kJ/mol"
+        "symbol": "kJ/mol"
       },
       "value": 0.0627
     },
@@ -23,7 +23,7 @@
       "name": "mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 81
     },
@@ -31,7 +31,7 @@
       "name": "length",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 4.438
     }
@@ -44,7 +44,7 @@
       "name": "\u03c3",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 0.25
     },
@@ -52,7 +52,7 @@
       "name": "e",
       "unit": {
         "name": "kilojoule per mol",
-        "sign": "kJ/mol"
+        "symbol": "kJ/mol"
       },
       "value": 0.0627
     },
@@ -60,7 +60,7 @@
       "name": "mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 117
     },
@@ -68,7 +68,7 @@
       "name": "length",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 5.7
     }
@@ -81,7 +81,7 @@
       "name": "\u03c3",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 0.34
     },
@@ -89,7 +89,7 @@
       "name": "e",
       "unit": {
         "name": "kilojoule per mol",
-        "sign": "kJ/mol"
+        "symbol": "kJ/mol"
       },
       "value": 1.2552
     },
@@ -97,7 +97,7 @@
       "name": "mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 134.906
     },
@@ -105,7 +105,7 @@
       "name": "length",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 5.7
     }
@@ -118,7 +118,7 @@
       "name": "\u03c3",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 0.285
     },
@@ -126,7 +126,7 @@
       "name": "e",
       "unit": {
         "name": "kilojoule per mol",
-        "sign": "kJ/mol"
+        "symbol": "kJ/mol"
       },
       "value": 0.255
     },
@@ -134,7 +134,7 @@
       "name": "mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 101.98
     },
@@ -142,7 +142,7 @@
       "name": "length",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 4.86
     }
@@ -155,7 +155,7 @@
       "name": "\u03c3",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 0.4
     },
@@ -163,7 +163,7 @@
       "name": "e",
       "unit": {
         "name": "kilojoule per mol",
-        "sign": "kJ/mol"
+        "symbol": "kJ/mol"
       },
       "value": 1.8731
     },
@@ -171,7 +171,7 @@
       "name": "mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 223.8
     },
@@ -179,7 +179,7 @@
       "name": "length",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 6.01
     }
@@ -192,7 +192,7 @@
       "name": "\u03c3",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 0.367
     },
@@ -200,7 +200,7 @@
       "name": "e",
       "unit": {
         "name": "kilojoule per mol",
-        "sign": "kJ/mol"
+        "symbol": "kJ/mol"
       },
       "value": 2.4267
     },
@@ -208,7 +208,7 @@
       "name": "mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 317.8
     },
@@ -216,7 +216,7 @@
       "name": "length",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 6.41
     }
@@ -229,7 +229,7 @@
       "name": "\u03c3",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 0.325
     },
@@ -237,7 +237,7 @@
       "name": "e",
       "unit": {
         "name": "kilojoule per mol",
-        "sign": "kJ/mol"
+        "symbol": "kJ/mol"
       },
       "value": 0.7112
     },
@@ -245,7 +245,7 @@
       "name": "mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 83
     },
@@ -253,7 +253,7 @@
       "name": "length",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.66
     }

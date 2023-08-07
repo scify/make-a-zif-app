@@ -13,7 +13,7 @@ export function mapApiGases(gas) {
       name: "kinetic diameter",
       unit: {
         name: "angstrom",
-        sign: "\u00C5",
+        symbol: "\u00C5",
       },
       value: gas.kdiameter,
     },
@@ -21,7 +21,7 @@ export function mapApiGases(gas) {
       name: "mass",
       unit: {
         name: "gram per mol",
-        sign: "g/mol",
+        symbol: "g/mol",
       },
       value: gas.mass,
     },
@@ -29,7 +29,7 @@ export function mapApiGases(gas) {
       name: "vdW diameter",
       unit: {
         name: "angstrom",
-        sign: "\u00C5",
+        symbol: "\u00C5",
       },
       value: gas.diameter,
     },
@@ -51,15 +51,15 @@ export function mapApiMetals(metal) {
       name: "metal mass",
       unit: {
         name: "dalton",
-        sign: "u",
+        symbol: "u",
       },
       value: metal.metalMass,
     },
     size: {
       name: "ionic radius",
       unit: {
-        name: "picometer",
-        sign: "pm",
+        name: "picometre",
+        symbol: "pm",
       },
       value: metal.ionicRad,
     },
@@ -80,7 +80,7 @@ export function mapApiGroups(group) {
       name: "mass",
       unit: {
         name: "dalton",
-        sign: "u",
+        symbol: "u",
       },
       value: group.f_group_mass,
     },
@@ -88,7 +88,7 @@ export function mapApiGroups(group) {
       name: "length",
       unit: {
         name: "angstrom",
-        sign: "\u00C5",
+        symbol: "\u00C5",
       },
       value: group.f_group_length,
     },
@@ -110,7 +110,7 @@ export function mapApiLinkers(linker) {
       name: "\u03c3",
       unit: {
         name: "angstrom",
-        sign: "\u00C5",
+        symbol: "\u00C5",
       },
       value: linker["s_1"],
     },
@@ -118,7 +118,7 @@ export function mapApiLinkers(linker) {
       name: "e",
       unit: {
         name: "kilojoule per mol",
-        sign: "kJ/mol",
+        symbol: "kJ/mol",
       },
       value: linker["e_1"],
     },
@@ -126,7 +126,7 @@ export function mapApiLinkers(linker) {
       name: "mass",
       unit: {
         name: "dalton",
-        sign: "u",
+        symbol: "u",
       },
       value: linker["linker_mass"],
     },
@@ -134,7 +134,7 @@ export function mapApiLinkers(linker) {
       name: "length",
       unit: {
         name: "angstrom",
-        sign: "\u00C5",
+        symbol: "\u00C5",
       },
       value: linker["linker_length"],
     },

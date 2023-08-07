@@ -8,7 +8,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 2.6
     },
@@ -16,7 +16,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 4.002
     },
@@ -24,7 +24,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 2.66
     }
@@ -38,7 +38,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 2.89
     },
@@ -46,7 +46,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 2.01
     },
@@ -54,7 +54,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 2.76
     }
@@ -68,7 +68,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.46
     },
@@ -76,7 +76,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 31.999
     },
@@ -84,7 +84,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 2.94
     }
@@ -98,7 +98,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.3
     },
@@ -106,7 +106,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 44.01
     },
@@ -114,7 +114,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.24
     }
@@ -128,7 +128,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.64
     },
@@ -136,7 +136,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 28
     },
@@ -144,7 +144,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.13
     }
@@ -158,7 +158,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.8
     },
@@ -166,7 +166,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 16.04
     },
@@ -174,7 +174,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.25
     }
@@ -188,7 +188,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.9
     },
@@ -196,7 +196,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 28.05
     },
@@ -204,7 +204,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.59
     }
@@ -218,7 +218,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 4
     },
@@ -226,7 +226,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 30.07
     },
@@ -234,7 +234,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.72
     }
@@ -248,7 +248,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 4.3
     },
@@ -256,7 +256,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 44.1
     },
@@ -264,7 +264,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 5.16
     }
@@ -278,7 +278,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 4.5
     },
@@ -286,7 +286,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 58.12
     },
@@ -294,7 +294,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 5.42
     }
@@ -308,7 +308,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.69
     },
@@ -316,7 +316,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 83.8
     },
@@ -324,7 +324,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 4
     }
@@ -338,7 +338,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 4.2
     },
@@ -346,7 +346,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 131.29
     },
@@ -354,7 +354,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 4.1
     }
@@ -368,7 +368,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 4.2
     },
@@ -376,7 +376,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 222
     },
@@ -384,7 +384,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 4.2
     }
@@ -398,7 +398,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.3
     },
@@ -406,7 +406,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 46.0055
     },
@@ -414,7 +414,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.22
     }
@@ -428,7 +428,7 @@
       "name": "kinetic diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 4.1
     },
@@ -436,7 +436,7 @@
       "name": "mass",
       "unit": {
         "name": "gram per mol",
-        "sign": "g/mol"
+        "symbol": "g/mol"
       },
       "value": 64.006
     },
@@ -444,7 +444,7 @@
       "name": "vdW diameter",
       "unit": {
         "name": "angstrom",
-        "sign": "\u212b"
+        "symbol": "\u212b"
       },
       "value": 3.55
     }

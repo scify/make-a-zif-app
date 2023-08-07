@@ -8,15 +8,15 @@
       "name": "metal mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 112.411
     },
     "size": {
       "name": "ionic radius",
       "unit": {
-        "name": "picometer",
-        "sign": "pm"
+        "name": "picometre",
+        "symbol": "pm"
       },
       "value": 92
     }
@@ -30,15 +30,15 @@
       "name": "metal mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 65.38
     },
     "size": {
       "name": "ionic radius",
       "unit": {
-        "name": "picometer",
-        "sign": "pm"
+        "name": "picometre",
+        "symbol": "pm"
       },
       "value": 74
     }
@@ -52,15 +52,15 @@
       "name": "metal mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 58.93
     },
     "size": {
       "name": "ionic radius",
       "unit": {
-        "name": "picometer",
-        "sign": "pm"
+        "name": "picometre",
+        "symbol": "pm"
       },
       "value": 72
     }
@@ -74,15 +74,15 @@
       "name": "metal mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 9.012
     },
     "size": {
       "name": "ionic radius",
       "unit": {
-        "name": "picometer",
-        "sign": "pm"
+        "name": "picometre",
+        "symbol": "pm"
       },
       "value": 41
     }
@@ -96,15 +96,15 @@
       "name": "metal mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 24.305
     },
     "size": {
       "name": "ionic radius",
       "unit": {
-        "name": "picometer",
-        "sign": "pm"
+        "name": "picometre",
+        "symbol": "pm"
       },
       "value": 71
     }
@@ -118,15 +118,15 @@
       "name": "metal mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 54.938
     },
     "size": {
       "name": "ionic radius",
       "unit": {
-        "name": "picometer",
-        "sign": "pm"
+        "name": "picometre",
+        "symbol": "pm"
       },
       "value": 80
     }
@@ -140,15 +140,15 @@
       "name": "metal mass",
       "unit": {
         "name": "dalton",
-        "sign": "u"
+        "symbol": "u"
       },
       "value": 63.456
     },
     "size": {
       "name": "ionic radius",
       "unit": {
-        "name": "picometer",
-        "sign": "pm"
+        "name": "picometre",
+        "symbol": "pm"
       },
       "value": 71
     }
