@@ -215,13 +215,13 @@ export default {
                     <td class="text-center">
                       {{ gas.kineticDiameter.value
                       }}<span class="unit inline">{{
-                        gas.kineticDiameter.unit.sign
+                        gas.kineticDiameter.unit.symbol
                       }}</span>
                     </td>
                     <td class="text-center">
                       {{ gas.mass.value
                       }}<span class="unit inline shrinked">{{
-                        gas.mass.unit.sign
+                        gas.mass.unit.symbol
                       }}</span>
                     </td>
                   </tr>

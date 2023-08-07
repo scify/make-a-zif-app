@@ -334,13 +334,13 @@ export default {
                     <td class="text-center">
                       {{ metal.size.value
                       }}<span class="unit inline">{{
-                        metal.size.unit.sign
+                        metal.size.unit.symbol
                       }}</span>
                     </td>
                     <td class="text-center">
                       {{ metal.mass.value
                       }}<span class="unit inline">{{
-                        metal.mass.unit.sign
+                        metal.mass.unit.symbol
                       }}</span>
                     </td>
                   </tr>
