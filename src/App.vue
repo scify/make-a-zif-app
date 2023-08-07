@@ -104,12 +104,14 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           this.modelVersion = data.model_version;
-          this.listOfGases = data.gases.map((gas) => mapApiGases(gas));
-          this.listOfMetals = data.metals.map((metal) => mapApiMetals(metal));
-          this.listOfGroups = data.f_groups.map((group) => mapApiGroups(group));
-          this.listOfLinkers = data.linkers.map((linker) =>
-            mapApiLinkers(linker)
-          );
+          this.listOfGases = data.gases;
+          this.listOfMetals = data.metals;
+          this.listOfGroups = data.f_groups;
+          this.listOfLinkers = data.linkers;
+          // this.listOfGases = data.gases.map((gas) => mapApiGases(gas));
+          // this.listOfMetals = data.metals.map((metal) => mapApiMetals(metal));
+          // this.listOfGroups = data.f_groups.map((group) => mapApiGroups(group));
+          // this.listOfLinkers = data.linkers.map((linker) => mapApiLinkers(linker));
           /*
           this.downloadJsonData(this.listOfGases, "gases");
           this.downloadJsonData(this.listOfMetals, "metals");
