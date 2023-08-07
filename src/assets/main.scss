@@ -215,6 +215,9 @@ div.maz-main {
         font-weight: 500;
       }
     }
+    table {
+      --bs-table-bg: var(--maz-background);
+    }
     table thead th {
       font-weight: 500;
       box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
@@ -267,8 +270,7 @@ div.maz-main {
     -webkit-appearance: none;
     appearance: none;
     background-color: var(--maz-background);
-    margin: 0;
-    margin-right: 0.5em;
+    margin: 0 0.5em 0 0;
     font: inherit;
     color: currentColor;
     width: 1.0em;
@@ -294,16 +296,17 @@ div.maz-main {
   }
 
   // Modals
+  .modal.warning {
+    .modal-content {
+      box-shadow: var(--maz-warning-shadow);
+    }
+    .modal-label {
+      box-shadow: 0 3px 0 0 #f00;
+    }
+  }
   .modal-content {
     background-color: var(--maz-modal-bg);
   }
-  .modal-content.warning {
-    box-shadow: var(--maz-warning-shadow);
-  }
-  .warning .modal-label {
-    box-shadow: 0 3px 0 0 #f00;
-  }
-
   .modal-dialog {
     color: var(--maz-text);
     .btn.primary {
@@ -319,11 +322,11 @@ div.maz-main {
       margin-bottom: 0;
       padding-top: 0;
     }
-    table thead th {
-      box-shadow: 0 1px 0 0 #000; // No equivelant for dark theme :(.
-    }
     .modal-footer {
       border-top: none;
+    }
+    table thead th {
+      box-shadow: 0 1px 0 0 #000; // No equivalent for dark theme :(.
     }
     .btn-close {
       margin-right: 0.5em;

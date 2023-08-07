@@ -2,7 +2,7 @@
 /**
  * Make-a-ZIF App
  *
- * Created by SciFY on November 2022-July 2023.
+ * Created by SciFY on November 2022-August 2023.
  *
  * Note: By default the App supports both light and dark theme. If dark mode
  * needs to be disabled, just remove @import "./assets/dark.scss"; from this
@@ -26,6 +26,7 @@ import {
   mapApiMetals,
 } from "./js/mapApiFunctions.js";
 */
+
 // Let the Vue begin!
 export default {
   components: {
@@ -39,8 +40,8 @@ export default {
   data() {
     return {
       // Local cached version of initial data.
-      modelVersion: "1.1.0 local",
-      // Parsed JSON data
+      modelVersion: "1.0.1 local",
+      // Local parsed JSON data of various constants.
       listOfGases: gasData,
       listOfMetals: metalData,
       listOfGroups: groupData,
@@ -55,7 +56,7 @@ export default {
       selectedFuncGroup1: null,
       selectedFuncGroup2: null,
       selectedFuncGroup3: null,
-      // Default (aka "example") scenario results based on the mock-ups:
+      // Default (aka "example") scenario results:
       scenarioResults: {
         name: "Example scenario metrics",
         date: "",
@@ -72,7 +73,6 @@ export default {
       // Starting with false instead of an [] to handle the default states for
       // various components and to avoid boring, lengthy, length counts.
       scenarioHistory: false,
-      // Units:
     };
   },
   created() {
@@ -82,7 +82,7 @@ export default {
   },
   computed: {},
   mounted() {
-    this.updateDataFromAPI();
+    this.fetchDataConstantsFromAPI();
   },
   methods: {
     resetToLocalOrDefault() {
@@ -99,25 +99,18 @@ export default {
         this.applyScenario(this.createScenario());
       }
     },
-    updateDataFromAPI() {
+
+    fetchDataConstantsFromAPI() {
       fetch(import.meta.env.VITE_MAZ_API_ENDPOINT + "params")
         .then((response) => response.json())
         .then((data) => {
           this.modelVersion = data.model_version;
+          // @example Download: this.downloadJsonData(this.listOfGases, "gases");
+          // @example Mapping: = data.gases.map((gas) => mapApiGases(gas));
           this.listOfGases = data.gases;
           this.listOfMetals = data.metals;
           this.listOfGroups = data.f_groups;
           this.listOfLinkers = data.linkers;
-          // this.listOfGases = data.gases.map((gas) => mapApiGases(gas));
-          // this.listOfMetals = data.metals.map((metal) => mapApiMetals(metal));
-          // this.listOfGroups = data.f_groups.map((group) => mapApiGroups(group));
-          // this.listOfLinkers = data.linkers.map((linker) => mapApiLinkers(linker));
-          /*
-          this.downloadJsonData(this.listOfGases, "gases");
-          this.downloadJsonData(this.listOfMetals, "metals");
-          this.downloadJsonData(this.listOfGroups, "groups");
-          this.downloadJsonData(this.listOfLinkers, "linkers");
-          */
           this.resetToLocalOrDefault();
         })
         .catch((error) => {
@@ -126,8 +119,37 @@ export default {
           console.error("Error fetching remote data:", error);
         })
         .finally(() => {
-          console.log("Finally!");
+          console.log("App initialised successfully!");
         });
+    },
+
+    fetchDataResultsFromAPI(apiParams, scenarioData) {
+      fetch(import.meta.env.VITE_MAZ_API_ENDPOINT + "predict?" + apiParams, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data && typeof data.diffusivity === "number") {
+            this.handlePredictionResponseData(data.diffusivity, scenarioData);
+          } else {
+            throw new Error(
+              "Invalid API response data or missing diffusivity key"
+            );
+          }
+        })
+        .catch((error) => {
+          // Handle any error that occurs during the fetch request
+          console.error("Error fetching data:", error);
+        });
+      return true;
     },
 
     currentDate() {
@@ -169,6 +191,13 @@ export default {
       }
     },
 
+    forceGasSelection() {
+      const gasModalButton = document.getElementById("gasModalButton");
+      const gasModal = document.getElementById("gasModal");
+      gasModalButton.click();
+      gasModal.classList.add("warning");
+    },
+
     /**
      * Executes a given scenario and returns reactive results.
      * @param {Object} scenario - Scenario to execute.
@@ -196,8 +225,7 @@ export default {
       divMemo.classList.add("active", "show");
       // Toggle gas if no gas selected and abort.
       if (!scenario.gas) {
-        document.querySelector("#gasModalButton").click();
-        document.querySelector("#gasModalContent").classList.add("warning");
+        this.forceGasSelection();
         return false;
       }
       // Validating Scenario:
@@ -236,31 +264,7 @@ export default {
         )
         .join("&");
 
-      fetch(import.meta.env.VITE_MAZ_API_ENDPOINT + "predict?" + apiParams, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          if (data && typeof data.diffusivity === "number") {
-            this.handlePredictionResponseData(data.diffusivity, scenarioData);
-          } else {
-            throw new Error(
-              "Invalid API response data or missing diffusivity key"
-            );
-          }
-        })
-        .catch((error) => {
-          // Handle any error that occurs during the fetch request
-          console.error("Error fetching data:", error);
-        });
+      this.fetchDataResultsFromAPI(apiParams, scenarioData);
       return true;
     },
 

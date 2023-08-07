@@ -280,7 +280,7 @@ export default {
       aria-labelledby="metalModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header align-items-baseline">
             <div class="modal-title">
@@ -367,7 +367,7 @@ export default {
       aria-labelledby="linkersModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header align-items-baseline">
             <div class="modal-title">
@@ -534,7 +534,7 @@ export default {
       aria-labelledby="groupsModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header align-items-baseline">
             <div class="modal-title">
