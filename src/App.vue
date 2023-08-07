@@ -18,14 +18,14 @@ import gasData from "./assets/data/gases.json";
 import metalData from "./assets/data/metals.json";
 import linkerData from "./assets/data/linkers.json";
 import groupData from "./assets/data/groups.json";
-// Import mapping for API v1.0.0 metadata:
+/* Import mapping for API v1.0.0 metadata:
 import {
   mapApiLinkers,
   mapApiGases,
   mapApiGroups,
   mapApiMetals,
 } from "./js/mapApiFunctions.js";
-
+*/
 // Let the Vue begin!
 export default {
   components: {

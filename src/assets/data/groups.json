@@ -43,8 +43,8 @@
   },
   {
     "key": "cl",
-    "name": "Chlorine",
-    "title": "\u2013Cl",
+    "name": "\u2013Cl",
+    "title": "Chlorine",
     "mass": {
       "name": "mass",
       "unit": {
@@ -64,8 +64,8 @@
   },
   {
     "key": "h",
-    "name": "Hydrogen",
-    "title": "\u2013H",
+    "name": "\u2013H",
+    "title": "Hydrogen",
     "mass": {
       "name": "mass",
       "unit": {
