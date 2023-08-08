@@ -470,6 +470,7 @@ export default {
      * @param {int} scenarioDate - The saved scenario's date (epoch time).
      */
     exportScenario(scenarioDate) {
+      console.log(`Scenario download for ${scenarioDate}`)
       // Find scenario on history based on its date...
       const scenario = this.scenarioHistory.find(
         (i) => i.date === scenarioDate
@@ -560,7 +561,7 @@ export default {
       :scenario-results="scenarioResults"
       :scenario-history="scenarioHistory"
       @do:delete-scenario="deleteScenario"
-      @do:download-scenario.once="exportScenario"
+      @do:download-scenario="exportScenario"
       @do:load-scenario="loadScenario"
       @do:save-scenario="saveScenario"
     />
