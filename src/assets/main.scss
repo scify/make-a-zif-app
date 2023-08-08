@@ -672,6 +672,27 @@ div.maz-main, div.maz-introduction {
       text-overflow: ellipsis;
       font-size: 2em;
     }
+    &--header {
+      text-align: center;
+      opacity: 0.9;
+    }
+    &--units {
+      font-size: 0.92em;
+      .unit {
+        padding: 0.24em;
+        dl,
+        dd,
+        dt {
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+    &--date {
+      text-align: center;
+      opacity: 0.62;
+      font-size: 0.8em;
+    }
     &--actions {
       button {
         display: block;

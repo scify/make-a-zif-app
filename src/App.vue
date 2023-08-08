@@ -289,7 +289,7 @@ export default {
         if (!isNaN(diffusivityValue)) {
           let results = {
             name: "",
-            date: Date.now(),
+            date: new Date().toISOString(),
             formattedDate: this.currentDate(),
             model: this.modelVersion.toString(),
             source: window.location.href.toString(),

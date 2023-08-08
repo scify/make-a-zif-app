@@ -257,7 +257,15 @@ export default {
 
                 <div class="zif--actions d-grid gap-2 d-md-flex">
                   <!-- @todo Fix the buttons functionality (reimplement them). -->
-                  <button class="btn btn-sm btn-primary flex-fill">Save</button>
+                  <button
+                    v-if="scenarioResults.showSave"
+                    class="btn btn-sm btn-primary flex-fill"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Save the scenario & its results to your history"
+                  >
+                    Save
+                  </button>
                 </div>
               </div>
               <!-- /zif ends here -->
@@ -326,26 +334,5 @@ export default {
 </template>
 <style lang="scss">
 .zif {
-  &--header {
-    text-align: center;
-    opacity: 0.9;
-  }
-  &--units {
-    font-size: 0.92em;
-    .unit {
-      padding: 0.24em;
-      dl,
-      dd,
-      dt {
-        margin: 0;
-        padding: 0;
-      }
-    }
-  }
-  &--date {
-    text-align: center;
-    opacity: 0.8;
-    font-size: 0.8em;
-  }
 }
 </style>
