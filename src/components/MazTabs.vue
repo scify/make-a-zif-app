@@ -19,6 +19,37 @@ export default {
   },
   mounted() {},
   methods: {
+    parseMetal(key) {
+      const metal = this.$root.listOfMetals.find((i) => i.key === key);
+      return metal.title;
+    },
+    parseLinker(key) {
+      const linker = this.$root.listOfLinkers.find((i) => i.key === key);
+      return linker.name;
+    },
+    parseGroup(key) {
+      const group = this.$root.listOfGroups.find((i) => i.key === key);
+      return this.parseSubScript(group.name);
+    },
+    parseGas(key) {
+      // Note that
+      let gas = this.$root.listOfGases.find((i) => i.key === key);
+      return gas.title;
+    },
+
+    /**
+     * Parses <sub>digit</sub> and returns the corresponding JavaScript friendly
+     * unicode character. E.g. <sub>2</sub> becomes \u2082.
+     * @param unit A unit which might contain <sub>scripts.
+     * @returns {string} The unit in plain unicode friendly text.
+     */
+    parseSubScript(unit) {
+      return unit.replace(/<sub>(\d)<\/sub>/g, (match, digit) => {
+        const unicodeCode = 0x2080 + parseInt(digit);
+        return String.fromCharCode(unicodeCode);
+      });
+    },
+
     saveScenario() {
       let scenarioName = "Scenario";
       if (this.inputScenarioName) {
@@ -172,27 +203,22 @@ export default {
                 <div class="zif--diffusivity">
                   {{ scenarioResults.diffusion }}
                 </div>
-                <div class="zif--date">
-                  Date:
-                  <!-- @todo Fix the datetime format for machine-readable dates. -->
-                  <time v-bind:datetime="scenarioResults.date">{{
-                    scenarioResults.formattedDate
-                  }}</time>
-                </div>
                 <div class="zif--units d-grid d-flex flex-wrap gap-0">
                   <div class="unit flex-grow-1">
                     <dl>
                       <dt>Metal</dt>
-                      <dd>{{ scenarioResults.scenario.metal }}</dd>
+                      <dd class="text-capitalize">
+                        {{ this.parseMetal(scenarioResults.scenario.metal) }}
+                      </dd>
                     </dl>
                   </div>
                   <div class="unit">
                     <dl>
                       <dt>Organic linkers</dt>
                       <dd>
-                        {{ scenarioResults.scenario.linker1 }}
-                        {{ scenarioResults.scenario.linker2 }}
-                        {{ scenarioResults.scenario.linker3 }}
+                        {{ this.parseLinker(scenarioResults.scenario.linker1) }}
+                        {{ this.parseLinker(scenarioResults.scenario.linker2) }}
+                        {{ this.parseLinker(scenarioResults.scenario.linker3) }}
                       </dd>
                     </dl>
                   </div>
@@ -200,19 +226,35 @@ export default {
                     <dl>
                       <dt>Functional groups</dt>
                       <dd>
-                        {{ scenarioResults.scenario.funcGroup1 }}
-                        {{ scenarioResults.scenario.funcGroup2 }}
-                        {{ scenarioResults.scenario.funcGroup3 }}
+                        {{
+                          this.parseGroup(scenarioResults.scenario.funcGroup1)
+                        }}
+                        {{
+                          this.parseGroup(scenarioResults.scenario.funcGroup2)
+                        }}
+                        {{
+                          this.parseGroup(scenarioResults.scenario.funcGroup3)
+                        }}
                       </dd>
                     </dl>
                   </div>
                   <div class="unit">
                     <dl>
                       <dt>Gas</dt>
-                      <dd>{{ scenarioResults.scenario.gas }}</dd>
+                      <dd class="text-capitalize">
+                        {{ this.parseGas(scenarioResults.scenario.gas) }}
+                      </dd>
                     </dl>
                   </div>
                 </div>
+                <div class="zif--date">
+                  Date:
+                  <!-- @todo Fix the datetime format for machine-readable dates. -->
+                  <time v-bind:datetime="scenarioResults.date">{{
+                    scenarioResults.formattedDate
+                  }}</time>
+                </div>
+
                 <div class="zif--actions d-grid gap-2 d-md-flex">
                   <!-- @todo Fix the buttons functionality (reimplement them). -->
                   <button class="btn btn-sm btn-primary flex-fill">Save</button>
@@ -302,9 +344,9 @@ export default {
     font-size: 2em;
   }
   &--units {
-    font-size: 1em;
+    font-size: 0.92em;
     .unit {
-      padding: 0.25em;
+      padding: 0.24em;
       dl,
       dd,
       dt {
