@@ -60,12 +60,10 @@ export default {
       selectedFuncGroup3: null,
       // Default (aka "example") scenario results:
       scenarioResults: {
-        name: "Example scenario metrics",
-        date: "",
+        name: "Example scenario",
+        date: new Date("2022-03-05T10:00:13.912Z"),
         formattedDate: "5/3/2022 | 12:00:13",
         suggestedName: "Scenario name",
-        diameter: "Coming soon",
-        permeability: "Coming soon",
         diffusion: 4,
         scenario: [],
         showDiff: false,
@@ -194,6 +192,9 @@ export default {
       }
     },
 
+    /**
+     * Forces the user to select a Gas by activating the corresponding modal.
+     */
     forceGasSelection() {
       const gasModalButton = document.getElementById("gasModalButton");
       const gasModal = document.getElementById("gasModal");
@@ -202,30 +203,34 @@ export default {
     },
 
     /**
+     * Focus (activate) a Tab and the corresponding panel (uses Bootstrap).
+     * @param {string} pane - One of the apps panes (Intro, Examples, History).
+     */
+    focusTab(pane = "History") {
+      const appTabs = document.querySelector("#mazTabs");
+      const appTabPanels = document.querySelector("#mazTabPanels");
+      const focusTab = document.querySelector(`#maz${pane}Tab`);
+      const focusPane = document.querySelector(`#maz${pane}Pane`);
+      // Scrolls to top in case the results are not into view:
+      appTabs.scrollIntoView({ behavior: "smooth", block: "center" });
+      // Switching active tabs...
+      appTabs
+        .querySelectorAll("button")
+        .forEach((tab) => tab.classList.remove("active"));
+      appTabPanels
+        .querySelectorAll("[role='tabpanel']")
+        .forEach((panel) => panel.classList.remove("show", "active"));
+      focusTab.classList.add("active");
+      focusPane.classList.add("show", "active");
+    },
+
+    /**
      * Executes a given scenario and returns reactive results.
      * @param {Object} scenario - Scenario to execute.
      */
     runScenario(scenario) {
       // Disable execution button until further notice:
-      const mazExecuteButton = document.querySelector("#mazExecuteButton");
-      mazExecuteButton.classList.add("disabled");
-      // Scrolls to top in case the results are not into view:
-      const scrollTarget = document.querySelector("#mazTabs");
-      scrollTarget.scrollIntoView({ behavior: "smooth", block: "center" });
-      // Shows Memo tab if not shown.
-      // As we can't directly access bootstrap we mimic its actions:
-      const tabMemo = document.querySelector("#mazMemoTab");
-      const tabHistory = document.querySelector("#mazHistoryTab");
-      const divMemo = document.querySelector("#mazMemo");
-      const divHistory = document.querySelector("#mazHistory");
-      // - Switching the active tabs...
-      tabMemo.classList.add("active");
-      tabHistory.classList.remove("active");
-      // - Switching the active panels...
-      divHistory.classList.add("fade");
-      divHistory.classList.remove("active", "show");
-      divMemo.classList.remove("fade");
-      divMemo.classList.add("active", "show");
+      document.querySelector("#mazExecuteButton").classList.add("disabled");
       // Toggle gas if no gas selected and abort.
       if (!scenario.gas) {
         this.forceGasSelection();
@@ -266,17 +271,19 @@ export default {
             `${encodeURIComponent(key)}=${encodeURIComponent(apiScenario[key])}`
         )
         .join("&");
-
-      this.fetchDataResultsFromAPI(apiParams, scenarioData);
-      return true;
+      // Fetches results & handles prediction.
+      if (this.fetchDataResultsFromAPI(apiParams, scenarioData)) {
+        // Focus on results!
+        this.focusTab();
+        return true;
+      }
+      return false;
     },
 
     /**
      * Handles prediction response data. Some random text will go here.
      */
     handlePredictionResponseData(diffusivity, scenarioData) {
-      const mazResultsTable = document.querySelector("#mazResultsTable");
-      const mazExecuteButton = document.querySelector("#mazExecuteButton");
       if (typeof diffusivity === "number") {
         const diffusivityValue = parseFloat(diffusivity);
         if (!isNaN(diffusivityValue)) {
@@ -299,15 +306,6 @@ export default {
       } else {
         throw new Error("Invalid API response data or missing diffusivity key");
       }
-      // Highlight the new results for a few seconds:
-      mazResultsTable.classList.add("executed");
-      setTimeout(function () {
-        mazResultsTable.classList.remove("executed");
-        // @TODO: Obviously execution should be allowed, only if parameters have
-        // actually changed. Unique hash from properties is once again a pretty
-        // easy solution. Till then, execution is re-enabled after this timeout.
-        mazExecuteButton.classList.remove("disabled");
-      }, 2500);
       return true;
     },
 

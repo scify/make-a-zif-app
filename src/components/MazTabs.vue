@@ -48,13 +48,29 @@ export default {
       this.$emit("do:saveScenario", scenarioName);
     },
   },
+  watch: {
+    scenarioResults: {
+      handler() {
+        setTimeout(function () {
+          // @TODO Fix the new class (aka implement it).
+          document.querySelector("#generatedZif").classList.add("new");
+        }, 500);
+        setTimeout(function () {
+          document.querySelector("#generatedZif").classList.remove("new");
+          document
+            .querySelector("#mazExecuteButton")
+            .classList.remove("disabled");
+        }, 3000);
+      },
+    },
+  },
 };
 </script>
 
 <template>
   <div class="introduction mt-4 mb-1 pt-2 pb-1">
     <div class="maz-tabs" role="navigation">
-      <ul id="mazIntroTabs" class="nav nav-tabs" role="tablist">
+      <ul id="mazTabs" class="nav nav-tabs" role="tablist">
         <li class="nav-item" role="presentation">
           <button
             class="nav-link active pt-3 px-md-5 px-4"
@@ -100,7 +116,7 @@ export default {
       </ul>
     </div>
 
-    <div class="tab-content maz-tab-content" id="mazTabContent">
+    <div id="mazTabPanels" class="tab-content maz-tab-content">
       <div
         id="mazIntroPane"
         class="tab-pane fade show active"
@@ -143,46 +159,123 @@ export default {
       >
         <div class="container-fluid mt-5 p-0 log">
           <div class="zif-history d-flex flex-wrap">
-            <div class="zif">
-              <div class="zif--header">Generated ZIF with diffusivity:</div>
-              <div class="zif--diffusivity">-14.560773849487305</div>
-              <div class="zif--units d-flex flex-wrap">
-                <div class="unit flex-grow-1">
-                  <dl>
-                    <dt>Metal</dt>
-                    <dd>Zn</dd>
-                  </dl>
+            <!-- memo starts here -->
+            <template
+              v-if="
+                scenarioResults.scenario &&
+                Object.keys(scenarioResults.scenario).length > 0
+              "
+            >
+              <!-- zif starts here -->
+              <div class="zif memo" id="generatedZif">
+                <div class="zif--header">Generated ZIF with diffusivity:</div>
+                <div class="zif--diffusivity">
+                  {{ scenarioResults.diffusion }}
                 </div>
-                <div class="unit">
-                  <dl>
-                    <dt>Organic linkers</dt>
-                    <dd>mLm mLm mLm</dd>
-                  </dl>
+                <div class="zif--date">
+                  Date:
+                  <!-- @todo Fix the datetime format for machine-readable dates. -->
+                  <time v-bind:datetime="scenarioResults.date">{{
+                    scenarioResults.formattedDate
+                  }}</time>
                 </div>
-                <div class="unit flex-grow-1">
-                  <dl>
-                    <dt>Functional groups</dt>
-                    <dd>–CHO –CHO –CHO</dd>
-                  </dl>
+                <div class="zif--units d-grid d-flex flex-wrap gap-0">
+                  <div class="unit flex-grow-1">
+                    <dl>
+                      <dt>Metal</dt>
+                      <dd>{{ scenarioResults.scenario.metal }}</dd>
+                    </dl>
+                  </div>
+                  <div class="unit">
+                    <dl>
+                      <dt>Organic linkers</dt>
+                      <dd>
+                        {{ scenarioResults.scenario.linker1 }}
+                        {{ scenarioResults.scenario.linker2 }}
+                        {{ scenarioResults.scenario.linker3 }}
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="unit flex-grow-1">
+                    <dl>
+                      <dt>Functional groups</dt>
+                      <dd>
+                        {{ scenarioResults.scenario.funcGroup1 }}
+                        {{ scenarioResults.scenario.funcGroup2 }}
+                        {{ scenarioResults.scenario.funcGroup3 }}
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="unit">
+                    <dl>
+                      <dt>Gas</dt>
+                      <dd>{{ scenarioResults.scenario.gas }}</dd>
+                    </dl>
+                  </div>
                 </div>
-                <div class="unit">
-                  <dl>
-                    <dt>Gas</dt>
-                    <dd>CO2</dd>
-                  </dl>
+                <div class="zif--actions d-grid gap-2 d-md-flex">
+                  <!-- @todo Fix the buttons functionality (reimplement them). -->
+                  <button class="btn btn-sm btn-primary flex-fill">Save</button>
                 </div>
               </div>
-              <div class="zif--date">Date: March 12, 2005, 05:34:34</div>
-              <div class="zif--actions d-flex">
-                <button class="btn btn-sm btn-primary m-1 flex-fill">
-                  Save
-                </button>
-                <button class="btn btn-sm btn-secondary m-1">Restore</button>
-                <button class="btn btn-sm btn-outline-primary m-1">
-                  Download
-                </button>
-              </div>
-            </div>
+              <!-- /zif ends here -->
+            </template>
+            <!-- /memo ends here -->
+            <!-- history starts here -->
+            <template v-if="scenarioHistory">
+              <template
+                v-for="(item, key) in scenarioHistory.slice().reverse()"
+                :key="key"
+              >
+                <!-- zif starts here -->
+                <div class="zif scenario" :id="`saved-scenario-${key}`">
+                  <div class="zif--header">Generated ZIF with diffusivity:</div>
+                  <div class="zif--diffusivity">-14.560773849487305</div>
+                  <div class="zif--units d-grid">
+                    <div class="unit flex-grow-1">
+                      <dl>
+                        <dt>Metal</dt>
+                        <dd>Zn</dd>
+                      </dl>
+                    </div>
+                    <div class="unit">
+                      <dl>
+                        <dt>Organic linkers</dt>
+                        <dd>mLm mLm mLm</dd>
+                      </dl>
+                    </div>
+                    <div class="unit flex-grow-1">
+                      <dl>
+                        <dt>Functional groups</dt>
+                        <dd>–CHO –CHO –CHO</dd>
+                      </dl>
+                    </div>
+                    <div class="unit">
+                      <dl>
+                        <dt>Gas</dt>
+                        <dd>CO2</dd>
+                      </dl>
+                    </div>
+                  </div>
+                  <div class="zif--date">
+                    Date:
+                    <time datetime="2011-11-18T14:54:39.929Z"
+                      >March 12, 2005, 05:34:34</time
+                    >
+                  </div>
+                  <div class="zif--actions d-grid gap-2">
+                    <button class="btn btn-sm btn-primary flex-fill">
+                      Save
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary">
+                      Download
+                    </button>
+                  </div>
+                </div>
+                <!-- / zif ends here -->
+              </template>
+            </template>
+            <!-- / history ends here -->
           </div>
         </div>
       </div>
