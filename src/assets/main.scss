@@ -78,7 +78,6 @@ div.maz-main {
  */
 div.maz-main {
   color: var(--maz-text);
-
   // Make-a-ZIF App Canvas & Image
   div.maz-image--visualization {
     text-align: center;
@@ -232,37 +231,6 @@ div.maz-main {
       box-shadow: none;
       padding: 0.75em 1em;
     }
-    ul.nav-tabs {
-      --bs-nav-tabs-border-width: 1px;
-      --bs-nav-tabs-border-radius: 0;
-      --bs-nav-tabs-border-color: var(--def-black);
-      --bs-nav-tabs-link-hover-border-color: rgba(0, 0, 0, 0);
-      --bs-nav-tabs-link-active-color: var(--def-black);
-      --bs-nav-tabs-link-active-bg: var(--maz-background);
-      --bs-nav-tabs-link-active-border-color: var(--def-black) var(--def-black)
-        var(--maz-background);
-      .nav-link {
-        color: var(--maz-blue);
-        font-weight: 500;
-        &:hover,
-        &:focus {
-          --bs-nav-tabs-link-hover-border-color: var(--maz-background)
-            var(--maz-background) #000 transparent;
-        }
-        &.active {
-          box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.1);
-          color: var(--def-black);
-          font-weight: 700;
-          background-color: var(--maz-background);
-          &:hover,
-          &:focus {
-            background-color: var(--maz-background);
-          }
-        }
-      }
-    }
-    @media (prefers-color-scheme: dark) {
-    }
   }
 
   // Forms
@@ -355,7 +323,7 @@ div.maz-main {
   // Decorated headers
   h4 {
     margin-top: 1.5em;
-    font-size: 1.1em;
+    font-size: 1.25em;
     font-weight: bold;
     color: var(--maz-heading);
     &.one::before,
@@ -379,10 +347,12 @@ div.maz-main {
     font-size: 1em;
     font-weight: normal;
     margin-top: 0.75em;
+    line-height: 1.4;
   }
   h6 {
     font-size: 0.8125em;
     font-weight: normal;
+    line-height: 1.5;
   }
   // Lists
   ul {
@@ -676,5 +646,41 @@ div.maz-main {
       }
     }
   }
+}
+/* Navigation Tabs */
+div.maz-main, div.maz-introduction {
+  .border {
+    --bs-border-width: 2px;
+    &.border-accent {
+      --bs-border-color: var(--maz-accent);
+    }
+  }
+  ul.nav-tabs {
+    --bs-nav-link-font-weight: 700;
+    --bs-nav-link-color: var(--maz-nav-soft);
+    --bs-nav-link-hover-color: var(--maz-nav-bright);
+    --bs-nav-tabs-link-active-color: var(--maz-nav-bright);
+    --bs-nav-tabs-border-width: 1px;
+    --bs-nav-tabs-border-radius: 0;
+    --bs-nav-tabs-border-color: var(--maz-nav-bright);
+    --bs-nav-tabs-link-active-border-color: var(--maz-nav-bright) var(--maz-nav-bright) var(--maz-background);
+    --bs-nav-tabs-link-hover-border-color: var(--maz-nav-box-hover) var(--maz-nav-box-hover) var(--maz-nav-bright);
+    --bs-nav-tabs-link-active-bg: var(--maz-background);
 
+    .nav-link {
+      &:hover {
+        box-shadow: inset 0 20px 20px rgba(244, 244, 244, 0.4);
+        @media (prefers-color-scheme: dark) {
+          box-shadow: 0 10px 10px -5px rgba(74, 74, 74, 0.8);
+        }
+      }
+      &.active {
+        box-shadow: var(--maz-nav-box-shadow);
+        &:hover,
+        &:focus {
+          background-color: var(--maz-background);
+        }
+      }
+    }
+  }
 }

@@ -9,8 +9,9 @@
  * file's <style> imports.
  */
 import MazHeader from "./components/MazHeader.vue";
-import MazImage from "./components/MazImage.vue";
 import MazTabs from "./components/MazTabs.vue";
+// import MazImage from "./components/MazImage.vue";
+// import MazTabs from "./components/obsolete/MazTabs.vue";
 import MazTableOne from "./components/MazTableOne.vue";
 import MazTableTwo from "./components/MazTableTwo.vue";
 // Import default assets (gas, metals, linkers, functional groups):
@@ -31,8 +32,9 @@ import {
 export default {
   components: {
     MazHeader, // A very basic header.
-    MazImage, // A very basic image of a ZIF.
-    MazTabs, // Memo & History Tabs, next to the image.
+    MazTabs, // Introduction, tutorials & history.
+    // MazImage, // A very basic image of a ZIF.
+    // MazTabs, // Memo & History Tabs, next to the image.
     MazTableOne, // Allows selection of Metals, Linkers & Groups.
     MazTableTwo, // Allows selection of Gas elements.
   },
@@ -114,7 +116,7 @@ export default {
           this.resetToLocalOrDefault();
         })
         .catch((error) => {
-          // Handle any error that occurs during the fetch request:
+          // Handle any errors that occurs during the fetch request:
           // @TODO: Handle specific errors in specific ways.
           console.error("Error fetching remote data:", error);
         })
@@ -132,7 +134,7 @@ export default {
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error("Network response was not ok");
+            throw new Error("Network response was not ok!");
           }
           return response.json();
         })
@@ -141,12 +143,13 @@ export default {
             this.handlePredictionResponseData(data.diffusivity, scenarioData);
           } else {
             throw new Error(
-              "Invalid API response data or missing diffusivity key"
+              "Invalid API response data or missing diffusivity key!"
             );
           }
         })
         .catch((error) => {
-          // Handle any error that occurs during the fetch request
+          // Handle any errors that occurs during the fetch request:
+          // @TODO: Handle specific errors in specific ways.
           console.error("Error fetching data:", error);
         });
       return true;
@@ -535,7 +538,6 @@ export default {
       if (!scenario.gas) {
         return false;
       }
-      console.log(scenario);
       return true;
     },
   },
@@ -553,7 +555,19 @@ export default {
     </div>
   </div>
 
+  <div class="maz-introduction">
+    <MazTabs
+      :scenario-results="scenarioResults"
+      :scenario-history="scenarioHistory"
+      @do:delete-scenario="deleteScenario"
+      @do:download-scenario.once="exportScenario"
+      @do:load-scenario="loadScenario"
+      @do:save-scenario="saveScenario"
+    />
+  </div>
+
   <div class="maz-main">
+    <!--
     <div class="maz-generator mt-4 gx-2 container-fluid">
       <div class="row">
         <MazImage />
@@ -567,6 +581,7 @@ export default {
         />
       </div>
     </div>
+    -->
     <MazTableOne
       :selected-scenario="selectedScenario"
       :list-of-metals="listOfMetals"

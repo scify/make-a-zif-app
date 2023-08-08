@@ -101,7 +101,7 @@ export default {
 
 <template>
   <!-- v-if starts here -->
-  <div class="maz-table" v-if="selectedScenario && listOfGases">
+  <div class="maz-table pb-2" v-if="selectedScenario && listOfGases">
     <h4 class="two">Add a gas element</h4>
     <h5>Click on the Gas column to select a fume.</h5>
     <h6>

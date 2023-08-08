@@ -1,13 +1,6 @@
 <script>
-/**
- * Experimental use of p5.js for rendering output on a canvas.
- */
-import UnitNanometre from "./units/UnitNanometre.vue";
-
 export default {
-  components: {
-    UnitNanometre,
-  },
+  components: {},
   props: {
     ["scenarioResults"]: { required: true },
     ["scenarioHistory"]: { required: false, default: false },
@@ -35,12 +28,12 @@ export default {
           /[`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi,
           ""
         );
-        // Enforcing a 20 character limit as desktop view has limited width:
+        // Enforcing a 20-character limit as desktop view has limited width:
         if (scenarioName.length > 20) {
           scenarioName = scenarioName.substring(0, 20);
         }
       } else {
-        // Since we are trying to set a "Scenario n" name, let's at least try to
+        // Since we are trying to set a "Scenario n" name, lets at least try to
         // set a meaningful number. For that, we first have to count the amount
         // of scenarios that the user has already saved.
         if (this.scenarioHistory) {
@@ -59,33 +52,46 @@ export default {
 </script>
 
 <template>
-  <div class="maz-tabs col mt-3 mb-1 mt-md-0 mb-md-0" id="mazResults">
-    <!-- Tabs starts here -->
-    <div class="section-tabs mb-3">
-      <ul id="mazTabs" class="nav nav-tabs ms-0" role="tablist">
+  <div class="introduction mt-4 mb-1 pt-2 pb-1">
+    <div class="maz-tabs" role="navigation">
+      <ul id="mazIntroTabs" class="nav nav-tabs" role="tablist">
         <li class="nav-item" role="presentation">
           <button
-            class="nav-link active pt-3 ps-5 pe-5"
-            id="mazMemoTab"
+            class="nav-link active pt-3 px-md-5 px-4"
+            id="mazIntroTab"
             data-bs-toggle="tab"
-            data-bs-target="#mazMemo"
+            data-bs-target="#mazIntroPane"
             type="button"
             role="tab"
-            aria-controls="mazMemo"
+            aria-controls="mazIntroPane"
             aria-selected="true"
           >
-            Memo
+            Intro
           </button>
         </li>
         <li class="nav-item" role="presentation">
           <button
-            class="nav-link pt-3 ps-5 pe-5"
-            id="mazHistoryTab"
+            class="nav-link pt-3 px-md-4 px-4"
+            id="mazExamplesTab"
             data-bs-toggle="tab"
-            data-bs-target="#mazHistory"
+            data-bs-target="#mazExamplesPane"
             type="button"
             role="tab"
-            aria-controls="mazHistory"
+            aria-controls="mazExamplesPane"
+            aria-selected="false"
+          >
+            Examples
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link pt-3 px-md-4 px-4"
+            id="mazHistoryTab"
+            data-bs-toggle="tab"
+            data-bs-target="#mazHistoryPane"
+            type="button"
+            role="tab"
+            aria-controls="mazHistoryPane"
             aria-selected="false"
           >
             History
@@ -93,138 +99,139 @@ export default {
         </li>
       </ul>
     </div>
-    <!-- Tabs ends here -->
-    <!-- Content hidden under tabs starts here -->
-    <div class="tab-content" id="mazTabContent">
-      <!-- Memo tab starts here -->
+
+    <div class="tab-content maz-tab-content" id="mazTabContent">
       <div
+        id="mazIntroPane"
         class="tab-pane fade show active"
-        id="mazMemo"
         role="tabpanel"
-        aria-labelledby="mazMemoTab"
+        aria-labelledby="mazIntroTab"
+        tabindex="0"
       >
-        <!-- mockup Make-a-ΖΙF default δεδομένα -->
-        <div class="maz-results-table" id="mazResultsTable">
-          <table class="table">
-            <thead>
-              <tr>
-                <th v-if="scenarioResults.name" scope="col">
-                  {{ scenarioResults.name }}
-                </th>
-                <th v-else>{{ scenarioResults.formattedDate }}</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Diameter</th>
-                <td>
-                  {{ scenarioResults.diameter }}
-                  <UnitNanometre :abbr="true" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Permeability</th>
-                <td>{{ scenarioResults.permeability }}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div
-            id="mazDiffusion"
-            v-if="scenarioResults.showDiff"
-            class="maz-diffusion text-center p-3 mb-0"
-          >
-            Diffusion: <strong>{{ scenarioResults.diffusion }}</strong>
-          </div>
-        </div>
-        <div v-if="scenarioResults.showSave" class="maz-save">
-          <p class="text-sm mb-2">
-            Save the scenario & its results on your history
-          </p>
-          <form @submit.prevent="saveScenario()">
-            <input
-              type="text"
-              class="form-control mb-2"
-              maxlength="20"
-              v-model="inputScenarioName"
-              placeholder="Scenario name"
-              aria-label="Scenario name"
-            />
-            <input
-              type="hidden"
-              name="scenario"
-              v-bind:value="scenarioResults"
-            />
-            <button class="btn primary" type="submit">Save scenario</button>
-          </form>
+        <div class="container-fluid mt-5 p-3 border border-accent">
+          1 Choose from a displayed pop-up list the material you want. 2 Choose
+          from a displayed pop-up list the fume you want. 3 Choose from a
+          displayed pop-up list the material you want. 4 Choose from a displayed
+          pop-up list the fume you want. In the History section you can always
+          see see the metrics of the last inputs you run. In the Historicity
+          section listed the saved scenarios which you can export in a excel
+          file or restore one of the scenarios you’ve saved.
         </div>
       </div>
-      <!-- Memo tab ends here -->
-      <!-- History tab starts here -->
       <div
-        class="tab-pane fade maz-history"
-        id="mazHistory"
+        id="mazExamplesPane"
+        class="tab-pane fade"
+        role="tabpanel"
+        aria-labelledby="mazExamplesTab"
+        tabindex="0"
+      >
+        <div class="container-fluid mt-5 p-3">
+          Replacing the units (metal, organic linker and functional group) in
+          ZIFs, seems to have small impact on the structure. But don’t be
+          fooled! The impact on diffusivities of various gases can be great.
+          Keep in mind that the larger the gas is, the larger the modification
+          impact will be on its diffusivity. See some examples below to develop
+          an intuition before you start playing with/using make-a-ZIF.
+        </div>
+      </div>
+      <div
+        id="mazHistoryPane"
+        class="tab-pane fade"
         role="tabpanel"
         aria-labelledby="mazHistoryTab"
+        tabindex="0"
       >
-        <div class="text-center message" v-if="!scenarioHistory">
-          No saved execution.
-        </div>
-        <!-- Scenarios starts here -->
-        <div v-if="scenarioHistory" class="maz-history-scroll">
-          <!-- Scenario loop starts here -->
-          <template
-            v-for="(item, key) in scenarioHistory.slice().reverse()"
-            :key="key"
-          >
-            <div class="maz-scenario" :id="'saved-scenario-' + key">
-              <div
-                class="d-flex align-items-center justify-content-between data"
-              >
-                <div class="pt-2 pb-2">
-                  <div class="date">{{ item.formattedDate }}</div>
-                  <div class="text">
-                    Executed <strong>{{ item.name }}</strong> with
-                    <strong>Diffusion: {{ item.diffusion }}</strong>
-                  </div>
+        <div class="container-fluid mt-5 p-0 log">
+          <div class="zif-history d-flex flex-wrap">
+            <div class="zif">
+              <div class="zif--header">Generated ZIF with diffusivity:</div>
+              <div class="zif--diffusivity">-14.560773849487305</div>
+              <div class="zif--units d-flex flex-wrap">
+                <div class="unit flex-grow-1">
+                  <dl>
+                    <dt>Metal</dt>
+                    <dd>Zn</dd>
+                  </dl>
                 </div>
-                <div class="icon">
-                  <button
-                    class="dot"
-                    type="button"
-                    title="Remove scenario"
-                    aria-label="Remove scenario"
-                    aria-hidden="false"
-                    @click="$emit('do:deleteScenario', item.date)"
-                  >
-                    <span class="dash"></span>
-                  </button>
+                <div class="unit">
+                  <dl>
+                    <dt>Organic linkers</dt>
+                    <dd>mLm mLm mLm</dd>
+                  </dl>
+                </div>
+                <div class="unit flex-grow-1">
+                  <dl>
+                    <dt>Functional groups</dt>
+                    <dd>–CHO –CHO –CHO</dd>
+                  </dl>
+                </div>
+                <div class="unit">
+                  <dl>
+                    <dt>Gas</dt>
+                    <dd>CO2</dd>
+                  </dl>
                 </div>
               </div>
-              <div class="d-flex gap-3">
-                <button
-                  class="btn primary"
-                  type="button"
-                  @click="$emit('do:downloadScenario', item.date)"
-                >
-                  Download data
+              <div class="zif--date">Date: March 12, 2005, 05:34:34</div>
+              <div class="zif--actions d-flex">
+                <button class="btn btn-sm btn-primary m-1 flex-fill">
+                  Save
                 </button>
-                <button
-                  class="btn secondary"
-                  type="button"
-                  @click="$emit('do:loadScenario', item.date)"
-                >
-                  Restore scenario
+                <button class="btn btn-sm btn-secondary m-1">Restore</button>
+                <button class="btn btn-sm btn-outline-primary m-1">
+                  Download
                 </button>
               </div>
             </div>
-          </template>
-          <!-- Scenario loop ends here -->
+          </div>
         </div>
-        <!-- Scenarios ends here -->
       </div>
-      <!-- History tab ends here -->
     </div>
-    <!-- Content hidden under tabs ends here -->
   </div>
 </template>
+<style lang="scss">
+.zif {
+  padding: 5px;
+  max-width: 250px;
+  font-size: 1em;
+  overflow: hidden;
+  border: 2px solid #000;
+  &--header {
+    text-align: center;
+    opacity: 0.9;
+  }
+  &--diffusivity {
+    font-weight: 700;
+    max-width: 250px;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    font-size: 2em;
+  }
+  &--units {
+    font-size: 1em;
+    .unit {
+      padding: 0.25em;
+      dl,
+      dd,
+      dt {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+  &--date {
+    text-align: center;
+    opacity: 0.8;
+    font-size: 0.8em;
+  }
+  &--actions {
+    button {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+</style>

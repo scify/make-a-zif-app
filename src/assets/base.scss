@@ -70,6 +70,11 @@ Inherited variables and values from Make-a-ZIF's website:
   --maz-blue: var(--def-blue-light); /* primary-blue */
   --maz-blue-hover: var(--def-blue-light-hover);
   --maz-blue-text: var(--def-blue-light-text);
+  --maz-nav-bright: var(--def-black);
+  --maz-nav-soft: #6a758a; // safe for text.
+  --maz-nav-box-hover: #e7e9ee;
+  --maz-nav-shadow-rgb: 50, 50, 50;
+  --maz-nav-box-shadow: 0px -4px 3px rgba(var(--maz-nav-shadow-rgb), 0.1);
   --maz-table-header: var(--def-table-header-light); /* bg-table */
   --maz-table-header-text: var(--def-blue-light);
   --maz-table-divider-hard: var(--def-blue-light);

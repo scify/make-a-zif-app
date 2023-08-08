@@ -15,6 +15,11 @@
     --maz-blue-hover: var(--def-blue-dark-hover);
     --maz-blue-text: var(--def-blue-dark-text);
     --maz-table-header: var(--def-table-header-dark);
+    --maz-nav-bright: var(--def-white);
+    --maz-nav-soft: var(--def-table-header-dark);
+    --maz-nav-box-hover: rgba(0, 0, 0, 0);
+    --maz-nav-shadow-rgb: 200, 200, 200;
+    --maz-nav-box-shadow: 0px -10px 10px -4px rgba(var(--maz-nav-shadow-rgb), 0.2);
     --maz-table-header-text: var(--def-black);
     --maz-table-divider-hard: var(--def-table-header-dark);
     --maz-table-divider-soft: var(--def-text-faded-dark);
