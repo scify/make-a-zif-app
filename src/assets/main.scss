@@ -649,6 +649,55 @@ div.maz-main {
 }
 /* Navigation Tabs */
 div.maz-main, div.maz-introduction {
+  --zif-width: 250px;
+  --zif-transition: all 0.8s ease-in-out;
+  div.zif {
+    background-color: rgba(var(--maz-accent-soft-rgb), 0.2);
+    transition: var(--zif-transition);
+    color: var(--maz-text);
+    padding: 5px;
+    max-width: var(--zif-width);
+    font-size: 1em;
+    overflow: hidden;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--maz-btn-bg);
+    &--diffusivity {
+      color: var(--maz-text-bright);
+      transition: var(--zif-transition);
+      font-weight: 700;
+      max-width: var(--zif-width);
+      overflow: hidden;
+      text-align: center;
+      text-overflow: ellipsis;
+      font-size: 2em;
+    }
+    &--actions {
+      button {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        &.btn-primary {
+          --bs-btn-color: var(--maz-blue-text);
+          --bs-btn-bg: var(--maz-btn-bg);
+          --bs-btn-border-color: var(--maz-btn-bg);
+          --bs-btn-hover-bg: var(--maz-btn-hover-bg);
+          --bs-btn-hover-border-color: var(--maz-btn-hover-bg);
+        }
+      }
+    }
+    dt {
+      font-weight: 600;
+    }
+    &.new {
+      background-color: rgba(var(--maz-accent-rgb), 0.1);
+      border-color: var(--maz-accent-darker);
+      .zif--diffusivity {
+        color: var(--maz-accent-darker);
+      }
+    }
+  }
   .border {
     --bs-border-width: 2px;
     &.border-accent {

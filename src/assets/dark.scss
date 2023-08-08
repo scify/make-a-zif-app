@@ -8,9 +8,14 @@
     --maz-backdrop: var(--def-black); /* bg */
     --maz-heading: var(--def-white);
     --maz-accent: var(--def-accent); /* light-green */
+    --maz-accent-rgb: var(--def-accent-rgb);
     --maz-accent-darker: var(--def-accent-darker);
     --maz-accent-soft: var(--def-accent-soft-dark);
+    --maz-accent-soft-rgb: 3, 3, 4;
     --maz-accent-soft-text: var(--def-accent-soft-dark-text);
+    --maz-btn-bg: #4a515b;
+    --maz-btn-hover-bg: #555b67;
+    --maz-btn-color: #fff;
     --maz-blue: var(--def-blue-dark);
     --maz-blue-hover: var(--def-blue-dark-hover);
     --maz-blue-text: var(--def-blue-dark-text);

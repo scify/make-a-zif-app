@@ -85,13 +85,13 @@ export default {
         setTimeout(function () {
           // @TODO Fix the new class (aka implement it).
           document.querySelector("#generatedZif").classList.add("new");
-        }, 500);
+        }, 1000);
         setTimeout(function () {
           document.querySelector("#generatedZif").classList.remove("new");
           document
             .querySelector("#mazExecuteButton")
             .classList.remove("disabled");
-        }, 3000);
+        }, 3500);
       },
     },
   },
@@ -326,22 +326,9 @@ export default {
 </template>
 <style lang="scss">
 .zif {
-  padding: 5px;
-  max-width: 250px;
-  font-size: 1em;
-  overflow: hidden;
-  border: 2px solid #000;
   &--header {
     text-align: center;
     opacity: 0.9;
-  }
-  &--diffusivity {
-    font-weight: 700;
-    max-width: 250px;
-    overflow: hidden;
-    text-align: center;
-    text-overflow: ellipsis;
-    font-size: 2em;
   }
   &--units {
     font-size: 0.92em;
@@ -359,14 +346,6 @@ export default {
     text-align: center;
     opacity: 0.8;
     font-size: 0.8em;
-  }
-  &--actions {
-    button {
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
   }
 }
 </style>
