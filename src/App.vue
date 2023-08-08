@@ -475,9 +475,11 @@ export default {
         (i) => i.date === scenarioDate
       );
       if (scenario) {
+        const timestamp = new Date(scenario.date).toISOString();
+        const cleanTimestamp = timestamp.replace(/[^A-Za-z0-9]/g, "");
         const index = this.scenarioHistory.indexOf(scenario);
         if (index > -1) {
-          this.downloadJsonData(scenario, `make-a-zif-${scenarioDate}`);
+          this.downloadJsonData(scenario, `make-a-zif-${cleanTimestamp}`);
           return true;
         }
       }

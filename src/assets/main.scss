@@ -649,21 +649,51 @@ div.maz-main {
 }
 /* Navigation Tabs */
 div.maz-main, div.maz-introduction {
-  --zif-width: 250px;
-  --zif-transition: all 0.8s ease-in-out;
+  --zif-width: 100%;
+  @media (min-width: 576px) {
+    --zif-width: 250px;
+  }
+  --zif-transition:
+    border 1s ease-in-out,
+    background-color 0.8s ease-in-out,
+    color 0.8s ease-in-out;
+  div.zif.memo {
+    .zif--header {
+      color: var(--maz-text-bright);
+      background-color: rgba(var(--maz-accent-rgb), 0.4);
+    }
+    .zif--diffusivity {
+      opacity: 1;
+      color: var(--maz-diffusion);
+    }
+  }
   div.zif {
     background-color: rgba(var(--maz-accent-soft-rgb), 0.2);
     transition: var(--zif-transition);
     color: var(--maz-text);
-    padding: 5px;
-    max-width: var(--zif-width);
+    margin: 0;
+    padding: 0;
+    width: var(--zif-width);
     font-size: 1em;
     overflow: hidden;
     border-width: 2px;
     border-style: solid;
     border-color: var(--maz-btn-bg);
+    &--header {
+      padding: 0.2em;
+      color: var(--maz-accent-soft-text);
+      background-color: var(--maz-accent-soft);
+      text-align: center;
+      opacity: 0.9;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 500;
+    }
     &--diffusivity {
-      color: var(--maz-text-bright);
+      padding: 0 0.2em;
+      color: var(--maz-text);
+      opacity: 0.7;
       transition: var(--zif-transition);
       font-weight: 700;
       max-width: var(--zif-width);
@@ -672,12 +702,9 @@ div.maz-main, div.maz-introduction {
       text-overflow: ellipsis;
       font-size: 2em;
     }
-    &--header {
-      text-align: center;
-      opacity: 0.9;
-    }
     &--units {
       font-size: 0.92em;
+      padding: 0.25em;
       .unit {
         padding: 0.24em;
         dl,
@@ -694,6 +721,7 @@ div.maz-main, div.maz-introduction {
       font-size: 0.8em;
     }
     &--actions {
+      padding: 0.33em 0.5em 0.44em;
       button {
         display: block;
         white-space: nowrap;
@@ -702,6 +730,12 @@ div.maz-main, div.maz-introduction {
         &.btn-primary {
           --bs-btn-color: var(--maz-blue-text);
           --bs-btn-bg: var(--maz-btn-bg);
+          --bs-btn-border-color: var(--maz-btn-bg);
+          --bs-btn-hover-bg: var(--maz-btn-hover-bg);
+          --bs-btn-hover-border-color: var(--maz-btn-hover-bg);
+        }
+        &.btn-outline-primary {
+          --bs-btn-color: var(--maz-text-bright);
           --bs-btn-border-color: var(--maz-btn-bg);
           --bs-btn-hover-bg: var(--maz-btn-hover-bg);
           --bs-btn-hover-border-color: var(--maz-btn-hover-bg);

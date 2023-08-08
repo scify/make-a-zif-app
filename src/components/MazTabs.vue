@@ -189,7 +189,7 @@ export default {
         tabindex="0"
       >
         <div class="container-fluid mt-5 p-0 log">
-          <div class="zif-history d-flex flex-wrap">
+          <div class="zif-history d-flex flex-wrap gap-lg-5 gap-4">
             <!-- memo starts here -->
             <template
               v-if="
@@ -199,7 +199,7 @@ export default {
             >
               <!-- zif starts here -->
               <div class="zif memo" id="generatedZif">
-                <div class="zif--header">Generated ZIF with diffusivity:</div>
+                <div class="zif--header">Generated ZIF diffusivity:</div>
                 <div class="zif--diffusivity">
                   {{ scenarioResults.diffusion }}
                 </div>
@@ -249,20 +249,19 @@ export default {
                 </div>
                 <div class="zif--date">
                   Date:
-                  <!-- @todo Fix the datetime format for machine-readable dates. -->
                   <time v-bind:datetime="scenarioResults.date">{{
                     scenarioResults.formattedDate
                   }}</time>
                 </div>
-
                 <div class="zif--actions d-grid gap-2 d-md-flex">
-                  <!-- @todo Fix the buttons functionality (reimplement them). -->
                   <button
                     v-if="scenarioResults.showSave"
+                    @click="this.saveScenario()"
                     class="btn btn-sm btn-primary flex-fill"
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
                     title="Save the scenario & its results to your history"
+                    type="button"
                   >
                     Save
                   </button>
@@ -271,54 +270,75 @@ export default {
               <!-- /zif ends here -->
             </template>
             <!-- /memo ends here -->
+
             <!-- history starts here -->
             <template v-if="scenarioHistory">
               <template
-                v-for="(item, key) in scenarioHistory.slice().reverse()"
+                v-for="(scenario, key) in scenarioHistory.slice().reverse()"
                 :key="key"
               >
                 <!-- zif starts here -->
                 <div class="zif scenario" :id="`saved-scenario-${key}`">
-                  <div class="zif--header">Generated ZIF with diffusivity:</div>
-                  <div class="zif--diffusivity">-14.560773849487305</div>
-                  <div class="zif--units d-grid">
+                  <div class="zif--header">
+                    ZIF {{ scenario.name }} diffusivity:
+                  </div>
+                  <div class="zif--diffusivity">{{ scenario.diffusion }}</div>
+                  <div class="zif--units d-grid d-flex flex-wrap gap-0">
                     <div class="unit flex-grow-1">
                       <dl>
                         <dt>Metal</dt>
-                        <dd>Zn</dd>
+                        <dd class="text-capitalize">
+                          {{ this.parseMetal(scenario.scenario.metal) }}
+                        </dd>
                       </dl>
                     </div>
                     <div class="unit">
                       <dl>
                         <dt>Organic linkers</dt>
-                        <dd>mLm mLm mLm</dd>
+                        <dd>
+                          {{ this.parseLinker(scenario.scenario.linker1) }}
+                          {{ this.parseLinker(scenario.scenario.linker2) }}
+                          {{ this.parseLinker(scenario.scenario.linker3) }}
+                        </dd>
                       </dl>
                     </div>
                     <div class="unit flex-grow-1">
                       <dl>
                         <dt>Functional groups</dt>
-                        <dd>–CHO –CHO –CHO</dd>
+                        <dd>
+                          {{ this.parseGroup(scenario.scenario.funcGroup1) }}
+                          {{ this.parseGroup(scenario.scenario.funcGroup2) }}
+                          {{ this.parseGroup(scenario.scenario.funcGroup3) }}
+                        </dd>
                       </dl>
                     </div>
                     <div class="unit">
                       <dl>
                         <dt>Gas</dt>
-                        <dd>CO2</dd>
+                        <dd class="text-capitalize">
+                          {{ this.parseGas(scenario.scenario.gas) }}
+                        </dd>
                       </dl>
                     </div>
                   </div>
                   <div class="zif--date">
                     Date:
-                    <time datetime="2011-11-18T14:54:39.929Z"
-                      >March 12, 2005, 05:34:34</time
-                    >
+                    <time v-bind:datetime="scenario.date">{{
+                      scenario.formattedDate
+                    }}</time>
                   </div>
-                  <div class="zif--actions d-grid gap-2">
+                  <div class="zif--actions d-grid gap-2 d-md-flex">
                     <button class="btn btn-sm btn-primary flex-fill">
-                      Save
+                      Restore
+                    </button>
+                    <button
+                      class="btn btn-sm btn-primary"
+                      @click="$emit('do:downloadScenario', scenario.date)"
+                    >
+                      Download
                     </button>
                     <button class="btn btn-sm btn-outline-primary">
-                      Download
+                      Delete
                     </button>
                   </div>
                 </div>
