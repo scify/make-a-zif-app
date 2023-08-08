@@ -453,7 +453,6 @@ export default {
       }
       this.scenarioResults.name = scenarioName;
       this.scenarioResults.showSave = false;
-      // @TODO: Save scenario confirmation (via a bootstrap component).
       // Pushing scenario to history:
       console.log("App pushing scenario to history!");
       if (!this.scenarioHistory) {
@@ -470,7 +469,6 @@ export default {
      * @param {int} scenarioDate - The saved scenario's date (epoch time).
      */
     exportScenario(scenarioDate) {
-      console.log(`Scenario download for ${scenarioDate}`)
       // Find scenario on history based on its date...
       const scenario = this.scenarioHistory.find(
         (i) => i.date === scenarioDate

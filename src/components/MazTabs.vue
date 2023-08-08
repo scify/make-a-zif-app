@@ -64,16 +64,28 @@ export default {
           scenarioName = scenarioName.substring(0, 20);
         }
       } else {
-        // Since we are trying to set a "Scenario n" name, lets at least try to
-        // set a meaningful number. For that, we first have to count the amount
-        // of scenarios that the user has already saved.
+        // As the inputScenarioName no longer exists (probably) we have to
+        // create a fancy name by ourselves like "Scenario n". For that, we
+        // first have to count the amount of scenarios that the user has already
+        // saved.
         if (this.scenarioHistory) {
           if (this.scenarioHistory.length) {
             this.countSavedScenarios = this.scenarioHistory.length;
           }
         }
         this.countSavedScenarios++;
-        scenarioName = `${scenarioName} ${this.countSavedScenarios}`;
+        let tempScenarioName = `${scenarioName} ${this.countSavedScenarios}`;
+        // But, yes, that might be an issue if user has only a "Scenario 2"
+        // saved & we are trying to save a 2nd one, which would have the
+        // exact same name. So, let's just take the latest scenario...
+        const existingScenario = this.scenarioHistory.find(
+          (i) => i.name === tempScenarioName
+        );
+        if (existingScenario) {
+          scenarioName = `${scenarioName} ${this.countSavedScenarios + 1}`;
+        } else {
+          scenarioName = tempScenarioName;
+        }
       }
       console.log("Trying to save Scenario with name: " + scenarioName);
       this.$emit("do:saveScenario", scenarioName);
@@ -328,7 +340,10 @@ export default {
                     }}</time>
                   </div>
                   <div class="zif--actions d-grid gap-2 d-md-flex">
-                    <button class="btn btn-sm btn-primary flex-fill">
+                    <button
+                      class="btn btn-sm btn-primary flex-fill"
+                      @click="$emit('do:loadScenario', scenario.date)"
+                    >
                       Restore
                     </button>
                     <button
@@ -337,7 +352,10 @@ export default {
                     >
                       Download
                     </button>
-                    <button class="btn btn-sm btn-outline-primary">
+                    <button
+                      class="btn btn-sm btn-outline-primary"
+                      @click="$emit('do:deleteScenario', scenario.date)"
+                    >
                       Delete
                     </button>
                   </div>
