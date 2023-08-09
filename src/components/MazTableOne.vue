@@ -385,13 +385,13 @@ export default {
           </div>
           <div class="modal-body">
             <form @submit.prevent="emitLinkers()">
-              <div class="container px-0 tablelike">
-                <div class="row gx-1 headerlike">
+              <div class="container px-0 table-like">
+                <div class="row gx-1 header-like">
                   <div class="col text-center">Linker 1</div>
                   <div class="col text-center">Linker 2</div>
                   <div class="col text-center">Linker 3</div>
                 </div>
-                <div class="row rawdata px-0 gx-0">
+                <div class="row raw-data px-0 gx-0">
                   <div class="col col1 text-center">
                     <span
                       v-bind:title="inputLinker1.mass.name"
@@ -552,13 +552,13 @@ export default {
           </div>
           <div class="modal-body">
             <form @submit.prevent="emitGroups()">
-              <div class="container px-0 tablelike">
-                <div class="row gx-1 headerlike">
+              <div class="container px-0 table-like">
+                <div class="row gx-1 header-like">
                   <div class="col text-center">Group 1</div>
                   <div class="col text-center">Group 2</div>
                   <div class="col text-center">Group 3</div>
                 </div>
-                <div class="row rawdata px-0 gx-0">
+                <div class="row raw-data px-0 gx-0">
                   <div class="col col1 text-center">
                     <span v-bind:title="inputFuncGroup1.mass.name">
                       {{ inputFuncGroup1.mass.value }} <UnitDalton />
@@ -603,8 +603,8 @@ export default {
                   <div class="col col1">
                     <ul>
                       <li
-                        v-for="(g1, gindex1) in listOfGroups"
-                        :key="gindex1"
+                        v-for="(g1, gIndex1) in listOfGroups"
+                        :key="gIndex1"
                         v-bind:title="g1.title"
                       >
                         <input
@@ -626,8 +626,8 @@ export default {
                   <div class="col col2">
                     <ul>
                       <li
-                        v-for="(g2, gindex2) in listOfGroups"
-                        :key="gindex2"
+                        v-for="(g2, gIndex2) in listOfGroups"
+                        :key="gIndex2"
                         v-bind:title="g2.title"
                       >
                         <input
@@ -649,8 +649,8 @@ export default {
                   <div class="col col3">
                     <ul>
                       <li
-                        v-for="(g3, gindex3) in listOfGroups"
-                        :key="gindex3"
+                        v-for="(g3, gIndex3) in listOfGroups"
+                        :key="gIndex3"
                         v-bind:title="g3.title"
                       >
                         <input

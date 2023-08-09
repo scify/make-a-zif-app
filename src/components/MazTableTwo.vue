@@ -94,14 +94,14 @@ export default {
       Keep in mind that the larger the gas is, the larger the modification
       impact will be on its diffusivity.
     </h6>
-    <table class="table-multi limitwidth">
+    <table class="table-multi limit-width">
       <colgroup class="header"></colgroup>
       <colgroup class="gas"></colgroup>
       <thead>
         <tr class="modal-row">
           <th
             scope="col"
-            class="hidden limitwidth"
+            class="hidden limit-width"
             aria-label="Properties"
             role="columnheader"
           >

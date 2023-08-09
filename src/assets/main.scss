@@ -467,7 +467,7 @@ div.maz-main {
   table {
     margin-top: 1em;
     width: 100%;
-    &.limitwidth {
+    &.limit-width {
       max-width: 100%;
       tbody th {
         width: 45%;
@@ -535,9 +535,9 @@ div.maz-main {
   }
 
   // Table-like Bootstrap Containers
-  .container.tablelike {
+  .container.table-like {
     font-size: 1em;
-    .row.headerlike .col {
+    .row.header-like .col {
       color: var(--maz-table-header-text);
       background-color: var(--maz-table-header);
       box-shadow: 0 1px 0 0 var(--def-black);
@@ -545,7 +545,7 @@ div.maz-main {
       font-weight: 700;
       margin-bottom: 0.25em;
     }
-    .row.rawdata .col {
+    .row.raw-data .col {
       line-height: 1em;
       font-size: 1.4em;
       font-weight: 700;
@@ -618,7 +618,7 @@ div.maz-main {
     div.maz-execution button {
       width: auto;
     }
-    table.limitwidth {
+    table.limit-width {
       max-width: 50%;
     }
     div.maz-table table {
@@ -626,8 +626,8 @@ div.maz-main {
     }
   }
   @media (min-width: 576px) {
-    .container.tablelike {
-      .row.headerlike .col {
+    .container.table-like {
+      .row.header-like .col {
         padding: 0.5em 2em;
       }
       ul li {
