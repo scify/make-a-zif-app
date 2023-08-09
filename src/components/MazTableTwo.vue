@@ -40,6 +40,9 @@ export default {
     onMouseLeave(columnGroup) {
       this.hoverColumns[columnGroup] = false;
     },
+    clickGasRow(gas) {
+      this.inputGas = gas;
+    },
     onGasModalHide(e) {
       // Modal hiding is intercepted to enforce a Gas selection by the user,
       // even though the app was initially designed to allow null gas input.
@@ -205,7 +208,7 @@ export default {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr @click="clickGasRow(false)">
                     <td>&#8212;</td>
                     <th scope="row" class="text-start">
                       <input
@@ -213,7 +216,7 @@ export default {
                         type="radio"
                         name="gas"
                         value=""
-                        id="gasfalse"
+                        id="gasFalse"
                         checked="checked"
                         v-model="inputGas"
                       />
@@ -222,10 +225,10 @@ export default {
                         type="radio"
                         name="gas"
                         value=""
-                        id="gasfalse"
+                        id="gasFalse"
                         v-model="inputGas"
                       />
-                      <label class="element" for="gasfalse">None</label>
+                      <label class="element" for="gasFalse">None</label>
                     </th>
                     <td class="text-center">&#8212;</td>
                     <td class="text-center">&#8212;</td>
@@ -234,6 +237,7 @@ export default {
                     v-for="(gas, index) in listOfGases"
                     :key="index"
                     v-bind:title="gas.title"
+                    @click="clickGasRow(gas)"
                   >
                     <td>{{ index + 1 }}</td>
                     <th scope="row" class="text-start">

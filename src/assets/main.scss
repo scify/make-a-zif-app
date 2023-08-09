@@ -447,6 +447,7 @@ div.maz-main {
   span.col-title--arrow {
     display: block;
     font-weight: bold;
+    color: var(--maz-table-header-text);
   }
   span.col-title--arrow::after {
     content: "";
@@ -457,6 +458,7 @@ div.maz-main {
     display: block;
     float: right;
     font-size: 0.7em;
+    color: var(--maz-table-header-text);
     @media (min-width: 560px) {
       content: "▶";
       padding: 4px 0 0 4px;

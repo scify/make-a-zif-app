@@ -54,6 +54,9 @@ export default {
     onMouseLeave(columnGroup) {
       this.hoverColumns[columnGroup] = false;
     },
+    clickMetalRow(metal) {
+      this.inputMetal = metal;
+    },
     /* Functional emitting */
     emitMetal() {
       this.$emit("update:selectedMetal", this.inputMetal);
@@ -314,6 +317,7 @@ export default {
                     v-for="(metal, index) in listOfMetals"
                     :key="index"
                     v-bind:title="metal.title"
+                    @click="clickMetalRow(metal)"
                   >
                     <td>{{ index + 1 }}</td>
                     <th scope="row" class="text-start">
