@@ -41,26 +41,10 @@ export default {
       this.hoverColumns[columnGroup] = false;
     },
     onGasModalHide(e) {
-      // Gas is the only unit that is not pre-defined on the ZIF and therefore
-      // "none" is selected by default. Unfortunately, "none" is not accepted on
-      // the back-end and therefore the user has to be forced to make a valid
-      // choice before "Execution". To enforce this rule, the Gas modal is shown
-      // on "Execution" if a Gas was not selected. But the user can still select
-      // "none" as a Gas or simply dismiss the modal. This is an UX issue: As we
-      // don't want to alter the behaviour of the other modals (on which "none"
-      // is not an option) at this stage of the app's development, we are
-      // preventing the default hide.bs.modal behavior of the Gas modal to
-      // decide its fate (ideally, all "X"s should either be removed or used to
-      // submit the data instead of just dismissing the modals). As we are
-      // preventing a click, let's find out which button triggered the hiding
-      // and if it was the addGasButton, let's emit the event as usual to update
-      // the selectedScenario:
-      if (e.explicitOriginalTarget.id === "addGasButton") {
-        this.emitGas();
-      }
-      // If the selectedScenario's gas is still false or not set, then the Gas
-      // modal can't really be dismissed:
-      if (this.selectedScenario.gas === false || this.selectedScenario === "") {
+      // Modal hiding is intercepted to enforce a Gas selection by the user,
+      // even though the app was initially designed to allow null gas input.
+      // As a default gas can't be proposed, we force the user to decide...
+      if (this.inputGas === false || this.inputGas === "") {
         e.preventDefault();
         document
           .getElementById("gasModal")
@@ -74,18 +58,20 @@ export default {
     },
     // Functional emitting.
     emitGas() {
-      console.log("T2 emitted Gas update: " + this.inputGas);
+      if (this.inputGas === "") {
+        this.inputGas = false;
+      }
+      console.log("T2 emitted Gas update: ", this.inputGas);
       this.$emit("update:selectedGas", this.inputGas);
     },
   },
   watch: {
     inputGas() {
-      console.log(this.inputGas);
       if (this.inputGas === "" || this.inputGas === false) {
         this.gasModalDescription = "Select a Gas and click the Add Gas button";
       } else {
         this.gasModalDescription =
-          "Confirm your selection by clicking the Add Gas button";
+          "Confirm selection by clicking the Add Gas button";
       }
       // Partially resets modal to default state if a gas is selected.
       const gasModal = document.getElementById("gasModal");
@@ -201,6 +187,7 @@ export default {
             </div>
             <button
               type="button"
+              id="gasModalXButton"
               class="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
@@ -272,7 +259,7 @@ export default {
                     </td>
                     <td class="text-center">
                       {{ gas.mass.value
-                      }}<span class="unit inline shrinked">{{
+                      }}<span class="unit inline shrunk">{{
                         gas.mass.unit.symbol
                       }}</span>
                     </td>
