@@ -651,24 +651,40 @@ div.maz-main {
 div.maz-main, div.maz-introduction {
 
   --zif-transition:
-    border 1s ease-in-out,
+    animation 2s ease-out,
+    border 1.2s ease-in-out,
+    opacity 0.4s ease-in-out,
+    color 0.8s ease-in-out,
     background-color 0.8s ease-in-out,
     box-shadow 0.8s ease-in-out,
-    color 0.8s ease-in-out,
     transform 0.5s ease-in-out;
 
   .zif-history {
-    transition: all .2s ease-in-out;
-    .col .zif .zif--units {
+    transition: height .2s ease-in-out;
+    .col {
+      transition:
+        margin 0.2s ease-in-out,
+        padding 0.2s ease-in-out,
+        width 0.2s ease-in-out;
+      ;
+    }
+    .col .zif {
+      max-width: 280px;
       @media (max-width: 575.98px) {
+        max-width: 90%;
         margin: 0 auto;
-        max-width: 300px;
+      }
+      .zif-units {
+        @media (max-width: 575.98px) {
+          margin: 0 auto;
+          max-width: 280px;
+        }
       }
     }
   }
 
   div.zif.memo {
-    border-color: var(--maz-accent);
+    border-color: var(--maz-accent-darker);
     .zif--header {
       font-weight: 700;
       color: var(--def-black);
@@ -710,6 +726,10 @@ div.maz-main, div.maz-introduction {
       text-align: center;
       text-overflow: ellipsis;
       font-size: 2em;
+      span {
+        font-weight: inherit;
+        font-size: inherit;
+      }
     }
     &--units {
       font-size: 0.92em;
@@ -736,6 +756,11 @@ div.maz-main, div.maz-introduction {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        transition:
+          color 0.15s ease-in-out,
+          background-color 0.15s ease-in-out,
+          border-color 0.15s ease-in-out,
+          box-shadow 1.2s ease-out;
         &.btn-primary {
           --bs-btn-color: var(--maz-blue-text);
           --bs-btn-bg: var(--maz-btn-bg);
@@ -746,6 +771,7 @@ div.maz-main, div.maz-introduction {
           --bs-btn-disabled-color: var(--maz-text-bright);
           --bs-btn-disabled-bg: rgba(var(--maz-accent-soft-rgb), 0);
           --bs-btn-disabled-border-color: rgba(var(--maz-accent-soft-rgb), 0);
+          --bs-btn-active-bg: var(--maz-blue-hover);
         }
         &.btn-outline-primary {
           --bs-btn-color: var(--maz-text-bright);
@@ -757,6 +783,29 @@ div.maz-main, div.maz-introduction {
     }
     dt {
       font-weight: 600;
+    }
+    &.loading {
+      border-color: rgba(var(--maz-accent-darker-rgb), 0.7);
+      .zif--header {
+        opacity: 0.6;
+      }
+      .zif--diffusivity {
+        animation: mazAccentOpacityAnim 3s infinite alternate;
+        opacity: 0.5;
+        text-shadow: 0.1em 0.1em 1em rgba(var(--maz-accent-darker-rgb), 0.2);
+      }
+      .zif--units {
+        opacity: 0.6;
+        dd {
+          opacity: 0.4;
+        }
+      }
+      .zif--date {
+        opacity: 0.2;
+      }
+      .zif--actions button {
+        opacity: 0;
+      }
     }
     &.new {
       transform: scale(1.15);
@@ -812,5 +861,23 @@ div.maz-main, div.maz-introduction {
         }
       }
     }
+  }
+}
+
+@keyframes mazAccentOpacityAnim {
+  0% {
+    opacity: 0.8;
+  }
+  49% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  51% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.8;
   }
 }

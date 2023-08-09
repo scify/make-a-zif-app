@@ -22,21 +22,30 @@ export default {
   mounted() {},
   methods: {
     parseMetal(key) {
-      const metal = this.$root["listOfMetals"].find((i) => i.key === key);
-      return metal.title;
+      const metal = key
+        ? this.$root["listOfMetals"].find((i) => i.key === key)
+        : null;
+      return metal ? metal.title : "None";
     },
     parseLinker(key) {
-      const linker = this.$root["listOfLinkers"].find((i) => i.key === key);
-      return linker.name;
+      const linker = key
+        ? this.$root["listOfLinkers"].find((i) => i.key === key)
+        : null;
+      return linker ? linker.name : "None";
     },
+
     parseGroup(key) {
-      const group = this.$root["listOfGroups"].find((i) => i.key === key);
-      return this.parseSubScript(group.name);
+      const group = key
+        ? this.$root["listOfGroups"].find((i) => i.key === key)
+        : null;
+      return group ? this.parseSubScript(group.name) : "None";
     },
+
     parseGas(key) {
-      // Note that
-      let gas = this.$root["listOfGases"].find((i) => i.key === key);
-      return gas.title;
+      const gas = key
+        ? this.$root["listOfGases"].find((i) => i.key === key)
+        : null;
+      return gas ? gas.title : "None";
     },
 
     /**
@@ -73,21 +82,27 @@ export default {
         if (this.scenarioHistory) {
           if (this.scenarioHistory.length) {
             this.countSavedScenarios = this.scenarioHistory.length;
+            let tempScenarioName = `${scenarioName} ${
+              this.countSavedScenarios + 1
+            }`;
+            // But, yes, that might be an issue if user has only a "Scenario 2"
+            // saved & we are trying to save a 2nd one, which would have the
+            // exact same name. So, let's just take the latest scenario...
+            const existingScenario = this.scenarioHistory.find(
+              (i) => i.name === tempScenarioName
+            );
+            let plusCount = 1;
+            if (existingScenario) {
+              plusCount++;
+            }
+            scenarioName = `${scenarioName} ${
+              this.countSavedScenarios + plusCount
+            }`;
           }
+        } else {
+          scenarioName = `${scenarioName} 1`;
         }
         this.countSavedScenarios++;
-        let tempScenarioName = `${scenarioName} ${this.countSavedScenarios}`;
-        // But, yes, that might be an issue if user has only a "Scenario 2"
-        // saved & we are trying to save a 2nd one, which would have the
-        // exact same name. So, let's just take the latest scenario...
-        const existingScenario = this.scenarioHistory.find(
-          (i) => i.name === tempScenarioName
-        );
-        if (existingScenario) {
-          scenarioName = `${scenarioName} ${this.countSavedScenarios + 1}`;
-        } else {
-          scenarioName = tempScenarioName;
-        }
       }
       console.log("Trying to save Scenario with name: " + scenarioName);
       this.$emit("do:saveScenario", scenarioName);
@@ -100,16 +115,17 @@ export default {
           this.scenarioResults.scenario &&
           Object.keys(this.scenarioResults.scenario).length > 0
         ) {
-          nextTick(() => {
-            document.querySelector("#generatedZif").classList.add("new");
-
-            setTimeout(() => {
-              document.querySelector("#generatedZif").classList.remove("new");
-              document
-                .querySelector("#mazExecuteButton")
-                .classList.remove("disabled");
-            }, 2500); // Adjust timing as needed
-          });
+          if (this.scenarioResults.showDiff && this.scenarioResults.showSave) {
+            nextTick(() => {
+              document.querySelector("#generatedZif").classList.add("new");
+              setTimeout(() => {
+                document.querySelector("#generatedZif").classList.remove("new");
+                document
+                  .querySelector("#mazExecuteButton")
+                  .classList.remove("disabled");
+              }, 2500); // Adjust timing as needed
+            });
+          }
         }
       },
       deep: true,
@@ -215,16 +231,39 @@ export default {
             <!-- memo starts here -->
             <template
               v-if="
-                scenarioResults.scenario &&
-                Object.keys(scenarioResults.scenario).length > 0
+                scenarioResults &&
+                (scenarioResults.showDiff || scenarioResults.showStatus)
               "
             >
               <!-- zif starts here -->
               <div class="col">
-                <div class="zif memo" id="generatedZif">
-                  <div class="zif--header">Generated ZIF diffusivity:</div>
+                <div
+                  :class="[
+                    'zif',
+                    'memo',
+                    { loading: scenarioResults.showStatus },
+                    {
+                      'd-none':
+                        !scenarioResults.showDiff &&
+                        !scenarioResults.showStatus,
+                    },
+                  ]"
+                  id="generatedZif"
+                >
+                  <div class="zif--header">
+                    {{
+                      scenarioResults.showDiff
+                        ? "Generated ZIF diffusivity:"
+                        : "Generating ZIF"
+                    }}
+                  </div>
                   <div class="zif--diffusivity">
-                    {{ scenarioResults.diffusion }}
+                    <span v-if="scenarioResults.showDiff">
+                      {{ scenarioResults.diffusion }}
+                    </span>
+                    <span v-if="scenarioResults.showStatus">
+                      {{ scenarioResults.status }}
+                    </span>
                   </div>
                   <div class="zif--units d-grid d-flex flex-wrap gap-0">
                     <div class="unit flex-grow-1">
@@ -284,6 +323,7 @@ export default {
                   </div>
                   <div class="zif--actions d-grid gap-2 d-md-flex">
                     <button
+                      v-if="scenarioResults.showDiff"
                       :class="[
                         'btn',
                         'btn-sm',
@@ -300,6 +340,13 @@ export default {
                       type="button"
                     >
                       {{ scenarioResults.showSave ? "Save" : "Saved!" }}
+                    </button>
+                    <button
+                      v-if="!scenarioResults.showDiff"
+                      class="btn btn-sm btn-primary disabled flex-fill"
+                      disabled
+                    >
+                      ...
                     </button>
                   </div>
                 </div>

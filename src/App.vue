@@ -10,10 +10,10 @@
  */
 import MazHeader from "./components/MazHeader.vue";
 import MazTabs from "./components/MazTabs.vue";
-// import MazImage from "./components/MazImage.vue";
-// import MazTabs from "./components/obsolete/MazTabs.vue";
 import MazTableOne from "./components/MazTableOne.vue";
 import MazTableTwo from "./components/MazTableTwo.vue";
+// import MazImage from "./components/MazImage.vue";
+// import MazTabs from "./components/obsolete/MazTabs.vue";
 // Import default assets (gas, metals, linkers, functional groups):
 import gasData from "./assets/data/gases.json";
 import metalData from "./assets/data/metals.json";
@@ -33,10 +33,9 @@ export default {
   components: {
     MazHeader, // A very basic header.
     MazTabs, // Introduction, tutorials & history.
-    // MazImage, // A very basic image of a ZIF.
-    // MazTabs, // Memo & History Tabs, next to the image.
     MazTableOne, // Allows selection of Metals, Linkers & Groups.
     MazTableTwo, // Allows selection of Gas elements.
+    // MazImage, // A very basic image of a ZIF.
   },
   props: [],
   data() {
@@ -63,11 +62,13 @@ export default {
         name: "Example scenario",
         date: new Date("2022-03-05T10:00:13.912Z"),
         formattedDate: "5/3/2022 | 12:00:13",
-        suggestedName: "Scenario name",
+        suggestedName: "Scenario",
         diffusion: 4,
         scenario: [],
+        status: "computing...",
         showDiff: false,
         showSave: false,
+        showStatus: false,
       },
       // History (an array of saved scenarios):
       // Starting with false instead of an [] to handle the default states for
@@ -86,7 +87,9 @@ export default {
   },
   methods: {
     resetToLocalOrDefault() {
-      const localStorageHistory = window.localStorage.getItem("mazAppHistory");
+      const localStorageHistory = window.localStorage.getItem(
+        import.meta.env.VITE_MAZ_STORAGE_KEY
+      );
       if (localStorageHistory) {
         this.scenarioHistory = JSON.parse(localStorageHistory);
         console.log("App loaded scenarios from browser's history");
@@ -124,6 +127,11 @@ export default {
     },
 
     fetchDataResultsFromAPI(apiParams, scenarioData) {
+      console.log("Fetching remote data...");
+      this.scenarioResults.showDiff = false;
+      this.scenarioResults.showStatus = true;
+      this.scenarioResults.status = "computing...";
+
       fetch(import.meta.env.VITE_MAZ_API_ENDPOINT + "predict?" + apiParams, {
         method: "GET",
         headers: {
@@ -132,14 +140,18 @@ export default {
       })
         .then((response) => {
           if (!response.ok) {
+            this.scenarioResults.status = "Server Error!";
             throw new Error("Network response was not ok!");
           }
           return response.json();
         })
         .then((data) => {
           if (data && typeof data.diffusivity === "number") {
-            this.handlePredictionResponseData(data.diffusivity, scenarioData);
+            setTimeout(() => {
+              this.handlePredictionResponseData(data.diffusivity, scenarioData);
+            }, 1000);
           } else {
+            this.scenarioResults.status = "API Error!";
             throw new Error(
               "Invalid API response data or missing diffusivity key!"
             );
@@ -147,8 +159,18 @@ export default {
         })
         .catch((error) => {
           // Handle any errors that occurs during the fetch request:
-          // @TODO: Handle specific errors in specific ways.
           console.error("Error fetching data:", error);
+          if (/NetworkError/.test(error)) {
+            this.scenarioResults.status = "Network Error!";
+          } else if (/HTTP/.test(error)) {
+            this.scenarioResults.status = "HTTP Error!";
+          } else if (/JSON/.test(error)) {
+            this.scenarioResults.status = "JSON Error!";
+          } else if (/Timeout/.test(error)) {
+            this.scenarioResults.status = "Timeout Error!";
+          } else {
+            this.scenarioResults.status = "Error!";
+          }
         });
       return true;
     },
@@ -284,6 +306,7 @@ export default {
      * Handles prediction response data. Some random text will go here.
      */
     handlePredictionResponseData(diffusivity, scenarioData) {
+      this.scenarioResults.status = "processing...";
       if (typeof diffusivity === "number") {
         const diffusivityValue = parseFloat(diffusivity);
         if (!isNaN(diffusivityValue)) {
@@ -291,6 +314,9 @@ export default {
             name: "",
             date: new Date().toISOString(),
             formattedDate: this.currentDate(),
+            app: `${import.meta.env.VITE_APP_TITLE} ${
+              import.meta.env.VITE_APP_VERSION
+            }`,
             model: this.modelVersion.toString(),
             source: window.location.href.toString(),
             diffusion: diffusivityValue,
@@ -301,9 +327,11 @@ export default {
           console.log("App ran scenario with diffusivity: " + diffusivityValue);
           this.scenarioResults = results;
         } else {
+          this.scenarioResults.status = "Invalid diffusion!";
           throw new Error("Invalid diffusivity value received from the API");
         }
       } else {
+        this.scenarioResults.status = "Invalid API response!";
         throw new Error("Invalid API response data or missing diffusivity key");
       }
       return true;
@@ -311,12 +339,26 @@ export default {
 
     /**
      * Download (non-unicode) JSON data.
-     * @param {array} dataArray An array of data.
+     * @param {array} dataArray An array/object that would be stringify-ied.
      * @param {string} fileName The name of the file (=data).
      * @param {string} fileExtension The extension of the file (=json).
      */
     downloadJsonData(dataArray, fileName = "data", fileExtension = "json") {
-      const json = encodeURIComponent(JSON.stringify(dataArray, null, 2));
+      // Remove irrelevant keys from the data array
+      let downloadArray = dataArray;
+      if (typeof downloadArray === "object" && downloadArray !== null) {
+        if ("showDiff" in downloadArray) {
+          delete downloadArray.showDiff;
+          if ("showSave" in downloadArray) {
+            delete downloadArray.showSave;
+          }
+          if ("showStatus" in downloadArray) {
+            delete downloadArray.showStatus;
+          }
+          downloadArray.status = `Downloaded on ${new Date().toISOString()}`;
+        }
+      }
+      const json = encodeURIComponent(JSON.stringify(downloadArray, null, 2));
       const output = "data:application/json;charset=utf-8," + json;
       const anchor = document.createElement("a");
       anchor.href = output;
@@ -411,8 +453,8 @@ export default {
     },
 
     /**
-     * Loads a Scenario (its keys) from browser's local storage. Data are loaded
-     * from: window.localStorage.mazAppHistory (mazAppHistory).
+     * Loads a Scenario (keys) from browser's local storage. Data is loaded by
+     * default from: window.localStorage.mazAppHistory (VITE_MAZ_STORAGE_KEY).
      *
      * @param {int} scenarioDate - The saved scenario's date (epoch time).
      * @param {boolean} execution - Execute loaded scenario? (default: true).
@@ -439,8 +481,8 @@ export default {
     },
 
     /**
-     * Saves current scenario in browser's local storage (mazAppHistory).
-     * Data are saved at: window.localStorage.mazAppHistory.
+     * Saves current scenario in browser's local storage (VITE_MAZ_STORAGE_KEY).
+     * Data are saved by default at: window.localStorage.mazAppHistory.
      *
      * @param {string} scenarioName - The name of the scenario.
      */
@@ -460,7 +502,10 @@ export default {
       }
       this.scenarioHistory.push(this.scenarioResults);
       // Storing scenario to browser's storage:
-      window.localStorage.mazAppHistory = JSON.stringify(this.scenarioHistory);
+      window.localStorage.setItem(
+        import.meta.env.VITE_MAZ_STORAGE_KEY,
+        JSON.stringify(this.scenarioHistory)
+      );
       return true;
     },
 
@@ -508,12 +553,15 @@ export default {
           this.scenarioHistory.splice(index, 1);
           if (this.scenarioHistory.length) {
             // If this history contains at least an item, JSON it...
-            window.localStorage.mazAppHistory = JSON.stringify(
-              this.scenarioHistory
+            window.localStorage.setItem(
+              import.meta.env.VITE_MAZ_STORAGE_KEY,
+              JSON.stringify(this.scenarioHistory)
             );
           } else {
             // Else, remove all traces of history from anywhere...
-            window.localStorage.removeItem("mazAppHistory");
+            window.localStorage.removeItem(
+              import.meta.env.VITE_MAZ_STORAGE_KEY
+            );
             // ... and return to the false default.
             this.scenarioHistory = false;
           }
