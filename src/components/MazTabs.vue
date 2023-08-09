@@ -1,4 +1,6 @@
 <script>
+import { nextTick } from "vue";
+
 export default {
   components: {},
   props: {
@@ -20,20 +22,20 @@ export default {
   mounted() {},
   methods: {
     parseMetal(key) {
-      const metal = this.$root.listOfMetals.find((i) => i.key === key);
+      const metal = this.$root["listOfMetals"].find((i) => i.key === key);
       return metal.title;
     },
     parseLinker(key) {
-      const linker = this.$root.listOfLinkers.find((i) => i.key === key);
+      const linker = this.$root["listOfLinkers"].find((i) => i.key === key);
       return linker.name;
     },
     parseGroup(key) {
-      const group = this.$root.listOfGroups.find((i) => i.key === key);
+      const group = this.$root["listOfGroups"].find((i) => i.key === key);
       return this.parseSubScript(group.name);
     },
     parseGas(key) {
       // Note that
-      let gas = this.$root.listOfGases.find((i) => i.key === key);
+      let gas = this.$root["listOfGases"].find((i) => i.key === key);
       return gas.title;
     },
 
@@ -94,17 +96,23 @@ export default {
   watch: {
     scenarioResults: {
       handler() {
-        setTimeout(function () {
-          // @TODO Fix the new class (aka implement it).
-          document.querySelector("#generatedZif").classList.add("new");
-        }, 1000);
-        setTimeout(function () {
-          document.querySelector("#generatedZif").classList.remove("new");
-          document
-            .querySelector("#mazExecuteButton")
-            .classList.remove("disabled");
-        }, 3500);
+        if (
+          this.scenarioResults.scenario &&
+          Object.keys(this.scenarioResults.scenario).length > 0
+        ) {
+          nextTick(() => {
+            document.querySelector("#generatedZif").classList.add("new");
+
+            setTimeout(() => {
+              document.querySelector("#generatedZif").classList.remove("new");
+              document
+                .querySelector("#mazExecuteButton")
+                .classList.remove("disabled");
+            }, 2500); // Adjust timing as needed
+          });
+        }
       },
+      deep: true,
     },
   },
 };
@@ -200,8 +208,10 @@ export default {
         aria-labelledby="mazHistoryTab"
         tabindex="0"
       >
-        <div class="container-fluid mt-5 p-0 log">
-          <div class="zif-history d-flex flex-wrap gap-lg-5 gap-4">
+        <div class="container mt-5 p-0 log">
+          <div
+            class="zif-history row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 g-5"
+          >
             <!-- memo starts here -->
             <template
               v-if="
@@ -210,73 +220,88 @@ export default {
               "
             >
               <!-- zif starts here -->
-              <div class="zif memo" id="generatedZif">
-                <div class="zif--header">Generated ZIF diffusivity:</div>
-                <div class="zif--diffusivity">
-                  {{ scenarioResults.diffusion }}
-                </div>
-                <div class="zif--units d-grid d-flex flex-wrap gap-0">
-                  <div class="unit flex-grow-1">
-                    <dl>
-                      <dt>Metal</dt>
-                      <dd class="text-capitalize">
-                        {{ this.parseMetal(scenarioResults.scenario.metal) }}
-                      </dd>
-                    </dl>
+              <div class="col">
+                <div class="zif memo" id="generatedZif">
+                  <div class="zif--header">Generated ZIF diffusivity:</div>
+                  <div class="zif--diffusivity">
+                    {{ scenarioResults.diffusion }}
                   </div>
-                  <div class="unit">
-                    <dl>
-                      <dt>Organic linkers</dt>
-                      <dd>
-                        {{ this.parseLinker(scenarioResults.scenario.linker1) }}
-                        {{ this.parseLinker(scenarioResults.scenario.linker2) }}
-                        {{ this.parseLinker(scenarioResults.scenario.linker3) }}
-                      </dd>
-                    </dl>
+                  <div class="zif--units d-grid d-flex flex-wrap gap-0">
+                    <div class="unit flex-grow-1">
+                      <dl>
+                        <dt>Metal</dt>
+                        <dd class="text-capitalize">
+                          {{ this.parseMetal(scenarioResults.scenario.metal) }}
+                        </dd>
+                      </dl>
+                    </div>
+                    <div class="unit">
+                      <dl>
+                        <dt>Organic linkers</dt>
+                        <dd>
+                          {{
+                            this.parseLinker(scenarioResults.scenario.linker1)
+                          }}
+                          {{
+                            this.parseLinker(scenarioResults.scenario.linker2)
+                          }}
+                          {{
+                            this.parseLinker(scenarioResults.scenario.linker3)
+                          }}
+                        </dd>
+                      </dl>
+                    </div>
+                    <div class="unit flex-grow-1">
+                      <dl>
+                        <dt>Functional groups</dt>
+                        <dd>
+                          {{
+                            this.parseGroup(scenarioResults.scenario.funcGroup1)
+                          }}
+                          {{
+                            this.parseGroup(scenarioResults.scenario.funcGroup2)
+                          }}
+                          {{
+                            this.parseGroup(scenarioResults.scenario.funcGroup3)
+                          }}
+                        </dd>
+                      </dl>
+                    </div>
+                    <div class="unit">
+                      <dl>
+                        <dt>Gas</dt>
+                        <dd class="text-capitalize">
+                          {{ this.parseGas(scenarioResults.scenario.gas) }}
+                        </dd>
+                      </dl>
+                    </div>
                   </div>
-                  <div class="unit flex-grow-1">
-                    <dl>
-                      <dt>Functional groups</dt>
-                      <dd>
-                        {{
-                          this.parseGroup(scenarioResults.scenario.funcGroup1)
-                        }}
-                        {{
-                          this.parseGroup(scenarioResults.scenario.funcGroup2)
-                        }}
-                        {{
-                          this.parseGroup(scenarioResults.scenario.funcGroup3)
-                        }}
-                      </dd>
-                    </dl>
+                  <div class="zif--date">
+                    Date:
+                    <time v-bind:datetime="scenarioResults.date">{{
+                      scenarioResults.formattedDate
+                    }}</time>
                   </div>
-                  <div class="unit">
-                    <dl>
-                      <dt>Gas</dt>
-                      <dd class="text-capitalize">
-                        {{ this.parseGas(scenarioResults.scenario.gas) }}
-                      </dd>
-                    </dl>
+                  <div class="zif--actions d-grid gap-2 d-md-flex">
+                    <button
+                      :class="[
+                        'btn',
+                        'btn-sm',
+                        'btn-primary',
+                        'flex-fill',
+                        { disabled: !scenarioResults.showSave },
+                      ]"
+                      :disabled="!scenarioResults.showSave"
+                      @click="saveScenario"
+                      class="btn btn-sm btn-primary flex-fill"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Save the scenario & its results to your history"
+                      type="button"
+                    >
+                      {{ scenarioResults.showSave ? "Save" : "Saved!" }}
+                    </button>
                   </div>
-                </div>
-                <div class="zif--date">
-                  Date:
-                  <time v-bind:datetime="scenarioResults.date">{{
-                    scenarioResults.formattedDate
-                  }}</time>
-                </div>
-                <div class="zif--actions d-grid gap-2 d-md-flex">
-                  <button
-                    v-if="scenarioResults.showSave"
-                    @click="this.saveScenario()"
-                    class="btn btn-sm btn-primary flex-fill"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Save the scenario & its results to your history"
-                    type="button"
-                  >
-                    Save
-                  </button>
                 </div>
               </div>
               <!-- /zif ends here -->
@@ -290,74 +315,76 @@ export default {
                 :key="key"
               >
                 <!-- zif starts here -->
-                <div class="zif scenario" :id="`saved-scenario-${key}`">
-                  <div class="zif--header">
-                    ZIF {{ scenario.name }} diffusivity:
-                  </div>
-                  <div class="zif--diffusivity">{{ scenario.diffusion }}</div>
-                  <div class="zif--units d-grid d-flex flex-wrap gap-0">
-                    <div class="unit flex-grow-1">
-                      <dl>
-                        <dt>Metal</dt>
-                        <dd class="text-capitalize">
-                          {{ this.parseMetal(scenario.scenario.metal) }}
-                        </dd>
-                      </dl>
+                <div class="col">
+                  <div class="zif scenario" :id="`saved-scenario-${key}`">
+                    <div class="zif--header">
+                      ZIF {{ scenario.name }} diffusivity:
                     </div>
-                    <div class="unit">
-                      <dl>
-                        <dt>Organic linkers</dt>
-                        <dd>
-                          {{ this.parseLinker(scenario.scenario.linker1) }}
-                          {{ this.parseLinker(scenario.scenario.linker2) }}
-                          {{ this.parseLinker(scenario.scenario.linker3) }}
-                        </dd>
-                      </dl>
+                    <div class="zif--diffusivity">{{ scenario.diffusion }}</div>
+                    <div class="zif--units d-grid d-flex flex-wrap gap-0">
+                      <div class="unit flex-grow-1">
+                        <dl>
+                          <dt>Metal</dt>
+                          <dd class="text-capitalize">
+                            {{ this.parseMetal(scenario.scenario.metal) }}
+                          </dd>
+                        </dl>
+                      </div>
+                      <div class="unit">
+                        <dl>
+                          <dt>Organic linkers</dt>
+                          <dd>
+                            {{ this.parseLinker(scenario.scenario.linker1) }}
+                            {{ this.parseLinker(scenario.scenario.linker2) }}
+                            {{ this.parseLinker(scenario.scenario.linker3) }}
+                          </dd>
+                        </dl>
+                      </div>
+                      <div class="unit flex-grow-1">
+                        <dl>
+                          <dt>Functional groups</dt>
+                          <dd>
+                            {{ this.parseGroup(scenario.scenario.funcGroup1) }}
+                            {{ this.parseGroup(scenario.scenario.funcGroup2) }}
+                            {{ this.parseGroup(scenario.scenario.funcGroup3) }}
+                          </dd>
+                        </dl>
+                      </div>
+                      <div class="unit">
+                        <dl>
+                          <dt>Gas</dt>
+                          <dd class="text-capitalize">
+                            {{ this.parseGas(scenario.scenario.gas) }}
+                          </dd>
+                        </dl>
+                      </div>
                     </div>
-                    <div class="unit flex-grow-1">
-                      <dl>
-                        <dt>Functional groups</dt>
-                        <dd>
-                          {{ this.parseGroup(scenario.scenario.funcGroup1) }}
-                          {{ this.parseGroup(scenario.scenario.funcGroup2) }}
-                          {{ this.parseGroup(scenario.scenario.funcGroup3) }}
-                        </dd>
-                      </dl>
+                    <div class="zif--date">
+                      Date:
+                      <time v-bind:datetime="scenario.date">{{
+                        scenario.formattedDate
+                      }}</time>
                     </div>
-                    <div class="unit">
-                      <dl>
-                        <dt>Gas</dt>
-                        <dd class="text-capitalize">
-                          {{ this.parseGas(scenario.scenario.gas) }}
-                        </dd>
-                      </dl>
+                    <div class="zif--actions d-grid gap-2 d-md-flex">
+                      <button
+                        class="btn btn-sm btn-primary flex-fill"
+                        @click="$emit('do:loadScenario', scenario.date)"
+                      >
+                        Restore
+                      </button>
+                      <button
+                        class="btn btn-sm btn-primary"
+                        @click="$emit('do:downloadScenario', scenario.date)"
+                      >
+                        Download
+                      </button>
+                      <button
+                        class="btn btn-sm btn-outline-primary"
+                        @click="$emit('do:deleteScenario', scenario.date)"
+                      >
+                        Delete
+                      </button>
                     </div>
-                  </div>
-                  <div class="zif--date">
-                    Date:
-                    <time v-bind:datetime="scenario.date">{{
-                      scenario.formattedDate
-                    }}</time>
-                  </div>
-                  <div class="zif--actions d-grid gap-2 d-md-flex">
-                    <button
-                      class="btn btn-sm btn-primary flex-fill"
-                      @click="$emit('do:loadScenario', scenario.date)"
-                    >
-                      Restore
-                    </button>
-                    <button
-                      class="btn btn-sm btn-primary"
-                      @click="$emit('do:downloadScenario', scenario.date)"
-                    >
-                      Download
-                    </button>
-                    <button
-                      class="btn btn-sm btn-outline-primary"
-                      @click="$emit('do:deleteScenario', scenario.date)"
-                    >
-                      Delete
-                    </button>
                   </div>
                 </div>
                 <!-- / zif ends here -->

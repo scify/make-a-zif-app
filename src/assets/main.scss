@@ -649,31 +649,41 @@ div.maz-main {
 }
 /* Navigation Tabs */
 div.maz-main, div.maz-introduction {
-  --zif-width: 100%;
-  @media (min-width: 576px) {
-    --zif-width: 250px;
-  }
+
   --zif-transition:
     border 1s ease-in-out,
     background-color 0.8s ease-in-out,
-    color 0.8s ease-in-out;
+    box-shadow 0.8s ease-in-out,
+    color 0.8s ease-in-out,
+    transform 0.5s ease-in-out;
+
+  .zif-history {
+    transition: all .2s ease-in-out;
+    .col .zif .zif--units {
+      @media (max-width: 575.98px) {
+        margin: 0 auto;
+        max-width: 300px;
+      }
+    }
+  }
+
   div.zif.memo {
+    border-color: var(--maz-accent);
     .zif--header {
-      color: var(--maz-text-bright);
-      background-color: rgba(var(--maz-accent-rgb), 0.4);
+      font-weight: 700;
+      color: var(--def-black);
+      background-color: var(--maz-accent);
     }
     .zif--diffusivity {
       opacity: 1;
       color: var(--maz-diffusion);
     }
   }
+
   div.zif {
     background-color: rgba(var(--maz-accent-soft-rgb), 0.2);
     transition: var(--zif-transition);
     color: var(--maz-text);
-    margin: 0;
-    padding: 0;
-    width: var(--zif-width);
     font-size: 1em;
     overflow: hidden;
     border-width: 2px;
@@ -696,7 +706,6 @@ div.maz-main, div.maz-introduction {
       opacity: 0.7;
       transition: var(--zif-transition);
       font-weight: 700;
-      max-width: var(--zif-width);
       overflow: hidden;
       text-align: center;
       text-overflow: ellipsis;
@@ -733,6 +742,10 @@ div.maz-main, div.maz-introduction {
           --bs-btn-border-color: var(--maz-btn-bg);
           --bs-btn-hover-bg: var(--maz-btn-hover-bg);
           --bs-btn-hover-border-color: var(--maz-btn-hover-bg);
+          --bs-btn-disabled-opacity: 1;
+          --bs-btn-disabled-color: var(--maz-text-bright);
+          --bs-btn-disabled-bg: rgba(var(--maz-accent-soft-rgb), 0);
+          --bs-btn-disabled-border-color: rgba(var(--maz-accent-soft-rgb), 0);
         }
         &.btn-outline-primary {
           --bs-btn-color: var(--maz-text-bright);
@@ -746,10 +759,23 @@ div.maz-main, div.maz-introduction {
       font-weight: 600;
     }
     &.new {
+      transform: scale(1.15);
+      box-shadow:
+              1px 0 10px -2px rgba(var(--maz-accent-rgb), 0.25),
+              0 1px 10px -2px rgba(var(--maz-accent-rgb), 0.25),
+              0 -1px 10px -2px rgba(var(--maz-accent-rgb), 0.25),
+              -1px 0 10px -2px rgba(var(--maz-accent-rgb), 0.25);
       background-color: rgba(var(--maz-accent-rgb), 0.1);
       border-color: var(--maz-accent-darker);
       .zif--diffusivity {
         color: var(--maz-accent-darker);
+      }
+      .zif--actions button.btn-primary {
+        box-shadow:
+          1px 0 4px -2px var(--maz-accent-darker),
+          0 1px 4px -2px var(--maz-accent-darker),
+          0 -1px 4px -2px var(--maz-accent-darker),
+          -1px 0 4px -2px var(--maz-accent-darker);
       }
     }
   }
