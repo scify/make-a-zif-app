@@ -112,7 +112,7 @@ export default {
           </th>
           <th scope="col" class="gas divider">
             <button
-              id="gasModalButton"
+              id="gasModalBtn"
               class="col-modal"
               data-bs-toggle="modal"
               data-bs-target="#gasModal"

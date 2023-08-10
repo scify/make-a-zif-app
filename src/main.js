@@ -8,4 +8,5 @@ import * as bootstrap from "bootstrap";
 
 // Note: Make-a-ZIF App's CSS is included on App.vue for convenience and
 // therefore none of the files on ./scss should be imported from this script.
-createApp(App).mount("#app");
+const app = createApp(App);
+app.mount("#app");

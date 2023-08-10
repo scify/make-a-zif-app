@@ -1,8 +1,11 @@
 <script>
 import { nextTick } from "vue";
+import IntroTab from "./partials/IntroTab.vue";
 
 export default {
-  components: {},
+  components: {
+    IntroTab,
+  },
   props: {
     ["scenarioResults"]: { required: true },
     ["scenarioHistory"]: { required: false, default: false },
@@ -191,15 +194,7 @@ export default {
         aria-labelledby="mazIntroTab"
         tabindex="0"
       >
-        <div class="container-fluid mt-5 p-3 border border-accent">
-          1 Choose from a displayed pop-up list the material you want. 2 Choose
-          from a displayed pop-up list the fume you want. 3 Choose from a
-          displayed pop-up list the material you want. 4 Choose from a displayed
-          pop-up list the fume you want. In the History section you can always
-          see see the metrics of the last inputs you run. In the Historicity
-          section listed the saved scenarios which you can export in a excel
-          file or restore one of the scenarios you’ve saved.
-        </div>
+        <IntroTab />
       </div>
       <div
         id="mazExamplesPane"
@@ -226,7 +221,7 @@ export default {
       >
         <div class="container mt-5 p-0 log">
           <div
-            class="zif-history row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 g-5"
+            class="zif-history row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-sm-5 gx-5 gy-0"
           >
             <!-- memo starts here -->
             <template
@@ -444,7 +439,3 @@ export default {
     </div>
   </div>
 </template>
-<style lang="scss">
-.zif {
-}
-</style>

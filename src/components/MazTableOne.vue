@@ -124,6 +124,7 @@ export default {
           </th>
           <th scope="col" class="metal divider">
             <button
+              id="metalModalBtn"
               class="col-modal"
               data-bs-toggle="modal"
               data-bs-target="#metalModal"
@@ -137,6 +138,7 @@ export default {
           </th>
           <th scope="col" colspan="3" class="linker divider">
             <button
+              id="linkersModalBtn"
               class="col-modal"
               data-bs-toggle="modal"
               data-bs-target="#linkersModal"
@@ -150,6 +152,7 @@ export default {
           </th>
           <th scope="col" colspan="3" class="group divider">
             <button
+              id="groupsModalBtn"
               class="col-modal"
               data-bs-toggle="modal"
               data-bs-target="#groupsModal"

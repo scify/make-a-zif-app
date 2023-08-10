@@ -218,9 +218,9 @@ export default {
      * Forces the user to select a Gas by activating the corresponding modal.
      */
     forceGasSelection() {
-      const gasModalButton = document.getElementById("gasModalButton");
+      const gasModalBtn = document.getElementById("gasModalBtn");
       const gasModal = document.getElementById("gasModal");
-      gasModalButton.click();
+      gasModalBtn.click();
       gasModal.classList.add("warning");
     },
 
@@ -229,12 +229,15 @@ export default {
      * @param {string} pane - One of the apps panes (Intro, Examples, History).
      */
     focusTab(pane = "History") {
-      const appTabs = document.querySelector("#mazTabs");
-      const appTabPanels = document.querySelector("#mazTabPanels");
-      const focusTab = document.querySelector(`#maz${pane}Tab`);
-      const focusPane = document.querySelector(`#maz${pane}Pane`);
+      const appTabs = document.getElementById("mazTabs");
+      const appTabPanels = document.getElementById("mazTabPanels");
+      const focusTab = document.getElementById(`maz${pane}Tab`);
+      const focusPane = document.getElementById(`maz${pane}Pane`);
       // Scrolls to top in case the results are not into view:
-      appTabs.scrollIntoView({ behavior: "smooth", block: "center" });
+      // appTabs.scrollIntoView({ behavior: "smooth", block: "start" });
+      // How about Safari on iOS?
+      window.scrollTo(0, 0);
+
       // Switching active tabs...
       appTabs
         .querySelectorAll("button")
