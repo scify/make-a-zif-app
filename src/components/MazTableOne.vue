@@ -87,7 +87,7 @@ export default {
 <template>
   <!-- v-if starts here -->
   <div
-    class="maz-table my-5"
+    class="maz-table my-4"
     v-if="
       selectedScenario &&
       listOfMetals &&

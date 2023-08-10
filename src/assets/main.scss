@@ -332,13 +332,17 @@ div.maz-main {
     }
     &.one::before,
     &.two::before {
+      display: inline-block;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      width: 2rem;
+      height: 2rem;
+      line-height: 1.91rem;
+      text-align: center;
+      font-size: 1.125em;
       font-weight: 700;
       color: var(--maz-background);
       background: var(--maz-accent);
-      border-radius: 50%;
-      line-height: 1;
-      padding: 0.33em 0.66em;
-      margin-right: 0.5em;
     }
     &.one::before {
       content: "1";

@@ -10,7 +10,9 @@ export default {
 </script>
 
 <template>
-  <div class="container-fluid mt-5 p-3 border border-accent documentation">
+  <div
+    class="container-fluid mt-4 px-3 pt-3 pb-1 border border-accent documentation"
+  >
     <h4>How-to Make-a-ZIF</h4>
     <ol>
       <li class="one">
@@ -21,7 +23,7 @@ export default {
         <button type="button" class="btn inline" @click="showModal('linkers')">
           organic linkers
         </button>
-        and
+        &amp;
         <button type="button" class="btn inline" @click="showModal('groups')">
           functional groups</button
         >.
@@ -35,13 +37,9 @@ export default {
       <li class="three">
         Click on
         <button type="button" class="btn inline disabled">Execute</button> to
-        calculate the ZIF's diffusivity!
+        get a fast prediction of the diffusivity!
       </li>
     </ol>
-    <div>
-      This panel will allow you to review the diffusivity and the properties of
-      all the ZIFs you have designed and either download or restore them.
-    </div>
   </div>
 </template>
 
@@ -53,7 +51,7 @@ export default {
   }
   ol {
     list-style-type: none;
-    padding: 0 0.5rem;
+    padding: 0;
     li {
       padding: 0.25rem 0;
       &.one::before,
@@ -67,7 +65,7 @@ export default {
         font-weight: 700;
         color: var(--maz-background);
         background: var(--maz-accent-darker);
-        border-radius: 100%;
+        border-radius: 50%;
         margin-right: 0.5rem;
         font-size: 0.9rem;
       }

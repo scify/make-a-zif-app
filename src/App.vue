@@ -597,7 +597,7 @@ export default {
 </script>
 
 <template>
-  <div class="maz-header" id="mazApp">
+  <div class="maz-header mx-sm-3 mx-1" id="mazApp">
     <div class="wrapper">
       <MazHeader
         header="Make-a-ZIF"
@@ -607,7 +607,7 @@ export default {
     </div>
   </div>
 
-  <div class="maz-introduction">
+  <div class="maz-introduction mx-sm-3 mx-1">
     <MazTabs
       :scenario-results="scenarioResults"
       :scenario-history="scenarioHistory"
@@ -618,7 +618,7 @@ export default {
     />
   </div>
 
-  <div class="maz-main">
+  <div class="maz-main mx-sm-3 mx-1">
     <!--
     <div class="maz-generator mt-4 gx-2 container-fluid">
       <div class="row">
