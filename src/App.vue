@@ -8,6 +8,7 @@
  * needs to be disabled, just remove @import "./assets/dark.scss"; from this
  * file's <style> imports.
  */
+import { nextTick } from "vue";
 import MazHeader from "./components/MazHeader.vue";
 import MazTabs from "./components/MazTabs.vue";
 import MazTableOne from "./components/MazTableOne.vue";
@@ -233,11 +234,6 @@ export default {
       const appTabPanels = document.getElementById("mazTabPanels");
       const focusTab = document.getElementById(`maz${pane}Tab`);
       const focusPane = document.getElementById(`maz${pane}Pane`);
-      // Scrolls to top in case the results are not into view:
-      // appTabs.scrollIntoView({ behavior: "smooth", block: "start" });
-      // How about Safari on iOS?
-      window.scrollTo(0, 0);
-
       // Switching active tabs...
       appTabs
         .querySelectorAll("button")
@@ -247,6 +243,12 @@ export default {
         .forEach((panel) => panel.classList.remove("show", "active"));
       focusTab.classList.add("active");
       focusPane.classList.add("show", "active");
+      nextTick(() => {
+        // Scrolls to top in case the results are not into view:
+        appTabs.scrollIntoView({ behavior: "smooth", block: "start" });
+        // How about Safari on iOS?
+        window.scrollTo(0, 0);
+      });
     },
 
     /**

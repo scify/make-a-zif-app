@@ -221,7 +221,7 @@ export default {
       >
         <div class="container mt-5 p-0 log">
           <div
-            class="zif-history row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-sm-5 gx-5 gy-0"
+            class="zif-history row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 gx-sm-5 gy-5 gx-0"
           >
             <!-- memo starts here -->
             <template
