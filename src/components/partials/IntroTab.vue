@@ -1,9 +1,22 @@
 <script>
 export default {
+  props: {
+    ["selectedScenario"]: { required: true },
+  },
   methods: {
     showModal(modal) {
       const modalBtn = document.getElementById(`${modal}ModalBtn`);
       modalBtn.click();
+    },
+    highlightEl(elementId) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
+        element.classList.add("highlight");
+        setTimeout(() => {
+          element.classList.remove("highlight");
+        }, 2000);
+      }
     },
   },
 };
@@ -34,76 +47,17 @@ export default {
           Gases</button
         >.
       </li>
-      <li class="three">
+      <li :class="['three', 'highlight', { highlight: selectedScenario.gas }]">
         Click on
-        <button type="button" class="btn inline disabled">Execute</button> to
-        get a fast prediction of the diffusivity!
+        <button
+          :class="['btn', 'inline', { disabled: !selectedScenario.gas }]"
+          @click="highlightEl('mazExecuteButton')"
+          type="button"
+        >
+          Execution
+        </button>
+        to get a fast prediction of the diffusivity!
       </li>
     </ol>
   </div>
 </template>
-
-<style lang="scss">
-.documentation {
-  h4 {
-    font-weight: 700;
-    color: var(--maz-text-accent);
-  }
-  ol {
-    list-style-type: none;
-    padding: 0;
-    li {
-      padding: 0.25rem 0;
-      &.one::before,
-      &.two::before,
-      &.three::before {
-        display: inline-block;
-        width: 1.4rem;
-        height: 1.4rem;
-        line-height: 1.4rem;
-        text-align: center;
-        font-weight: 700;
-        color: var(--maz-background);
-        background: var(--maz-accent-darker);
-        border-radius: 50%;
-        margin-right: 0.5rem;
-        font-size: 0.9rem;
-      }
-      &.one::before {
-        content: "1";
-      }
-      &.two::before {
-        content: "2";
-      }
-      &.three::before {
-        content: "3";
-      }
-    }
-  }
-  button {
-    transition: border-color 0.2s ease-in-out;
-    &.btn.inline {
-      display: inline-block;
-      border-width: 2px;
-      border-style: dotted;
-      border-color: rgba(var(--maz-accent-darker-rgb), 0.4);
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      box-shadow: none;
-      border-radius: 0;
-      padding: 0;
-      margin: 0 1px;
-      text-align: inherit;
-      color: inherit;
-      font-size: inherit;
-      font-weight: inherit;
-      line-height: inherit;
-      vertical-align: inherit;
-      &:hover {
-        border-color: rgba(var(--maz-accent-darker-rgb), 1);
-      }
-    }
-  }
-}
-</style>

@@ -106,8 +106,7 @@ export default {
       Click on the columns to replace the units (metal, organic linkers &amp;
       functional groups) in the ZIF.
     </h5>
-    <h6></h6>
-    <table class="table-multi">
+    <table class="table-multi table-responsive-hide">
       <colgroup class="header"></colgroup>
       <colgroup class="metal"></colgroup>
       <colgroup class="linker" span="3"></colgroup>

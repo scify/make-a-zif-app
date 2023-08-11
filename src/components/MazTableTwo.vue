@@ -71,7 +71,7 @@ export default {
   watch: {
     inputGas() {
       if (this.inputGas === "" || this.inputGas === false) {
-        this.gasModalDescription = "Select a Gas and click the Add Gas button";
+        this.gasModalDescription = "Select a gas and click the Add Gas button";
       } else {
         this.gasModalDescription =
           "Confirm selection by clicking the Add Gas button";
@@ -93,10 +93,6 @@ export default {
   <div class="maz-table pb-2" v-if="selectedScenario && listOfGases">
     <h4 class="two">Add a gas element</h4>
     <h5>Click on the Gas column to select a fume.</h5>
-    <h6>
-      Keep in mind that the larger the gas is, the larger the modification
-      impact will be on its diffusivity.
-    </h6>
     <table class="table-multi limit-width">
       <colgroup class="header"></colgroup>
       <colgroup class="gas"></colgroup>
@@ -187,6 +183,10 @@ export default {
               <p id="gasModalDescription">
                 {{ gasModalDescription }}
               </p>
+              <span class="small">
+                Keep in mind that the larger the gas is, the larger the
+                modification impact will be on its diffusivity.
+              </span>
             </div>
             <button
               type="button"

@@ -98,6 +98,10 @@ export default {
           this.scenarioHistory[this.scenarioHistory.length - 1];
         this.selectedScenario = this.createScenario();
         this.loadScenario(lastScenario.date, false);
+        nextTick(() => {
+          // Two hours (ticks) later.
+          this.focusTab();
+        });
       } else {
         console.log("App loaded default scenario");
         this.applyScenario(this.createScenario());
@@ -247,7 +251,7 @@ export default {
         // Scrolls to top in case the results are not into view:
         appTabs.scrollIntoView({ behavior: "smooth", block: "start" });
         // How about Safari on iOS?
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
       });
     },
 
@@ -360,7 +364,6 @@ export default {
           if ("showStatus" in downloadArray) {
             delete downloadArray.showStatus;
           }
-          downloadArray.status = `Downloaded on ${new Date().toISOString()}`;
         }
       }
       const json = encodeURIComponent(JSON.stringify(downloadArray, null, 2));
@@ -583,7 +586,6 @@ export default {
      */
     validateScenario(scenario) {
       // @TODO: Validation based on minimum amount of required data.
-      console.log("App validates scenario...");
       if (!scenario) {
         return false;
       }
@@ -609,6 +611,7 @@ export default {
 
   <div class="maz-introduction mx-sm-3 mx-1">
     <MazTabs
+      :selected-scenario="selectedScenario"
       :scenario-results="scenarioResults"
       :scenario-history="scenarioHistory"
       @do:delete-scenario="deleteScenario"
@@ -619,21 +622,6 @@ export default {
   </div>
 
   <div class="maz-main mx-sm-3 mx-1">
-    <!--
-    <div class="maz-generator mt-4 gx-2 container-fluid">
-      <div class="row">
-        <MazImage />
-        <MazTabs
-          :scenario-results="scenarioResults"
-          :scenario-history="scenarioHistory"
-          @do:delete-scenario="deleteScenario"
-          @do:download-scenario.once="exportScenario"
-          @do:load-scenario="loadScenario"
-          @do:save-scenario="saveScenario"
-        />
-      </div>
-    </div>
-    -->
     <MazTableOne
       :selected-scenario="selectedScenario"
       :list-of-metals="listOfMetals"

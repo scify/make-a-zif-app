@@ -7,6 +7,7 @@ export default {
     IntroTab,
   },
   props: {
+    ["selectedScenario"]: { required: true },
     ["scenarioResults"]: { required: true },
     ["scenarioHistory"]: { required: false, default: false },
   },
@@ -49,6 +50,21 @@ export default {
         ? this.$root["listOfGases"].find((i) => i.key === key)
         : null;
       return gas ? gas.title : "None";
+    },
+
+    isRestored(scenario) {
+      const selected = this.selectedScenario;
+      const current = scenario.scenario;
+      return (
+        selected.gas.key === current.gas &&
+        selected.metal.key === current.metal &&
+        selected.funcGroup1.key === current.funcGroup1 &&
+        selected.funcGroup2.key === current.funcGroup2 &&
+        selected.funcGroup3.key === current.funcGroup3 &&
+        selected.linker1.key === current.linker1 &&
+        selected.linker2.key === current.linker2 &&
+        selected.linker3.key === current.linker3
+      );
     },
 
     /**
@@ -191,7 +207,7 @@ export default {
         aria-labelledby="mazIntroTab"
         tabindex="0"
       >
-        <IntroTab />
+        <IntroTab :selected-scenario="selectedScenario" />
       </div>
       <div
         id="mazExamplesPane"
@@ -239,7 +255,7 @@ export default {
         <template v-else>
           <div class="container-fluid mt-4 px-0 py-2 log">
             <div
-              class="zif-history row row-cols-xl-4 row-cols-md-3 row-cols-sm-2 row-cols-1 gx-sm-5 gy-5 gx-0"
+              class="zif-history row row-cols-xl-4 row-cols-md-3 row-cols-sm-2 row-cols-1 gx-lg-5 gx-md-2 gx-sm-4 gy-5 gx-0"
             >
               <!-- memo starts here -->
               <template
@@ -384,7 +400,14 @@ export default {
                 >
                   <!-- zif starts here -->
                   <div class="col">
-                    <div class="zif scenario" :id="`saved-scenario-${key}`">
+                    <div
+                      :class="[
+                        'zif',
+                        'scenario',
+                        { restored: isRestored(scenario) },
+                      ]"
+                      :id="`saved-scenario-${key}`"
+                    >
                       <div class="zif--header">
                         ZIF {{ scenario.name }} diffusivity:
                       </div>
@@ -443,7 +466,14 @@ export default {
                       </div>
                       <div class="zif--actions d-grid gap-2 d-md-flex">
                         <button
-                          class="btn btn-sm btn-primary flex-fill"
+                          :class="[
+                            'btn',
+                            'btn-sm',
+                            'btn-primary',
+                            'flex-fill',
+                            'restore',
+                            { disabled: isRestored(scenario) },
+                          ]"
                           @click="$emit('do:loadScenario', scenario.date)"
                         >
                           Restore

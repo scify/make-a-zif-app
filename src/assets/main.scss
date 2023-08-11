@@ -1,6 +1,7 @@
 @import './base.scss';
 
 #app {
+  min-width: 320px;
   max-width: 1280px;
   margin: 0 auto;
   padding: 1rem 0.5rem;
@@ -375,6 +376,10 @@ div.maz-main {
     background-color: var(--maz-blue);
     color: var(--maz-blue-text);
     font-weight: 500;
+    &.highlight {
+      outline: 2px solid var(--maz-text-bright);
+      background-color: var(--maz-accent-darker);
+    }
     &:hover,
     &:focus,
     &:active {
@@ -621,7 +626,27 @@ div.maz-main {
   .unit.inline.shrunk {
     font-size: 0.8em;
   }
-
+  // Responsive table layout (sorry, mobile).
+  @media (max-width: 479.98px) {
+    table.table-responsive-hide {
+      colgroup.header {
+        display: none;
+      }
+      tr {
+        th:nth-of-type(1) {
+          display: none;
+        }
+      }
+      tbody {
+        tr {
+          td:nth-child(2) {
+            border-left: none !important;
+            box-shadow: none !important;
+          }
+        }
+      }
+    }
+  }
   // Responsive layout (changes applied on screen widths > 768px)
   @media (min-width: 768px) {
     button,
@@ -657,7 +682,84 @@ div.maz-main {
     }
   }
 }
+
 /* Navigation Tabs */
+// Introduction section.
+div.maz-introduction {
+  .documentation {
+    h4 {
+      font-weight: 700;
+      color: var(--maz-text-accent);
+    }
+    ol {
+      list-style-type: none;
+      padding: 0;
+      li {
+        transition: background 0.5s ease-in, color 0.25s ease-in-out;
+        padding: 0.25rem 0;
+        &.highlight {
+          color: var(--maz-text-bright);
+          &.one::before,
+          &.two::before,
+          &.three::before {
+            background-color: var(--maz-accent);
+          }
+        }
+        &.one::before,
+        &.two::before,
+        &.three::before {
+          display: inline-block;
+          width: 1.4rem;
+          height: 1.4rem;
+          line-height: 1.4rem;
+          text-align: center;
+          font-weight: 700;
+          color: var(--maz-background);
+          background-color: var(--maz-accent-darker);
+          border-radius: 50%;
+          margin-right: 0.5rem;
+          font-size: 0.9rem;
+        }
+        &.one::before {
+          content: "1";
+        }
+        &.two::before {
+          content: "2";
+        }
+        &.three::before {
+          content: "3";
+        }
+      }
+    }
+    button {
+      transition: border-color 0.2s ease-in-out;
+      &.btn.inline {
+        display: inline-block;
+        border-width: 2px;
+        border-style: dotted;
+        border-color: rgba(var(--maz-accent-darker-rgb), 0.4);
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+        margin: 0 1px;
+        text-align: inherit;
+        color: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+        vertical-align: inherit;
+
+        &:hover {
+          border-color: rgba(var(--maz-accent-darker-rgb), 1);
+        }
+      }
+    }
+  }
+}
+// Other navigation tabs...
 div.maz-main, div.maz-introduction {
 
   --zif-transition:
@@ -714,6 +816,9 @@ div.maz-main, div.maz-introduction {
     border-width: 2px;
     border-style: solid;
     border-color: var(--maz-btn-bg);
+    &.restored {
+      border-color: var(--maz-text-bright);
+    }
     &--header {
       padding: 0.2em;
       color: var(--maz-accent-soft-text);
@@ -770,6 +875,12 @@ div.maz-main, div.maz-introduction {
           background-color 0.15s ease-in-out,
           border-color 0.15s ease-in-out,
           box-shadow 1.2s ease-out;
+        &.restore.disabled {
+          --bs-btn-disabled-color: var(--maz-blue-text);
+          --bs-btn-disabled-bg: var(--maz-btn-bg);
+          --bs-btn-disabled-border-color: var(--maz-btn-bg);
+          opacity: 0.5;
+        }
         &.btn-primary {
           --bs-btn-color: var(--maz-blue-text);
           --bs-btn-bg: var(--maz-btn-bg);
@@ -817,7 +928,7 @@ div.maz-main, div.maz-introduction {
       }
     }
     &.new {
-      transform: scale(1.15);
+      transform: scale(1.05);
       box-shadow:
               1px 0 10px -2px rgba(var(--maz-accent-rgb), 0.25),
               0 1px 10px -2px rgba(var(--maz-accent-rgb), 0.25),
