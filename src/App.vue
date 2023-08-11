@@ -656,6 +656,7 @@ export default {
 /* 2. Import Make-a-ZIF App's Dark Theme support */
 @import "./assets/dark.scss";
 /* 3. Import Bootstrap's CSS (@TODO: Should it be removed from Production?): */
+@import "floating-vue/dist/style.css";
 @import "~bootstrap/scss/bootstrap";
 /* 4. Default body & reset (@TODO: Should it be removed from Production?): */
 @import "./assets/default.scss";

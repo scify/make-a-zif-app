@@ -984,6 +984,24 @@ div.maz-main, div.maz-introduction {
   }
 }
 
+/* Floating vue */
+.v-popper--theme-tooltip .v-popper__inner {
+  background: #f7d27c;
+  color: #000000;
+  border: 1px #f9d37d solid;
+  border-radius: 4px;
+}
+
+.v-popper--theme-tooltip .v-popper__arrow-outer {
+  border-color: #f9d37d;
+}
+
+.v-popper--theme-tooltip .v-popper__arrow-inner {
+  visibility: visible;
+  border-color: #f9d37d;
+}
+
+/* Animations */
 @keyframes mazAccentOpacityAnim {
   0% {
     opacity: 0.8;

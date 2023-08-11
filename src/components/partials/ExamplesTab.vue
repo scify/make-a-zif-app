@@ -1,5 +1,6 @@
 <script>
 import ExamplesTable from "@/components/partials/ExamplesTable.vue";
+
 export default {
   components: {
     ExamplesTable,
