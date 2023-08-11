@@ -1,6 +1,6 @@
 {
   "name": "make-a-zif-app",
-  "version": "0.9.14",
+  "version": "0.9.19",
   "homepage": "https://make-a-zif.scify.org/zif-model/",
   "engines": {
     "npm": "9.6.7",

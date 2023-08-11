@@ -91,11 +91,7 @@
             <th scope="col">
               Diffusivity
               <!-- @TODO -->
-              <span
-                class="alert-warning alert"
-                v-tooltip="
-                  `Please confirm that (1) this unit (of measurement) is correct & (2) that it also applies to the Executed ZIF diffusivities (aka the number that the API provides as 'diffusivity'). If that's the case, then it should be added there as well (3)! Is diffusivity = diffusion = '𝑫' (4)?  Should the temperature be specified (5)? Finally, Aperture has been removed as the API does not provide it (6) - furthermore, it was not provided for all examples. Also note that on the original examples, the word unit was used to describe both units of measurement AND the structural units (of the ZIF) - it was confusing and it has been corrected.`
-                "
+              <span class="alert-warning alert" v-tooltip="`?`"
                 >(10<sup>-10</sup> m<sup>2</sup>/s)</span
               >
             </th>
@@ -113,13 +109,9 @@
             </th>
             <!-- @TODO Proper diffusivities for gases -->
             <td class="highlight-diffusion">
-              <span
-                class="alert alert-warning"
-                v-tooltip="
-                  'Please note that on the mock-ups the diffusivities for all examples are the same. The proper, expected values are needed.'
-                "
-                >{{ gas.diffusion }}</span
-              >
+              <span class="alert alert-warning" v-tooltip="'?'">{{
+                gas.diffusion
+              }}</span>
             </td>
             <td class="highlight-diffusion execute">
               <button
