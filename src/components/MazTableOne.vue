@@ -103,8 +103,8 @@ export default {
   >
     <h4 class="one">Select metal, linkers & groups</h4>
     <h5>
-      Click on the columns to replace the units (metal, organic linkers &amp;
-      functional groups) in the ZIF.
+      Click on the columns to replace the metal, organic linkers &amp;
+      functional groups in the ZIF.
     </h5>
     <table class="table-multi table-responsive-hide">
       <colgroup class="header"></colgroup>

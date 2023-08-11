@@ -1,10 +1,12 @@
 <script>
 import { nextTick } from "vue";
-import IntroTab from "./partials/IntroTab.vue";
+import IntroTab from "@/components/partials/IntroTab.vue";
+import ExamplesTab from "@/components/partials/ExamplesTab.vue";
 
 export default {
   components: {
     IntroTab,
+    ExamplesTab,
   },
   props: {
     ["selectedScenario"]: { required: true },
@@ -216,16 +218,7 @@ export default {
         aria-labelledby="mazExamplesTab"
         tabindex="0"
       >
-        <div
-          class="container-fluid mt-4 px-3 py-3 border border-accent documentation"
-        >
-          Replacing the units (metal, organic linker and functional group) in
-          ZIFs, seems to have small impact on the structure. But don’t be
-          fooled! The impact on diffusivities of various gases can be great.
-          Keep in mind that the larger the gas is, the larger the modification
-          impact will be on its diffusivity. See some examples below to develop
-          an intuition before you start playing with/using make-a-ZIF.
-        </div>
+        <ExamplesTab />
       </div>
       <div
         id="mazHistoryPane"
