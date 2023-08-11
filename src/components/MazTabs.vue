@@ -17,6 +17,7 @@ export default {
     "do:saveScenario",
     "do:deleteScenario",
     "do:downloadScenario",
+    "do:loadExampleScenario",
     "do:loadScenario",
   ],
   data() {
@@ -39,21 +40,22 @@ export default {
         : null;
       return linker ? linker.name : "None";
     },
-
     parseGroup(key) {
       const group = key
         ? this.$root["listOfGroups"].find((i) => i.key === key)
         : null;
       return group ? this.parseSubScript(group.name) : "None";
     },
-
     parseGas(key) {
       const gas = key
         ? this.$root["listOfGases"].find((i) => i.key === key)
         : null;
       return gas ? gas.title : "None";
     },
-
+    loadExampleScenario(exampleScenario) {
+      console.log("Maz Tabs received loadExampleScenario");
+      this.$emit("do:loadExampleScenario", exampleScenario);
+    },
     isRestored(scenario) {
       const selected = this.selectedScenario;
       const current = scenario.scenario;
@@ -218,7 +220,7 @@ export default {
         aria-labelledby="mazExamplesTab"
         tabindex="0"
       >
-        <ExamplesTab />
+        <ExamplesTab @do:load-example-scenario="loadExampleScenario" />
       </div>
       <div
         id="mazHistoryPane"

@@ -902,6 +902,123 @@ div.maz-main, div.maz-introduction {
   }
 }
 
+/* Example Tables */
+div.maz-introduction {
+  div.example {
+    h5 {
+      color: var(--maz-text);
+      font-weight: 700;
+    }
+    h6 {
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+    &--title {
+      border-bottom: 2px solid var(--maz-accent);
+      margin-top: 2.25em;
+      padding-bottom: 0.25em;
+      margin-bottom: 0.25em;
+    }
+    &--notes {
+      margin-top: 1.25em;
+      margin-bottom: 1.25em;
+    }
+    &--gases {
+      margin-bottom: 0.75em;
+      margin-top: 0.5em;
+    }
+    &--reference {
+      color: var(--maz-text-faded);
+    }
+
+    table {
+      td.highlight {
+        background: #dfdff355;
+        @media (prefers-color-scheme: dark) {
+          background: #44445533;
+          color: var(--maz-accent);
+        }
+      }
+
+      th.highlight-gas,
+      td.highlight-diffusion {
+        border-bottom-color: var(--maz-accent) !important;
+        @media (prefers-color-scheme: dark) {
+          border-bottom-color: #000 !important;
+        }
+      }
+      td.highlight-diffusion {
+        font-weight: 700;
+        box-shadow: -1px 0 0 0 var(--maz-accent) !important;
+        @media (prefers-color-scheme: dark) {
+          box-shadow: -1px 0 0 0 #000 !important;
+        }
+        &.execute {
+          button {
+            --bs-btn-border-width: 1px;
+            --bs-btn-color: var(--maz-text-bright);
+            --bs-btn-bg: none;
+            --bs-btn-hover-bg: var(--maz-text-bright);
+            --bs-btn-active-bg: var(--maz-text-bright);
+            --bs-btn-active-color: var(--maz-background);
+            --bs-btn-hover-color: var(--maz-background);
+            --bs-btn-border-color: var(--def-black);
+            --bs-btn-hover-border-color: var(--maz-text-bright);
+          }
+          text-align: right;
+          box-shadow: none !important;
+        }
+      }
+      th.highlight-gas {
+        span {
+          font-weight: 600;
+        }
+      }
+
+      tr:nth-child(2) {
+        th.highlight-gas {
+          background-color: rgba(var(--maz-accent-rgb), 0.25);
+        }
+
+        td.highlight-diffusion {
+          background-color: rgba(var(--maz-accent-rgb), 0.2);
+        }
+      }
+
+      tr:nth-child(1) {
+        th.highlight-gas {
+          background-color: rgba(var(--maz-accent-rgb), 0.1);
+        }
+
+        td.highlight-diffusion {
+          background-color: rgba(var(--maz-accent-rgb), 0.06);
+        }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        tr:nth-child(2) {
+          th.highlight-gas {
+            background-color: rgba(var(--maz-accent-rgb), 0.1);
+          }
+
+          td.highlight-diffusion {
+            background-color: rgba(var(--maz-accent-rgb), 0.1);
+          }
+        }
+        tr:nth-child(1) {
+          th.highlight-gas {
+            background-color: rgba(var(--maz-accent-rgb), 0.05);
+          }
+
+          td.highlight-diffusion {
+            background-color: rgba(var(--maz-accent-rgb), 0.05);
+          }
+        }
+      }
+    }
+  }
+}
+
 /* Table multi (very wide). */
 // Responsive mobile-first: these apply to all screen-sizes
 div.maz-introduction table.table-multi {

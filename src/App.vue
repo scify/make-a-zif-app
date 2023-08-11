@@ -229,6 +229,17 @@ export default {
       gasModal.classList.add("warning");
     },
 
+    highlightEl(elementId) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
+        element.classList.add("highlight");
+        setTimeout(() => {
+          element.classList.remove("highlight");
+        }, 2000);
+      }
+    },
+
     /**
      * Focus (activate) a Tab and the corresponding panel (uses Bootstrap).
      * @param {string} pane - One of the apps panes (Intro, Examples, History).
@@ -460,6 +471,11 @@ export default {
       return true;
     },
 
+    loadExampleScenario(exampleScenario) {
+      this.applyScenario(this.createScenario({ ...exampleScenario }));
+      this.highlightEl("mazExecuteButton");
+    },
+
     /**
      * Loads a Scenario (keys) from browser's local storage. Data is loaded by
      * default from: window.localStorage.mazAppHistory (VITE_MAZ_STORAGE_KEY).
@@ -612,6 +628,7 @@ export default {
       :scenario-history="scenarioHistory"
       @do:delete-scenario="deleteScenario"
       @do:download-scenario="exportScenario"
+      @do:load-example-scenario="loadExampleScenario"
       @do:load-scenario="loadScenario"
       @do:save-scenario="saveScenario"
     />
