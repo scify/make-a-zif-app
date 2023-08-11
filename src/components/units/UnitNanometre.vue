@@ -6,6 +6,12 @@ export default {
 };
 </script>
 <template>
-  <abbr v-if="abbr" title="nanometre" aria-label="nanometre">nm</abbr>
+  <abbr
+    v-if="abbr"
+    title="nanometre"
+    v-tooltip="'nanometre'"
+    aria-label="nanometre"
+    >nm</abbr
+  >
   <span v-else class="unit">nm</span>
 </template>

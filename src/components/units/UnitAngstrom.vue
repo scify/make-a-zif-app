@@ -6,6 +6,12 @@ export default {
 };
 </script>
 <template>
-  <abbr v-if="abbr" title="ångström" aria-label="angstrom">&Aring;</abbr>
+  <abbr
+    v-if="abbr"
+    title="ångström"
+    v-tooltip="'ångström'"
+    aria-label="angstrom"
+    >&Aring;</abbr
+  >
   <span v-else class="unit">&Aring;</span>
 </template>

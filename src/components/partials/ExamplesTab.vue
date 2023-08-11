@@ -28,8 +28,11 @@ export default {
     class="container-fluid mt-4 px-3 pt-3 pb-1 border border-accent documentation"
   >
     <p>
-      Replacing the structural units (
-      <button type="button" class="btn inline" @click="showModal('metal')">
+      Replacing the building units in ZIFs (<button
+        type="button"
+        class="btn inline"
+        @click="showModal('metal')"
+      >
         metal</button
       >,
       <button type="button" class="btn inline" @click="showModal('linkers')">
@@ -38,8 +41,8 @@ export default {
       &amp;
       <button type="button" class="btn inline" @click="showModal('groups')">
         functional groups</button
-      >.) in ZIFs, seems to have small impact on the structure. But don’t be
-      fooled! The impact on diffusivities of various
+      >), seems to have small impact on the structure. But don’t be fooled! The
+      impact on diffusivities of various
       <button type="button" class="btn inline" @click="showModal('gas')">
         gases
       </button>
@@ -49,6 +52,8 @@ export default {
     </p>
 
     <h5>Starting from the original ZIF-8</h5>
-    <ExamplesTable />
+    <ExamplesTable
+      caption="Table 1. Basic structural units of the original ZIF-8<sup><em>1</em></sup>."
+    />
   </div>
 </template>

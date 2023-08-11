@@ -585,11 +585,7 @@ export default {
      * @param {Object} scenario - A scenario to validate.
      */
     validateScenario(scenario) {
-      // @TODO: Validation based on minimum amount of required data.
       if (!scenario) {
-        return false;
-      }
-      if (!scenario.gas) {
         return false;
       }
       return true;

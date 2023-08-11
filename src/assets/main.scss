@@ -414,68 +414,12 @@ div.maz-main {
   }
 
   // Tables
-  // Responsive mobile-first: these apply to all screen-sizes
-  table.table-multi {
-    font-size: 0.9em; // will be reverted to 1em via @media on desktop
-    abbr {
-      display: none; // will be reverted to inline-block on desktop
-    }
-    thead th,
-    tbody td {
-      font-size: 0.9em;
-      text-align: center; // will be reverted to left via @media on desktop
-    }
-  }
-  tr.modal-row th {
-    margin: 0;
-    padding: 0;
-    @media (min-width: 640px) {
-      padding: 0;
-    }
-  }
   th,
   td {
     padding: 0.5em 0.2em; /* reverted to 0.5em 1em via @media on desktop */
     transition: var(--maz-transition);
     @media (min-width: 640px) {
       padding: 0.5em 1em;
-    }
-  }
-  button.col-modal,
-  div.col-modal {
-    padding: 0.5em;
-    text-align: center;
-    display: block;
-    width: 100%;
-    border: none;
-    white-space: nowrap;
-    overflow: hidden;
-    font: inherit;
-    background: inherit;
-    @media (min-width: 480px) {
-      padding: 0.5em 1em;
-      text-align: left;
-    }
-  }
-  span.col-title--arrow {
-    display: block;
-    font-weight: bold;
-    color: var(--maz-table-header-text);
-  }
-  span.col-title--arrow::after {
-    content: "";
-    z-index: 1;
-    padding: 0;
-    margin: 0;
-    line-height: 1;
-    display: block;
-    float: right;
-    font-size: 0.7em;
-    color: var(--maz-table-header-text);
-    @media (min-width: 560px) {
-      content: "▶";
-      padding: 4px 0 0 4px;
-      font-size: 0.9em;
     }
   }
   // End of responsive elements
@@ -504,7 +448,6 @@ div.maz-main {
   .table-multi tbody tr td:nth-child(6) {
     border-left: 1px solid var(--maz-table-divider-hard);
     box-shadow: -1px 0 0 0 var(--maz-table-divider-hard);
-
   }
   thead {
     background: var(--maz-table-header);
@@ -530,15 +473,10 @@ div.maz-main {
       }
     }
   }
-  tbody th {
-    font-weight: 500;
-    color: var(--maz-heading);
-    white-space: nowrap;
-  }
   tbody td {
-    color: var(--maz-text-bright);
     border-bottom: 1px solid;
     border-bottom-color: var(--maz-table-divider-soft);
+    color: var(--maz-text-bright);
   }
   td {
     text-align: left;
@@ -605,6 +543,7 @@ div.maz-main {
     text-decoration: none !important;
     opacity: 0.75;
     color: inherit;
+    cursor: help;
   }
   div.maz-table abbr::before {
     content: "(";
@@ -625,27 +564,6 @@ div.maz-main {
   }
   .unit.inline.shrunk {
     font-size: 0.8em;
-  }
-  // Responsive table layout (sorry, mobile).
-  @media (max-width: 479.98px) {
-    table.table-responsive-hide {
-      colgroup.header {
-        display: none;
-      }
-      tr {
-        th:nth-of-type(1) {
-          display: none;
-        }
-      }
-      tbody {
-        tr {
-          td:nth-child(2) {
-            border-left: none !important;
-            box-shadow: none !important;
-          }
-        }
-      }
-    }
   }
   // Responsive layout (changes applied on screen widths > 768px)
   @media (min-width: 768px) {
@@ -978,6 +896,205 @@ div.maz-main, div.maz-introduction {
         &:hover,
         &:focus {
           background-color: var(--maz-background);
+        }
+      }
+    }
+  }
+}
+
+/* Table multi (very wide). */
+// Responsive mobile-first: these apply to all screen-sizes
+div.maz-introduction table.table-multi {
+  abbr {
+    font-weight: inherit;
+    text-decoration: none !important;
+    opacity: 0.75;
+    color: inherit;
+    cursor: help;
+  }
+  caption {
+    color: var(--maz-text-faded);
+    em {
+      opacity: 0.6;
+    }
+  }
+  span.help {
+    cursor: help;
+  }
+  thead {
+    th {
+      font-weight: 600;
+      border-bottom: 1px solid;
+      border-bottom-color: var(--maz-table-divider-hard);
+      text-align: center;
+    }
+  }
+  tbody {
+    th, td {
+      border-bottom: 1px solid;
+      border-bottom-color: var(--maz-table-divider-soft);
+      text-align: center;
+    }
+  }
+  abbr::before {
+    content: "(";
+    font-weight: inherit;
+    color: inherit;
+  }
+  abbr::after {
+    content: ")";
+    font-weight: inherit;
+    color: inherit;
+  }
+  .unit.inline {
+    display: inline-block;
+    opacity: 0.7;
+    margin-left: 0.12rem;
+    letter-spacing: -1px;
+    font-weight: 300;
+  }
+  .unit.inline.shrunk {
+    font-size: 0.8em;
+  }
+  @media (min-width: 768px) {
+    font-size: 1em;
+  }
+  @media (min-width: 576px) {
+    abbr {
+      display: inline-block;
+    }
+    tbody th {
+      text-align: left;
+    }
+    thead th,
+    tbody td {
+      font-size: 1em; // switches to 0.9 via @media on mobile
+      text-align: left; // switches to 0.9 via @media on mobile
+    }
+  }
+}
+table.table-multi {
+  font-size: 0.9em; // will be reverted to 1em via @media on desktop
+  width: 100%;
+  &.limit-width {
+    max-width: 100%;
+    tbody th {
+      width: 45%;
+    }
+    tbody td {
+      width: 55%;
+    }
+    tbody td.faded {
+      opacity: 0.5;
+    }
+  }
+  abbr {
+    display: none; // will be reverted to inline-block on desktop
+  }
+  th {
+    &.divider {
+      border-left: 1px solid var(--maz-table-header-text);
+      box-shadow: -1px 0 0 0 var(--maz-table-header-text);
+    }
+  }
+  thead th,
+  tbody td {
+    font-size: 0.9em;
+    text-align: center; // will be reverted to left via @media on desktop
+  }
+  tbody th {
+    font-weight: 500;
+    color: var(--maz-heading);
+    white-space: nowrap;
+  }
+  tbody tr td:nth-child(2),
+  tbody tr td:nth-child(3),
+  tbody tr td:nth-child(6) {
+    // border-left: 1px solid var(--maz-table-divider-soft);
+    box-shadow: -1px 0 0 0 var(--maz-table-divider-soft);
+  }
+  tbody td {
+    border-bottom: 1px solid;
+    border-bottom-color: var(--maz-table-divider-soft);
+    color: var(--maz-text-bright);
+  }
+  tr.modal-row th {
+    margin: 0;
+    padding: 0;
+    @media (min-width: 640px) {
+      padding: 0;
+    }
+  }
+  th,
+  td {
+    padding: 0.5em 0.2em; /* reverted to 0.5em 1em via @media on desktop */
+    transition: var(--maz-transition);
+    @media (min-width: 640px) {
+      padding: 0.5em 1em;
+    }
+  }
+  button.col-modal,
+  div.col-modal {
+    padding: 0.5em;
+    text-align: center;
+    display: block;
+    width: 100%;
+    border: none;
+    white-space: nowrap;
+    overflow: hidden;
+    font: inherit;
+    background: inherit;
+    @media (min-width: 480px) {
+      padding: 0.5em 1em;
+      text-align: left;
+    }
+  }
+  span.col-title--arrow {
+    display: block;
+    font-weight: bold;
+    color: var(--maz-table-header-text);
+  }
+  span.col-title--arrow::after {
+    content: "";
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    display: block;
+    float: right;
+    font-size: 0.7em;
+    color: var(--maz-table-header-text);
+    @media (min-width: 560px) {
+      content: "▶";
+      padding: 4px 0 0 4px;
+      font-size: 0.9em;
+    }
+  }
+}
+// Responsive table layout (sorry, mobile).
+@media (max-width: 479.98px) {
+  table.table-responsive-hide {
+    colgroup.header {
+      display: none;
+    }
+    tr {
+      th:nth-of-type(1) {
+        display: none;
+      }
+    }
+    thead {
+      tr {
+        th:nth-child(2) {
+          border-left: none !important;
+          box-shadow: none !important;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td:nth-child(2) {
+          border-left: none !important;
+          box-shadow: none !important;
         }
       }
     }

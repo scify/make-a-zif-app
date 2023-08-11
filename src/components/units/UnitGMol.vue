@@ -6,7 +6,11 @@ export default {
 };
 </script>
 <template>
-  <abbr v-if="abbr" title="grams per mol" aria-label="grams per mol"
+  <abbr
+    v-if="abbr"
+    title="grams per mol"
+    v-tooltip="'grams per mol'"
+    aria-label="grams per mol"
     >g/mol</abbr
   >
   <span v-else class="unit">g/mol</span>

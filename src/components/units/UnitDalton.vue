@@ -6,6 +6,8 @@ export default {
 };
 </script>
 <template>
-  <abbr v-if="abbr" title="dalton" aria-label="dalton">u</abbr>
+  <abbr v-if="abbr" title="dalton" v-tooltip="'dalton'" aria-label="dalton"
+    >u</abbr
+  >
   <span v-else class="unit">u</span>
 </template>

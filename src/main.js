@@ -3,7 +3,9 @@ import App from "./App.vue";
 import FloatingVue from "floating-vue";
 import { VTooltip, VClosePopper } from "floating-vue";
 
-FloatingVue.options.distance = 12;
+// Configuration
+FloatingVue.options.distance = 8;
+FloatingVue.options.skidding = 0;
 
 // Note: Make-a-ZIF App's CSS is included on App.vue for convenience and
 // therefore none of the files on ./scss should be imported from this script.

@@ -158,7 +158,7 @@ export default {
       <ul id="mazTabs" class="nav nav-tabs" role="tablist">
         <li class="nav-item" role="presentation">
           <button
-            class="nav-link active pt-3 px-md-5 px-4"
+            class="nav-link active pt-3 px-md-5 px-sm-4 px-3"
             id="mazIntroTab"
             data-bs-toggle="tab"
             data-bs-target="#mazIntroPane"
@@ -172,7 +172,7 @@ export default {
         </li>
         <li class="nav-item" role="presentation">
           <button
-            class="nav-link pt-3 px-md-4 px-4"
+            class="nav-link pt-3 px-sm-4 px-3"
             id="mazExamplesTab"
             data-bs-toggle="tab"
             data-bs-target="#mazExamplesPane"
@@ -186,7 +186,7 @@ export default {
         </li>
         <li class="nav-item" role="presentation">
           <button
-            class="nav-link pt-3 px-md-4 px-4"
+            class="nav-link pt-3 px-sm-4 px-3"
             id="mazHistoryTab"
             data-bs-toggle="tab"
             data-bs-target="#mazHistoryPane"
