@@ -61,7 +61,8 @@ export default {
       // Default (aka "example") scenario results:
       scenarioResults: {
         name: "Example scenario",
-        date: new Date("2022-03-05T10:00:13.912Z"),
+        date: new Date("2022-03-05T10:00:13.912Z").toISOString(),
+        dateTimeStamp: new Date("2022-03-05T10:00:13.912Z").getTime(),
         formattedDate: "5/3/2022 | 12:00:13",
         suggestedName: "Scenario",
         diffusion: 4,
@@ -180,8 +181,17 @@ export default {
       return true;
     },
 
-    currentDate() {
-      const current = new Date();
+    /**
+     * Format a date object to a custom string representation for this App.
+     *
+     * @param {Date=} dateObject - The date object to format. If not provided, the current date will be used.
+     * @returns {string} The formatted date string.
+     */
+    getFormattedDate(dateObject) {
+      let current = dateObject;
+      if (current === null || current === undefined) {
+        current = new Date();
+      }
       const month = current.getMonth() + 1;
       const hours = String(current.getHours()).padStart(2, "0");
       const minutes = String(current.getMinutes()).padStart(2, "0");
@@ -330,10 +340,12 @@ export default {
       if (typeof diffusivity === "number") {
         const diffusivityValue = parseFloat(diffusivity);
         if (!isNaN(diffusivityValue)) {
+          const dateNow = new Date();
           let results = {
             name: "",
-            date: new Date().toISOString(),
-            formattedDate: this.currentDate(),
+            date: dateNow.toISOString(),
+            dateTimeStamp: dateNow.getTime(),
+            formattedDate: this.getFormattedDate(dateNow),
             app: `${import.meta.env.VITE_APP_TITLE} ${
               import.meta.env.VITE_APP_VERSION
             }`,
@@ -364,16 +376,22 @@ export default {
      * @param {string} fileExtension The extension of the file (=json).
      */
     downloadJsonData(dataArray, fileName = "data", fileExtension = "json") {
+      const propertiesToDelete = [
+        "showDiff",
+        "showSave",
+        "showStatus",
+        "dateTimeStamp",
+      ];
       // Remove irrelevant keys from the data array
       let downloadArray = dataArray;
       if (typeof downloadArray === "object" && downloadArray !== null) {
+        // Is this a scenario?
         if ("showDiff" in downloadArray) {
-          delete downloadArray.showDiff;
-          if ("showSave" in downloadArray) {
-            delete downloadArray.showSave;
-          }
-          if ("showStatus" in downloadArray) {
-            delete downloadArray.showStatus;
+          // If true, then remove the following properties from the download.
+          for (const property of propertiesToDelete) {
+            if (property in downloadArray) {
+              delete downloadArray[property];
+            }
           }
         }
       }

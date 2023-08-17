@@ -882,7 +882,7 @@ div.maz-main, div.maz-introduction {
     --bs-nav-tabs-border-color: var(--maz-nav-bright);
     --bs-nav-tabs-link-active-border-color: var(--maz-nav-bright) var(--maz-nav-bright) var(--maz-background);
     --bs-nav-tabs-link-hover-border-color: var(--maz-nav-box-hover) var(--maz-nav-box-hover) var(--maz-nav-bright);
-    --bs-nav-tabs-link-active-bg: var(--maz-background);
+    --bs-nav-tabs-link-active-bg: rgba(0, 0, 0, 0);
 
     .nav-link {
       &:hover {

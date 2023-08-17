@@ -84,6 +84,23 @@ export default {
       });
     },
 
+    startDeleteScenario(scenarioDate, scenarioEl) {
+      const zifItem = document.getElementById(scenarioEl);
+      // Experimental Simplified View Transition.
+      // @link https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition
+      console.log("Start scenario removal...", scenarioEl);
+      if (zifItem && document.startViewTransition) {
+        document.startViewTransition(() => {
+          zifItem.remove();
+          nextTick(() => {
+            this.$emit("do:deleteScenario", scenarioDate);
+          });
+        });
+      } else {
+        this.$emit("do:deleteScenario", scenarioDate);
+      }
+    },
+
     saveScenario() {
       let scenarioName = "Scenario";
       if (this.inputScenarioName) {
@@ -128,7 +145,14 @@ export default {
         this.countSavedScenarios++;
       }
       console.log("Trying to save Scenario with name: " + scenarioName);
-      this.$emit("do:saveScenario", scenarioName);
+      // Experimental View Transition (read previous, related comment).
+      if (document.startViewTransition) {
+        document.startViewTransition(() => {
+          this.$emit("do:saveScenario", scenarioName);
+        });
+      } else {
+        this.$emit("do:saveScenario", scenarioName);
+      }
     },
   },
   watch: {
@@ -250,7 +274,7 @@ export default {
         <template v-else>
           <div class="container-fluid mt-4 px-0 py-2 log">
             <div
-              class="zif-history row row-cols-xl-4 row-cols-md-3 row-cols-sm-2 row-cols-1 gx-lg-5 gx-md-2 gx-sm-4 gy-5 gx-0"
+              class="zif-history zif-items row row-cols-xl-4 row-cols-md-3 row-cols-sm-2 row-cols-1 gx-lg-5 gx-md-2 gx-sm-4 gy-5 gx-0"
             >
               <!-- memo starts here -->
               <template
@@ -260,7 +284,10 @@ export default {
                 "
               >
                 <!-- zif starts here -->
-                <div class="col">
+                <div
+                  class="col zif-item zif-item--0"
+                  style="{ 'view-transition-name': 'zif-item--0' }"
+                >
                   <div
                     :class="[
                       'zif',
@@ -368,7 +395,8 @@ export default {
                         class="btn btn-sm btn-primary flex-fill"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
-                        title="Save the scenario & its results to your history"
+                        aria-label="Save ZIF model to your browser's local cache history"
+                        title="Save this ZIF model to your browser's history"
                         type="button"
                       >
                         {{ scenarioResults.showSave ? "Save" : "Saved!" }}
@@ -391,10 +419,21 @@ export default {
               <template v-if="scenarioHistory">
                 <template
                   v-for="(scenario, key) in scenarioHistory.slice().reverse()"
-                  :key="key"
+                  :key="scenario.dateTimeStamp"
                 >
                   <!-- zif starts here -->
-                  <div class="col">
+                  <div
+                    :class="[
+                      'col',
+                      'zif-item',
+                      'zif-item--' + scenario.dateTimeStamp,
+                    ]"
+                    :style="{
+                      'view-transition-name':
+                        'zif-item-' + scenario.dateTimeStamp,
+                    }"
+                    :id="`zif-item-${scenario.dateTimeStamp}`"
+                  >
                     <div
                       :class="[
                         'zif',
@@ -469,19 +508,30 @@ export default {
                             'restore',
                             { disabled: isRestored(scenario) },
                           ]"
+                          type="button"
+                          aria-label="Restore ZIF Model"
                           @click="$emit('do:loadScenario', scenario.date)"
                         >
                           Restore
                         </button>
                         <button
                           class="btn btn-sm btn-primary"
+                          type="button"
+                          aria-label="Download ZIF model as a JSON file"
                           @click="$emit('do:downloadScenario', scenario.date)"
                         >
                           Download
                         </button>
                         <button
                           class="btn btn-sm btn-outline-primary"
-                          @click="$emit('do:deleteScenario', scenario.date)"
+                          type="button"
+                          aria-label="Delete ZIF model"
+                          @click="
+                            startDeleteScenario(
+                              scenario.date,
+                              `zif-item-${scenario.dateTimeStamp}`
+                            )
+                          "
                         >
                           Delete
                         </button>

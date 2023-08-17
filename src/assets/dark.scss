@@ -92,10 +92,10 @@
       ul.nav-tabs {
         --bs-nav-tabs-border-color: var(--def-white);
         --bs-nav-tabs-link-hover-border-color: rgba(255, 255, 255, 0);
-        --bs-nav-tabs-link-active-color: var(--def-white);
-        --bs-nav-tabs-link-active-bg: var(--maz-background);
+        --bs-nav-tabs-link-active-color: var(--def-text-bright-light);
+        --bs-nav-tabs-link-active-bg: rgba(0, 0, 0, 0);
         --bs-nav-tabs-link-active-border-color: var(--def-white) var(--def-white)
-          var(--maz-background);
+          rgba(0, 0, 0, 0);
         .nav-link {
           color: var(--maz-text);
           &:hover,

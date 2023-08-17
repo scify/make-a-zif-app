@@ -92,7 +92,7 @@
               Diffusivity
               <!-- @TODO -->
               <span class="alert-warning alert" v-tooltip="`?`"
-                >(10<sup>-10</sup> m<sup>2</sup>/s)</span
+                >(10<sup>−10</sup> m<sup>2</sup>/s)</span
               >
             </th>
             <th></th>

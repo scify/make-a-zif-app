@@ -47,10 +47,10 @@ export default {
           Gases</button
         >.
       </li>
-      <li :class="['three', 'highlight', { highlight: selectedScenario.gas }]">
+      <li :class="['three', { highlight: this.selectedScenario.gas }]">
         Click on
         <button
-          :class="['btn', 'inline', { disabled: !selectedScenario.gas }]"
+          :class="['btn', 'inline', { disabled: !this.selectedScenario.gas }]"
           @click="highlightEl('mazExecuteButton')"
           type="button"
         >
